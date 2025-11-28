@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>安装指南 - 系统安装一站式网站</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind 配置 -->
+  <script src="js/tailwind.config.js"></script>
+  <!-- 自定义工具类 -->
+  <link rel="stylesheet" href="css/custom-utilities.css">
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="font-inter bg-gray-50 text-dark">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-3">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center space-x-2">
+          <i class="fa fa-desktop text-primary text-2xl"></i>
+          <span class="text-xl font-bold text-primary">系统安装指南</span>
+        </a>
+        
+        <!-- 桌面导航 -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="font-medium text-gray-700 hover:text-primary transition-colors">首页</a>
+          <a href="guides.html" class="font-medium text-primary border-b-2 border-primary pb-0.5">安装指南</a>
+          <a href="tools.html" class="font-medium text-gray-700 hover:text-primary transition-colors">装机工具</a>
+          <a href="software-share.html" class="font-medium text-gray-700 hover:text-primary transition-colors">好软分享</a>
+          <a href="sites-share.html" class="font-medium text-gray-700 hover:text-primary transition-colors">好站分享</a>
+          <a href="about.html" class="font-medium text-gray-700 hover:text-primary transition-colors">关于网站</a>
+        </nav>
+        
+        <!-- 搜索框 -->
+          <div class="hidden md:flex items-center">
+            <div class="relative">
+              <input type="text" placeholder="搜索软件、教程..." class="py-1.5 pl-3 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm" id="desktop-search-input">
+              <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary search-btn" id="desktop-search-btn">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        
+        <!-- 移动端菜单按钮 -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-700 hover:text-primary">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg">
+      <div class="container mx-auto px-4 py-3 space-y-3">
+        <a href="index.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">首页</a>
+        <a href="guides.html" class="block py-2 font-medium text-primary">安装指南</a>
+        <a href="tools.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">装机工具</a>
+        <a href="software-share.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">好软分享</a>
+        <a href="sites-share.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">好站分享</a>
+        <a href="about.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">关于网站</a>
+        
+        <!-- 移动端搜索框 -->
+        <div class="pt-2">
+          <div class="relative">
+            <input type="text" placeholder="搜索软件、教程..." class="w-full py-2 pl-3 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm" id="mobile-search-input">
+            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary search-btn" id="mobile-search-btn">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 页面标题区域 -->
+  <section class="pt-24 pb-10 bg-gradient-to-br from-primary/5 to-secondary/5">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-[clamp(1.8rem,4vw,3rem)] font-bold text-dark mb-4">安装指南</h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          最新发布的系统安装教程，帮助您轻松完成各种操作系统的安装与配置
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主要内容区域 - 教程卡片 -->
+  <section class="py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- 教程筛选器 -->
+      <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex flex-wrap gap-2">
+          <button class="px-4 py-2 bg-primary text-white rounded-full text-sm font-medium">全部</button>
+          <button class="px-4 py-2 bg-white text-gray-700 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors">Windows</button>
+          <button class="px-4 py-2 bg-white text-gray-700 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors">macOS</button>
+          <button class="px-4 py-2 bg-white text-gray-700 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors">Linux</button>
+          <button class="px-4 py-2 bg-white text-gray-700 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors">双系统</button>
+        </div>
+        <div class="relative">
+          <select class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary">
+            <option>最新发布</option>
+            <option>热门教程</option>
+            <option>浏览最多</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <i class="fa fa-chevron-down text-xs"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- 教程卡片容器 -->
+      <div id="guides-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 教程卡片将通过JavaScript动态加载 -->
+      </div>
+
+      <!-- 加载更多按钮 -->
+      <div class="mt-10 text-center">
+        <button id="load-more" class="px-6 py-3 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors flex items-center mx-auto gap-2">
+          <span>加载更多</span>
+          <i class="fa fa-refresh"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <i class="fa fa-desktop text-primary text-2xl"></i>
+            <span class="text-xl font-bold">系统安装指南</span>
+          </div>
+          <p class="text-gray-400 mb-4">提供详细的操作系统安装教程、必备工具和优质软件推荐，让系统安装变得简单易懂。</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-weixin text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-weibo text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-github text-xl"></i></a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">首页</a></li>
+            <li><a href="guides.html" class="text-gray-400 hover:text-primary transition-colors">安装指南</a></li>
+            <li><a href="tools.html" class="text-gray-400 hover:text-primary transition-colors">装机工具</a></li>
+            <li><a href="software-share.html" class="text-gray-400 hover:text-primary transition-colors">好软分享</a></li>
+            <li><a href="sites-share.html" class="text-gray-400 hover:text-primary transition-colors">好站分享</a></li>
+            <li><a href="about.html" class="text-gray-400 hover:text-primary transition-colors">关于网站</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">热门教程</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Windows 11 全新安装教程</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">macOS Ventura 升级指南</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Ubuntu 22.04 LTS 安装详解</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">双系统安装教程（Windows + Linux）</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">系统备份与恢复全攻略</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">联系我们</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start space-x-3">
+              <i class="fa fa-envelope text-primary mt-1"></i>
+              <span class="text-gray-400">contact@systemguide.com</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <i class="fa fa-comments text-primary mt-1"></i>
+              <span class="text-gray-400">在线客服：工作日 9:00-18:00</span>
+            </li>
+          </ul>
+          <div class="mt-6">
+            <h4 class="font-medium mb-2">订阅更新</h4>
+            <div class="flex">
+              <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-white w-full">
+              <button class="bg-primary text-white px-4 rounded-r-lg hover:bg-primary/90 transition-colors">
+                <i class="fa fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 系统安装一站式网站. 保留所有权利.</p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-500 hover:text-gray-400 text-sm">隐私政策</a>
+            <a href="#" class="text-gray-500 hover:text-gray-400 text-sm">使用条款</a>
+            <a href="#" class="text-gray-500 hover:text-gray-400 text-sm">免责声明</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+  <script src="js/guides.js"></script>
+  <script src="js/search.js"></script>
+</body>
+</html>

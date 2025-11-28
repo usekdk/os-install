@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>系统安装一站式网站</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind 配置 -->
+  <script src="js/tailwind.config.js"></script>
+  <!-- 自定义工具类 -->
+  <link rel="stylesheet" href="css/custom-utilities.css">
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="font-inter bg-gray-50 text-dark">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-3">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center space-x-2">
+          <i class="fa fa-desktop text-primary text-2xl"></i>
+          <span class="text-xl font-bold text-primary">系统安装指南</span>
+        </a>
+        
+        <!-- 桌面导航 -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="font-medium text-gray-700 hover:text-primary transition-colors">首页</a>
+          <a href="guides.html" class="font-medium text-gray-700 hover:text-primary transition-colors">安装指南</a>
+          <a href="tools.html" class="font-medium text-gray-700 hover:text-primary transition-colors">装机工具</a>
+          <a href="software-share.html" class="font-medium text-gray-700 hover:text-primary transition-colors">好软分享</a>
+          <a href="sites-share.html" class="font-medium text-gray-700 hover:text-primary transition-colors">好站分享</a>
+          <a href="about.html" class="font-medium text-gray-700 hover:text-primary transition-colors">关于网站</a>
+        </nav>
+        
+        <!-- 搜索框 -->
+          <div class="hidden md:flex items-center">
+            <div class="relative">
+              <input type="text" placeholder="搜索软件、教程..." class="py-1.5 pl-3 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm" id="desktop-search-input">
+              <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary search-btn" id="desktop-search-btn">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        
+        <!-- 移动端菜单按钮 -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-700 hover:text-primary">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg">
+      <div class="container mx-auto px-4 py-3 space-y-3">
+        <a href="index.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">首页</a>
+        <a href="guides.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">安装指南</a>
+        <a href="tools.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">装机工具</a>
+        <a href="software-share.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">好软分享</a>
+        <a href="sites-share.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">好站分享</a>
+        <a href="about.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">关于网站</a>
+        
+        <!-- 移动端搜索框 -->
+        <div class="pt-2">
+          <div class="relative">
+            <input type="text" placeholder="搜索软件、教程..." class="w-full py-2 pl-3 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm" id="mobile-search-input">
+            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary search-btn" id="mobile-search-btn">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 首页Hero区域 -->
+  <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-dark mb-6 leading-tight text-shadow">
+          系统安装一站式网站
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed">
+          提供详细的操作系统安装教程、必备工具和优质软件、网站推荐，让玩机变得简单易懂
+        </p>
+        
+        <!-- 系统选择按钮组 -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+          <a href="guides.html" class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center hover-scale">
+            <img src="https://picsum.photos/id/0/80/80" alt="Windows" class="w-16 h-16 rounded-lg mb-3">
+            <span class="font-medium">安装教程</span>
+          </a>
+          <a href="tools.html" class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center hover-scale">
+            <img src="https://picsum.photos/id/1/80/80" alt="macOS" class="w-16 h-16 rounded-lg mb-3">
+            <span class="font-medium">装机工具</span>
+          </a>
+          <a href="software-share.html" class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center hover-scale">
+            <img src="https://picsum.photos/id/2/80/80" alt="Ubuntu" class="w-16 h-16 rounded-lg mb-3">
+            <span class="font-medium">好软分享</span>
+          </a>
+          <a href="sites-share.html" class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center hover-scale">
+            <img src="https://picsum.photos/id/3/80/80" alt="其他系统" class="w-16 h-16 rounded-lg mb-3">
+            <span class="font-medium">好站分享</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 特色内容区域 -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4">我们提供什么</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">为您提供全面的系统安装解决方案，从准备工作到完成安装，一应俱全</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 特色1 -->
+        <div class="bg-light rounded-xl p-6 hover-scale">
+          <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-5">
+            <i class="fa fa-list-ol text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">详细安装步骤</h3>
+          <p class="text-gray-600">提供 step-by-step 的详细安装教程，附带清晰的截图和说明，让您轻松跟随操作。</p>
+        </div>
+        
+        <!-- 特色2 -->
+        <div class="bg-light rounded-xl p-6 hover-scale">
+          <div class="w-14 h-14 bg-secondary/10 rounded-full flex items-center justify-center mb-5">
+            <i class="fa fa-wrench text-secondary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">必备工具推荐</h3>
+          <p class="text-gray-600">精选各类系统安装必备工具，从U盘制作到分区管理，确保安装过程顺利进行。</p>
+        </div>
+        
+        <!-- 特色3 -->
+        <div class="bg-light rounded-xl p-6 hover-scale">
+          <div class="w-14 h-14 bg-warning/10 rounded-full flex items-center justify-center mb-5">
+            <i class="fa fa-thumbs-up text-warning text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">优质软件分享</h3>
+          <p class="text-gray-600">推荐各类系统必备软件和实用工具，帮助您快速搭建完善的工作和娱乐环境。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 最新教程 -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold">最新教程</h2>
+      </div>
+      
+      <!-- 动态加载教程容器 -->
+      <div id="featured-guides-container">
+        <!-- 教程内容将通过JavaScript动态加载 -->
+        <div class="text-center py-12 text-gray-500">正在加载最新教程...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 推荐工具区域 -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center mb-12">
+        <h2 class="text-3xl font-bold">装机必备工具</h2>
+        <a href="tools.html" class="text-primary font-medium hover:underline flex items-center">
+          查看全部 <i class="fa fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- 工具卡片1 -->
+        <div class="bg-light rounded-xl p-5 hover-scale">
+          <div class="flex items-center mb-4">
+            <img src="https://picsum.photos/id/40/60/60" alt="Rufus" class="w-12 h-12 rounded-lg mr-4">
+            <div>
+              <h3 class="font-semibold">Rufus</h3>
+              <p class="text-sm text-gray-500">U盘启动盘制作工具</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">制作Windows系统安装U盘的最佳工具，支持UEFI和Legacy模式。</p>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-gray-500">更新于 2023-04-18</span>
+            <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+          </div>
+        </div>
+        
+        <!-- 工具卡片2 -->
+        <div class="bg-light rounded-xl p-5 hover-scale">
+          <div class="flex items-center mb-4">
+            <img src="https://picsum.photos/id/41/60/60" alt="BalenaEtcher" class="w-12 h-12 rounded-lg mr-4">
+            <div>
+              <h3 class="font-semibold">BalenaEtcher</h3>
+              <p class="text-sm text-gray-500">镜像烧录工具</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">跨平台的镜像烧录工具，支持Windows、macOS和Linux系统。</p>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-gray-500">更新于 2023-05-02</span>
+            <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+          </div>
+        </div>
+        
+        <!-- 工具卡片3 -->
+        <div class="bg-light rounded-xl p-5 hover-scale">
+          <div class="flex items-center mb-4">
+            <img src="https://picsum.photos/id/42/60/60" alt="Macrium Reflect" class="w-12 h-12 rounded-lg mr-4">
+            <div>
+              <h3 class="font-semibold">Macrium Reflect</h3>
+              <p class="text-sm text-gray-500">系统备份工具</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">强大的系统备份和恢复工具，可以克隆硬盘或创建系统镜像。</p>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-gray-500">更新于 2023-03-27</span>
+            <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+          </div>
+        </div>
+        
+        <!-- 工具卡片4 -->
+        <div class="bg-light rounded-xl p-5 hover-scale">
+          <div class="flex items-center mb-4">
+            <img src="https://picsum.photos/id/43/60/60" alt="MiniTool Partition Wizard" class="w-12 h-12 rounded-lg mr-4">
+            <div>
+              <h3 class="font-semibold">分区助手</h3>
+              <p class="text-sm text-gray-500">磁盘分区管理工具</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">专业的磁盘分区管理工具，支持调整分区大小、合并分区等操作。</p>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-gray-500">更新于 2023-05-15</span>
+            <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 软件分享区域 -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center mb-12">
+        <h2 class="text-3xl font-bold">好软分享</h2>
+        <a href="software-share.html" class="text-primary font-medium hover:underline flex items-center">
+            查看全部 <i class="fa fa-arrow-right ml-2"></i>
+          </a>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- 软件列表1 -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+          <div class="p-5 border-b border-gray-100">
+            <h3 class="font-semibold text-lg">系统必备软件</h3>
+          </div>
+          <div class="divide-y divide-gray-100">
+            <div class="p-4 flex items-center hover:bg-gray-50">
+              <img src="https://picsum.photos/id/50/40/40" alt="Chrome" class="w-10 h-10 rounded-lg mr-4">
+              <div class="flex-1 min-w-0">
+                <h4 class="font-medium text-gray-900 truncate">Google Chrome</h4>
+                <p class="text-sm text-gray-500 truncate">快速、安全的浏览器</p>
+              </div>
+              <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+            </div>
+            <div class="p-4 flex items-center hover:bg-gray-50">
+              <img src="https://picsum.photos/id/51/40/40" alt="7-Zip" class="w-10 h-10 rounded-lg mr-4">
+              <div class="flex-1 min-w-0">
+                <h4 class="font-medium text-gray-900 truncate">7-Zip</h4>
+                <p class="text-sm text-gray-500 truncate">免费的压缩解压工具</p>
+              </div>
+              <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+            </div>
+            <div class="p-4 flex items-center hover:bg-gray-50">
+              <img src="https://picsum.photos/id/52/40/40" alt="PotPlayer" class="w-10 h-10 rounded-lg mr-4">
+              <div class="flex-1 min-w-0">
+                <h4 class="font-medium text-gray-900 truncate">PotPlayer</h4>
+                <p class="text-sm text-gray-500 truncate">强大的视频播放器</p>
+              </div>
+              <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+            </div>
+            <div class="p-4 flex items-center hover:bg-gray-50">
+              <img src="https://picsum.photos/id/53/40/40" alt="Everything" class="w-10 h-10 rounded-lg mr-4">
+              <div class="flex-1 min-w-0">
+                <h4 class="font-medium text-gray-900 truncate">Everything</h4>
+                <p class="text-sm text-gray-500 truncate">快速文件搜索工具</p>
+              </div>
+              <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 软件列表2 -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+          <div class="p-5 border-b border-gray-100">
+            <h3 class="font-semibold text-lg">办公效率软件</h3>
+          </div>
+          <div class="divide-y divide-gray-100">
+            <div class="p-4 flex items-center hover:bg-gray-50">
+              <img src="https://picsum.photos/id/60/40/40" alt="LibreOffice" class="w-10 h-10 rounded-lg mr-4">
+              <div class="flex-1 min-w-0">
+                <h4 class="font-medium text-gray-900 truncate">LibreOffice</h4>
+                <p class="text-sm text-gray-500 truncate">免费开源办公套件</p>
+              </div>
+              <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+            </div>
+            <div class="p-4 flex items-center hover:bg-gray-50">
+              <img src="https://picsum.photos/id/61/40/40" alt="WPS Office" class="w-10 h-10 rounded-lg mr-4">
+              <div class="flex-1 min-w-0">
+                <h4 class="font-medium text-gray-900 truncate">WPS Office</h4>
+                <p class="text-sm text-gray-500 truncate">轻量级办公软件</p>
+              </div>
+              <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+            </div>
+            <div class="p-4 flex items-center hover:bg-gray-50">
+              <img src="https://picsum.photos/id/62/40/40" alt="思维导图" class="w-10 h-10 rounded-lg mr-4">
+              <div class="flex-1 min-w-0">
+                <h4 class="font-medium text-gray-900 truncate">XMind</h4>
+                <p class="text-sm text-gray-500 truncate">专业思维导图工具</p>
+              </div>
+              <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+            </div>
+            <div class="p-4 flex items-center hover:bg-gray-50">
+              <img src="https://picsum.photos/id/63/40/40" alt="滴答清单" class="w-10 h-10 rounded-lg mr-4">
+              <div class="flex-1 min-w-0">
+                <h4 class="font-medium text-gray-900 truncate">滴答清单</h4>
+                <p class="text-sm text-gray-500 truncate">任务管理与待办事项</p>
+              </div>
+              <a href="#" class="text-primary text-sm font-medium hover:underline">下载</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 网站底部 -->
+  <footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <!-- 关于我们 -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+          <p class="text-gray-400 mb-4">系统安装一站式网站，致力于为用户提供简单易懂的系统安装教程和优质软件推荐。</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-github text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-twitter text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-envelope text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- 快速链接 -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+            <li><a href="systems.html" class="text-gray-400 hover:text-white transition-colors">系统选择</a></li>
+            <li><a href="tools.html" class="text-gray-400 hover:text-white transition-colors">装机工具</a></li>
+            <li><a href="software-share.html" class="text-gray-400 hover:text-white transition-colors">好软分享</a></li>
+            <li><a href="websites.html" class="text-gray-400 hover:text-white transition-colors">好站分享</a></li>
+          </ul>
+        </div>
+        
+        <!-- 热门教程 -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">热门教程</h3>
+          <ul class="space-y-2">
+            <li><a href="windows.html" class="text-gray-400 hover:text-white transition-colors">Windows 11安装教程</a></li>
+            <li><a href="macos.html" class="text-gray-400 hover:text-white transition-colors">macOS Ventura安装教程</a></li>
+            <li><a href="ubuntu.html" class="text-gray-400 hover:text-white transition-colors">Ubuntu双系统安装</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">系统备份与恢复教程</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">常见安装问题解决</a></li>
+          </ul>
+        </div>
+        
+        <!-- 联系我们 -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">联系我们</h3>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fa fa-envelope-o text-gray-400 mt-1 mr-3"></i>
+              <span class="text-gray-400">contact@sysinstall.com</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-github text-gray-400 mt-1 mr-3"></i>
+              <span class="text-gray-400">github.com/sysinstall</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-comment-o text-gray-400 mt-1 mr-3"></i>
+              <span class="text-gray-400">有任何问题或建议，请随时联系我们</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 系统安装一站式网站. 保留所有权利.</p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">隐私政策</a>
+            <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">使用条款</a>
+            <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">网站地图</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+  <script src="js/featured-guides.js"></script>
+  <script src="js/search.js"></script>
+</body>
+</html>

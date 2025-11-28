@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容发布系统 - 系统重装一站式网站</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        neutral: {
+                            100: '#f5f5f5',
+                            200: '#e5e5e5',
+                            300: '#d4d4d4',
+                            400: '#a3a3a3',
+                            500: '#737373',
+                            600: '#525252',
+                            700: '#404040',
+                            800: '#262626',
+                            900: '#171717',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                    },
+                },
+            }
+        }
+    </script>
+    
+    <!-- 自定义样式 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .editor-focus {
+                @apply focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200;
+            }
+            .btn-primary {
+                @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors duration-200 font-medium;
+            }
+            .btn-secondary {
+                @apply bg-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-300 transition-colors duration-200 font-medium;
+            }
+            .btn-danger {
+                @apply bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors duration-200 font-medium;
+            }
+            .btn-outline {
+                @apply border border-neutral-300 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200 font-medium;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral-100 min-h-screen">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i class="fa fa-refresh text-primary text-2xl"></i>
+                        <span class="font-bold text-lg hidden sm:block">系统重装一站式</span>
+                        <span class="font-bold text-lg sm:hidden">系统重装</span>
+                    </a>
+                </div>
+                
+                <!-- 桌面端导航 -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-neutral-600 hover:text-primary transition-colors font-medium">首页</a>
+                    <a href="guides.html" class="text-primary border-b-2 border-primary font-medium">安装指南</a>
+                    <a href="#" class="text-neutral-600 hover:text-primary transition-colors font-medium">常见问题</a>
+                    <a href="#" class="text-neutral-600 hover:text-primary transition-colors font-medium">关于我们</a>
+                    
+                    <!-- 搜索框 -->
+                    <div class="relative">
+                        <input type="text" placeholder="搜索指南..." 
+                            class="w-40 lg:w-56 pl-10 pr-4 py-1.5 rounded-full border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm">
+                        <i class="fa fa-search absolute left-3.5 top-2 text-neutral-400"></i>
+                    </div>
+                </nav>
+                
+                <!-- 移动端菜单按钮 -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-neutral-600 hover:text-primary focus:outline-none">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+
+                    </div>
+                    
+                    <!-- 软件标签 -->
+                    <div>
+                        <label for="software-tags" class="block text-sm font-medium text-neutral-700 mb-1">软件标签（用逗号分隔）</label>
+                        <input type="text" id="software-tags" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="如: 浏览器,Chrome,Google">
+                    </div>
+                </div>
+                
+                <!-- 下载信息 -->
+                <div class="space-y-4 bg-neutral-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-medium text-neutral-800">下载信息</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label for="baidu-pan-link" class="block text-sm font-medium text-neutral-700 mb-1">百度网盘下载链接</label>
+                            <input type="url" id="baidu-pan-link" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="https://pan.baidu.com/s/...">
+                        </div>
+                        
+                        <div>
+                            <label for="cloud189-link" class="block text-sm font-medium text-neutral-700 mb-1">天翼云盘下载链接</label>
+                            <input type="url" id="cloud189-link" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="https://cloud.189.cn/t/...">
+                        </div>
+                        
+                        <div>
+                            <label for="download-password" class="block text-sm font-medium text-neutral-700 mb-1">下载密码</label>
+                            <input type="text" id="download-password" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入下载密码（可选）">
+                        </div>
+                        
+                        <div>
+                            <label for="download-notes" class="block text-sm font-medium text-neutral-700 mb-1">下载说明</label>
+                            <input type="text" id="download-notes" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="如: 安装前请关闭杀毒软件">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 软件介绍详情 -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-neutral-800">软件介绍详情</h3>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-700 mb-1">主要特点</label>
+                        <div id="features-container" class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="text" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入特点...">
+                                <button type="button" class="ml-2 text-neutral-400 hover:text-red-500 remove-feature">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" id="add-feature" class="mt-2 text-sm text-primary flex items-center">
+                            <i class="fa fa-plus-circle mr-1"></i> 添加特点
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-700 mb-1">系统要求</label>
+                        <div id="requirements-container" class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="text" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入系统要求...">
+                                <button type="button" class="ml-2 text-neutral-400 hover:text-red-500 remove-requirement">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" id="add-requirement" class="mt-2 text-sm text-primary flex items-center">
+                            <i class="fa fa-plus-circle mr-1"></i> 添加系统要求
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <label for="software-scenarios" class="block text-sm font-medium text-neutral-700 mb-1">适用场景</label>
+                        <textarea id="software-scenarios" rows="3" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="描述软件适用的场景和用户群体..."></textarea>
+                    </div>
+                    
+                    <!-- 富文本编辑区 - 详细介绍 -->
+                    <div>
+                        <label for="software-description" class="block text-sm font-medium text-neutral-700 mb-1">详细介绍</label>
+                        <div class="border border-neutral-300 rounded-lg overflow-hidden">
+                            <div class="bg-neutral-100 border-b border-neutral-300 p-2 flex flex-wrap gap-1">
+                                <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="粗体" data-command="bold">
+                                    <i class="fa fa-bold"></i>
+                                </button>
+                                <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="斜体" data-command="italic">
+                                    <i class="fa fa-italic"></i>
+                                </button>
+                                <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="标题" data-command="formatBlock" data-value="<h4>">
+                                    <i class="fa fa-header"></i>
+                                </button>
+                                <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="列表" data-command="insertUnorderedList">
+                                    <i class="fa fa-list-ul"></i>
+                                </button>
+                            </div>
+                            <div id="software-description" class="min-h-[200px] p-4 border border-neutral-300 border-t-0 rounded-b-lg focus:outline-none editor-focus" contenteditable="true">
+                                <p>输入软件的详细介绍...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 软件截图 -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-neutral-800">软件截图</h3>
+                    
+                    <div id="screenshots-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex items-center">
+                            <input type="url" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入截图URL...">
+                            <button type="button" class="ml-2 text-neutral-400 hover:text-red-500 remove-screenshot">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="url" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入截图URL...">
+                            <button type="button" class="ml-2 text-neutral-400 hover:text-red-500 remove-screenshot">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" id="add-screenshot" class="mt-2 text-sm text-primary flex items-center">
+                        <i class="fa fa-plus-circle mr-1"></i> 添加截图
+                    </button>
+                </div>
+                
+                <!-- 安装步骤 -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-neutral-800">安装步骤</h3>
+                    
+                    <div id="steps-container" class="space-y-6">
+                        <!-- 步骤示例 -->
+                        <div class="step-item border border-neutral-200 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-medium">步骤 1</h4>
+                                <button type="button" class="text-neutral-400 hover:text-red-500 remove-step">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm text-neutral-600 mb-1">步骤标题</label>
+                                    <input type="text" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="如: 下载安装包">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-neutral-600 mb-1">步骤描述</label>
+                                    <textarea rows="2" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="详细描述该步骤的操作..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-neutral-600 mb-1">步骤截图URL（可选）</label>
+                                    <input type="url" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入截图URL...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-step" class="mt-2 text-sm text-primary flex items-center">
+                        <i class="fa fa-plus-circle mr-1"></i> 添加步骤
+                    </button>
+                </div>
+                
+                <!-- 安装注意事项 -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-neutral-800">安装注意事项</h3>
+                    <textarea id="installation-notes" rows="3" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入安装过程中的注意事项..."></textarea>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-neutral-200">
+            <div class="px-4 py-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 rounded-lg text-neutral-600 hover:bg-neutral-100 hover:text-primary font-medium">首页</a>
+                <a href="guides.html" class="block px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium">安装指南</a>
+                <a href="#" class="block px-3 py-2 rounded-lg text-neutral-600 hover:bg-neutral-100 hover:text-primary font-medium">常见问题</a>
+                <a href="#" class="block px-3 py-2 rounded-lg text-neutral-600 hover:bg-neutral-100 hover:text-primary font-medium">关于我们</a>
+                
+                <!-- 移动端搜索框 -->
+                <div class="relative mt-3">
+                    <input type="text" placeholder="搜索指南..." 
+                        class="w-full pl-10 pr-4 py-2 rounded-full border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm">
+                    <i class="fa fa-search absolute left-3.5 top-3 text-neutral-400"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <!-- 页面标题和状态 -->
+        <div class="mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+                <div>
+                    <h1 class="text-2xl font-bold text-neutral-800 mb-1">内容发布系统</h1>
+                    <p class="text-neutral-500">创建和编辑安装指南文章</p>
+                </div>
+                <div class="mt-4 sm:mt-0 flex space-x-3">
+                    <button id="preview-button" class="btn-secondary flex items-center">
+                        <i class="fa fa-eye mr-2"></i>
+                        预览
+                    </button>
+                    <button id="save-button" class="btn-primary flex items-center">
+                        <i class="fa fa-save mr-2"></i>
+                        保存
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 发布状态指示器 -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 pt-0.5">
+                        <i class="fa fa-info-circle text-blue-500 text-lg"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">文章状态: <span id="article-status" class="font-medium">草稿</span></p>
+                        <p class="text-xs text-blue-600 mt-1">上次保存: <span id="last-saved">从未</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 编辑器和预览区域 -->
+        <!-- 顶部中央功能按钮区域 -->
+        <div class="mb-6 md:mb-8 text-center">
+            <div class="inline-flex rounded-lg shadow-lg overflow-hidden border-2 border-primary/20 w-[90%] max-w-md">
+                <button id="article-mode-btn" class="flex-1 px-4 py-3 md:px-8 md:py-4 text-base md:text-lg font-bold text-primary bg-white border-r-2 border-primary/20 hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1">文章编辑</button>
+                <button id="software-mode-btn" class="flex-1 px-4 py-3 md:px-8 md:py-4 text-base md:text-lg font-bold text-neutral-500 bg-primary/5 border-l-2 border-primary/20 hover:text-primary hover:bg-primary/10 transition-all duration-300 transform hover:-translate-y-1">软件详情</button>
+            </div>
+        </div>
+        
+        <div id="editor-wrapper" class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 w-full">
+            <!-- 编辑器区域 -->
+            <div id="editor-panel" class="w-full h-[400px] md:h-[500px] lg:h-[calc(100vh-250px)] bg-white rounded-xl shadow-lg border border-neutral-200 overflow-hidden flex flex-col">
+                <div class="p-6 space-y-6 flex-1 overflow-y-auto">
+                    <!-- 编辑器标题 -->
+                    <div id="editor-title" class="mb-6">
+                        <h2 class="text-xl font-bold text-neutral-800 border-b-2 border-primary/30 pb-3">编辑内容</h2>
+                    </div>
+                
+                <!-- 文章编辑区域 -->
+                <div id="article-editor">
+                    <h2 class="text-xl font-bold text-neutral-800 border-b-2 border-primary/30 pb-3">编辑文章</h2>
+                    
+                    <!-- 文章基本信息表单 -->
+                <div class="space-y-6 mt-4 bg-neutral-50 p-5 rounded-lg border border-neutral-200">
+                    <div>
+                        <label for="article-title" class="block text-sm font-medium text-neutral-700 mb-2">文章标题 <span class="text-red-500">*</span></label>
+                        <input type="text" id="article-title" class="w-full px-4 py-3 border border-neutral-300 rounded-lg editor-focus shadow-sm" placeholder="输入文章标题...">
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="article-category" class="block text-sm font-medium text-neutral-700 mb-2">文章分类 <span class="text-red-500">*</span></label>
+                            <select id="article-category" class="w-full px-4 py-3 border border-neutral-300 rounded-lg editor-focus shadow-sm">
+                                <option value="">选择分类</option>
+                                <option value="Windows">Windows</option>
+                                <option value="macOS">macOS</option>
+                                <option value="Linux">Linux</option>
+                                <option value="通用教程">通用教程</option>
+                                <option value="常见问题">常见问题</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="article-date" class="block text-sm font-medium text-neutral-700 mb-1">发布日期 <span class="text-red-500">*</span></label>
+                            <input type="date" id="article-date" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="article-thumbnail" class="block text-sm font-medium text-neutral-700 mb-1">缩略图 URL <span class="text-red-500">*</span></label>
+                        <input type="text" id="article-thumbnail" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入缩略图URL...">
+                    </div>
+                    
+                    <div>
+                        <label for="article-description" class="block text-sm font-medium text-neutral-700 mb-1">文章摘要 <span class="text-red-500">*</span></label>
+                        <textarea id="article-description" rows="3" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入文章摘要..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- 内容编辑器工具栏 -->
+                <div class="border border-neutral-300 rounded-lg overflow-hidden">
+                    <div class="bg-neutral-100 border-b border-neutral-300 p-2 flex flex-wrap gap-1">
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="粗体" data-command="bold">
+                            <i class="fa fa-bold"></i>
+                        </button>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="斜体" data-command="italic">
+                            <i class="fa fa-italic"></i>
+                        </button>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="下划线" data-command="underline">
+                            <i class="fa fa-underline"></i>
+                        </button>
+                        <div class="h-6 border-r border-neutral-300 mx-1"></div>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="插入标题" data-command="formatBlock" data-value="<h2>">
+                            <i class="fa fa-header"></i>
+                        </button>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="插入段落" data-command="formatBlock" data-value="<p>">
+                            <i class="fa fa-paragraph"></i>
+                        </button>
+                        <div class="h-6 border-r border-neutral-300 mx-1"></div>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="无序列表" data-command="insertUnorderedList">
+                            <i class="fa fa-list-ul"></i>
+                        </button>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="有序列表" data-command="insertOrderedList">
+                            <i class="fa fa-list-ol"></i>
+                        </button>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="引用" data-command="formatBlock" data-value="<blockquote>">
+                            <i class="fa fa-quote-right"></i>
+                        </button>
+                        <div class="h-6 border-r border-neutral-300 mx-1"></div>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="插入链接" id="insert-link-btn">
+                            <i class="fa fa-link"></i>
+                        </button>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="插入图片" id="insert-image-btn">
+                            <i class="fa fa-image"></i>
+                        </button>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="插入代码块" id="insert-code-btn">
+                            <i class="fa fa-code"></i>
+                        </button>
+                        <div class="h-6 border-r border-neutral-300 mx-1"></div>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="左对齐" data-command="justifyLeft">
+                            <i class="fa fa-align-left"></i>
+                        </button>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="居中对齐" data-command="justifyCenter">
+                            <i class="fa fa-align-center"></i>
+                        </button>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="右对齐" data-command="justifyRight">
+                            <i class="fa fa-align-right"></i>
+                        </button>
+                        <button class="editor-tool-btn p-2 text-sm text-neutral-700 hover:bg-neutral-200 rounded" title="两端对齐" data-command="justifyFull">
+                            <i class="fa fa-align-justify"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 内容编辑区域 -->
+                    <div id="article-content-editor" class="min-h-[400px] p-4 border border-neutral-300 border-t-0 rounded-b-lg focus:outline-none editor-focus" contenteditable="true">
+                        <p>开始输入文章内容...</p>
+                    </div>
+                </div>
+                
+                <!-- 软件详情编辑区域 -->
+                <div id="software-editor" class="hidden space-y-6">
+                    <h2 class="text-xl font-bold text-neutral-800 border-b-2 border-primary/30 pb-3">软件详情页发布</h2>
+                    
+                    <!-- 软件基本信息表单 -->
+                    <div class="space-y-6">
+                        <!-- 软件名称和版本 -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="software-name" class="block text-sm font-medium text-neutral-700 mb-2">软件名称 <span class="text-red-500">*</span></label>
+                                <input type="text" id="software-name" class="w-full px-4 py-3 border border-neutral-300 rounded-lg editor-focus shadow-sm" placeholder="输入软件名称..." required>
+                            </div>
+                            <div>
+                                <label for="software-version" class="block text-sm font-medium text-neutral-700 mb-2">软件版本 <span class="text-red-500">*</span></label>
+                                <input type="text" id="software-version" class="w-full px-4 py-3 border border-neutral-300 rounded-lg editor-focus shadow-sm" placeholder="如: 120.0.6099.199" required>
+                            </div>
+                        </div>
+                        
+                        <!-- 软件图标 -->
+                        <div>
+                            <label for="software-icon" class="block text-sm font-medium text-neutral-700 mb-2">软件图标 URL <span class="text-red-500">*</span></label>
+                            <input type="url" id="software-icon" class="w-full px-4 py-3 border border-neutral-300 rounded-lg editor-focus shadow-sm" placeholder="输入软件图标URL..." required>
+                        </div>
+                        
+                        <!-- 软件分类 -->
+                        <div>
+                            <label for="software-category" class="block text-sm font-medium text-neutral-700 mb-2">软件分类 <span class="text-red-500">*</span></label>
+                            <select id="software-category" class="w-full px-4 py-3 border border-neutral-300 rounded-lg editor-focus shadow-sm" required>
+                                <option value="">选择分类</option>
+                                <option value="Windows">Windows</option>
+                                <option value="macOS">macOS</option>
+                                <option value="Linux">Linux</option>
+                                <option value="浏览器">浏览器</option>
+                                <option value="办公软件">办公软件</option>
+                                <option value="压缩工具">压缩工具</option>
+                                <option value="聊天工具">聊天工具</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                        
+                        <!-- 软件简介 -->
+                        <div>
+                            <label for="software-summary" class="block text-sm font-medium text-neutral-700 mb-2">软件简介 <span class="text-red-500">*</span></label>
+                            <textarea id="software-summary" rows="3" class="w-full px-4 py-3 border border-neutral-300 rounded-lg editor-focus shadow-sm" placeholder="简要介绍软件功能和特点..." required></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 模板选择 -->
+                <div>
+                    <label class="block text-sm font-medium text-neutral-700 mb-2">快速模板</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        <button class="btn-outline text-xs flex flex-col items-center py-3" id="template-windows">
+                            <i class="fa fa-windows text-primary mb-1"></i>
+                            <span>Windows安装</span>
+                        </button>
+                        <button class="btn-outline text-xs flex flex-col items-center py-3" id="template-macos">
+                            <i class="fa fa-apple text-primary mb-1"></i>
+                            <span>macOS安装</span>
+                        </button>
+                        <button class="btn-outline text-xs flex flex-col items-center py-3" id="template-linux">
+                            <i class="fa fa-linux text-primary mb-1"></i>
+                            <span>Linux安装</span>
+                        </button>
+                        <button class="btn-outline text-xs flex flex-col items-center py-3" id="template-guide">
+                            <i class="fa fa-book text-primary mb-1"></i>
+                            <span>通用教程</span>
+                        </button>
+                        <button class="btn-outline text-xs flex flex-col items-center py-3" id="template-faq">
+                            <i class="fa fa-question-circle text-primary mb-1"></i>
+                            <span>常见问题</span>
+                        </button>
+                        <button class="btn-outline text-xs flex flex-col items-center py-3" id="template-tip">
+                            <i class="fa fa-lightbulb-o text-primary mb-1"></i>
+                            <span>技巧分享</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 预览区域 -->
+            <div id="preview-section" class="w-full h-[400px] md:h-[500px] lg:h-[calc(100vh-250px)] bg-white rounded-xl shadow-lg border border-neutral-200 overflow-hidden flex flex-col">
+                <div class="p-6 space-y-6 flex-1 overflow-y-auto">
+                    <div class="flex justify-between items-center mb-4 pb-2 border-b-2 border-primary/30">
+                        <h2 class="text-xl font-bold text-neutral-800">预览</h2>
+                        <div class="text-sm text-neutral-500 px-3 py-1 bg-primary/5 rounded-full" id="preview-mode-text">文章预览</div>
+                    </div>
+                
+                <div id="preview-content" class="space-y-6 mt-4 bg-neutral-50 p-5 rounded-lg border border-neutral-200">
+                    <!-- 预览标题 -->
+                    <div>
+                        <h1 id="preview-title" class="text-2xl font-bold text-neutral-800">文章标题将在这里显示</h1>
+                        <div class="flex items-center mt-3 text-sm text-neutral-500">
+                            <span id="preview-category" class="bg-primary/10 text-primary px-3 py-1 rounded-full">分类</span>
+                            <span class="mx-2">•</span>
+                            <span id="preview-date">2023-00-00</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 预览缩略图 -->
+                    <div id="preview-thumbnail-container" class="hidden">
+                        <img id="preview-thumbnail" src="" alt="文章缩略图" class="w-full h-auto rounded-lg shadow-md">
+                    </div>
+                    
+                    <!-- 预览摘要 -->
+                    <div>
+                        <p id="preview-description" class="text-neutral-600">文章摘要将在这里显示...</p>
+                    </div>
+                    
+                    <!-- 预览内容 -->
+                    <div id="preview-body" class="prose max-w-none text-neutral-700">
+                        <p>在编辑区输入内容后，预览将显示在这里...</p>
+                    </div>
+                </div>
+                
+                <!-- 发布控制 -->
+                <div class="border-t pt-4">
+                    <h3 class="text-lg font-medium text-neutral-800 mb-3">发布控制</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="flex items-center">
+                                <input type="checkbox" id="publish-status" class="rounded border-neutral-300 text-primary focus:ring-primary h-4 w-4">
+                                <span class="ml-2 text-sm text-neutral-700">将文章标记为已发布</span>
+                            </label>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="article-tags" class="block text-sm font-medium text-neutral-700 mb-1">文章标签（用逗号分隔）</label>
+                                <input type="text" id="article-tags" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="标签1,标签2,标签3">
+                            </div>
+                            
+                            <div>
+                                <label for="article-author" class="block text-sm font-medium text-neutral-700 mb-1">作者</label>
+                                <input type="text" id="article-author" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入作者名称" value="系统重装团队">
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-end space-x-3 mt-6">
+                            <button id="discard-button" class="btn-danger flex items-center">
+                                <i class="fa fa-trash mr-2"></i>
+                                放弃修改
+                            </button>
+                            <button id="publish-button" class="btn-primary flex items-center" data-mode="article">
+                                <i class="fa fa-paper-plane mr-2"></i>
+                                发布文章
+                            </button>
+                            <button id="publish-software-button" class="btn-primary flex items-center hidden" data-mode="software">
+                                <i class="fa fa-paper-plane mr-2"></i>
+                                发布软件详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white border-t border-neutral-200 mt-16">
+        <div class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- 关于我们 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-neutral-800">关于我们</h3>
+                    <p class="text-sm text-neutral-600 mb-4">提供一站式系统重装指南，帮助用户轻松安装各类操作系统。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-neutral-500 hover:text-primary transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-neutral-500 hover:text-primary transition-colors">
+                            <i class="fa fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-neutral-500 hover:text-primary transition-colors">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 快速链接 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-neutral-800">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-neutral-600 hover:text-primary transition-colors text-sm">首页</a></li>
+                        <li><a href="guides.html" class="text-neutral-600 hover:text-primary transition-colors text-sm">安装指南</a></li>
+                        <li><a href="#" class="text-neutral-600 hover:text-primary transition-colors text-sm">常见问题</a></li>
+                        <li><a href="#" class="text-neutral-600 hover:text-primary transition-colors text-sm">联系我们</a></li>
+                        <li><a href="#" class="text-neutral-600 hover:text-primary transition-colors text-sm">隐私政策</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 热门教程 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-neutral-800">热门教程</h3>
+                    <ul class="space-y-2">
+                        <li><a href="article.html?id=1" class="text-neutral-600 hover:text-primary transition-colors text-sm">Windows 11安装教程</a></li>
+                        <li><a href="article.html?id=2" class="text-neutral-600 hover:text-primary transition-colors text-sm">macOS Sonoma升级指南</a></li>
+                        <li><a href="article.html?id=3" class="text-neutral-600 hover:text-primary transition-colors text-sm">Ubuntu 22.04 LTS安装详解</a></li>
+                        <li><a href="#" class="text-neutral-600 hover:text-primary transition-colors text-sm">系统备份与恢复</a></li>
+                        <li><a href="#" class="text-neutral-600 hover:text-primary transition-colors text-sm">驱动安装与更新</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 联系信息 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-neutral-800">联系我们</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa fa-envelope text-primary mt-1 mr-2"></i>
+                            <span class="text-neutral-600">contact@sysreinstall.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-github text-primary mt-1 mr-2"></i>
+                            <a href="#" class="text-neutral-600 hover:text-primary transition-colors">github.com/sysreinstall</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-neutral-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm text-neutral-500 mb-4 md:mb-0">© 2023 系统重装一站式网站. 保留所有权利.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-sm text-neutral-500 hover:text-primary transition-colors">隐私政策</a>
+                    <a href="#" class="text-sm text-neutral-500 hover:text-primary transition-colors">使用条款</a>
+                    <a href="#" class="text-sm text-neutral-500 hover:text-primary transition-colors">Cookie政策</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 模态框 - 插入链接 -->
+    <div id="link-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-neutral-800">插入链接</h3>
+                <button class="text-neutral-400 hover:text-neutral-600 close-modal">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label for="link-text" class="block text-sm font-medium text-neutral-700 mb-1">链接文本</label>
+                    <input type="text" id="link-text" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入链接显示文本">
+                </div>
+                
+                <div>
+                    <label for="link-url" class="block text-sm font-medium text-neutral-700 mb-1">链接地址</label>
+                    <input type="url" id="link-url" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入链接URL">
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button class="btn-outline close-modal">取消</button>
+                    <button id="confirm-link" class="btn-primary">插入链接</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 - 插入图片 -->
+    <div id="image-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-neutral-800">插入图片</h3>
+                <button class="text-neutral-400 hover:text-neutral-600 close-modal">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label for="image-url" class="block text-sm font-medium text-neutral-700 mb-1">图片地址</label>
+                    <input type="url" id="image-url" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入图片URL">
+                </div>
+                
+                <div>
+                    <label for="image-alt" class="block text-sm font-medium text-neutral-700 mb-1">替代文本</label>
+                    <input type="text" id="image-alt" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入图片描述（可选）">
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button class="btn-outline close-modal">取消</button>
+                    <button id="confirm-image" class="btn-primary">插入图片</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 - 插入代码块 -->
+    <div id="code-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-neutral-800">插入代码块</h3>
+                <button class="text-neutral-400 hover:text-neutral-600 close-modal">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label for="code-content" class="block text-sm font-medium text-neutral-700 mb-1">代码内容</label>
+                    <textarea id="code-content" rows="8" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus font-mono text-sm" placeholder="粘贴代码内容..."></textarea>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button class="btn-outline close-modal">取消</button>
+                    <button id="confirm-code" class="btn-primary">插入代码块</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 成功提示 -->
+    <div id="success-toast" class="fixed bottom-6 right-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center">
+        <i class="fa fa-check-circle mr-2"></i>
+        <span id="toast-message">操作成功！</span>
+    </div>
+
+    <!-- 内容编辑器JS -->
+    <script src="js/content-editor.js"></script>
+    
+    <!-- 软件详情页发布功能JS -->
+    <script>
+        // 使用DOMContentLoaded确保DOM完全加载后执行代码
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                console.log('初始化软件详情编辑功能...');
+                
+                // 模式切换功能
+                const articleModeBtn = document.getElementById('article-mode-btn');
+                const softwareModeBtn = document.getElementById('software-mode-btn');
+                const articleEditor = document.getElementById('article-editor');
+                const softwareEditor = document.getElementById('software-editor');
+                const publishButton = document.getElementById('publish-button');
+                const publishSoftwareButton = document.getElementById('publish-software-button');
+                const previewModeText = document.getElementById('preview-mode-text');
+                const previewContent = document.getElementById('preview-content');
+                const previewTitle = document.getElementById('preview-title');
+                
+                // 验证所有必要的DOM元素是否存在
+                const requiredElements = {
+                    articleModeBtn,
+                    softwareModeBtn,
+                    articleEditor,
+                    softwareEditor,
+                    publishButton,
+                    publishSoftwareButton,
+                    previewModeText
+                };
+                
+                let hasMissingElements = false;
+                for (const [key, element] of Object.entries(requiredElements)) {
+                    if (!element) {
+                        console.error(`缺少必要的DOM元素: ${key}`);
+                        hasMissingElements = true;
+                    }
+                }
+                
+                if (hasMissingElements) {
+                    console.warn('部分DOM元素缺失，可能会影响功能正常运行');
+                }
+                
+                // 切换到文章编辑模式
+                if (articleModeBtn) {
+                    articleModeBtn.addEventListener('click', function() {
+                        try {
+                            console.log('切换到文章编辑模式');
+                            articleModeBtn.classList.add('text-primary', 'border-b-2', 'border-primary');
+                            articleModeBtn.classList.remove('text-neutral-500');
+                            if (softwareModeBtn) {
+                                softwareModeBtn.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                                softwareModeBtn.classList.add('text-neutral-500');
+                            }
+                            
+                            if (articleEditor) articleEditor.classList.remove('hidden');
+                            if (softwareEditor) softwareEditor.classList.add('hidden');
+                            
+                            if (publishButton) publishButton.classList.remove('hidden');
+                            if (publishSoftwareButton) publishSoftwareButton.classList.add('hidden');
+                            
+                            if (previewModeText) previewModeText.textContent = '文章预览';
+                        } catch (error) {
+                            console.error('切换文章编辑模式时出错:', error);
+                        }
+                    });
+                }
+                
+                // 切换到软件详情编辑模式
+                if (softwareModeBtn) {
+                    softwareModeBtn.addEventListener('click', function() {
+                        try {
+                            console.log('切换到软件详情编辑模式');
+                            softwareModeBtn.classList.add('text-primary', 'border-b-2', 'border-primary');
+                            softwareModeBtn.classList.remove('text-neutral-500');
+                            if (articleModeBtn) {
+                                articleModeBtn.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                                articleModeBtn.classList.add('text-neutral-500');
+                            }
+                            
+                            if (softwareEditor) softwareEditor.classList.remove('hidden');
+                            if (articleEditor) articleEditor.classList.add('hidden');
+                            
+                            if (publishSoftwareButton) publishSoftwareButton.classList.remove('hidden');
+                            if (publishButton) publishButton.classList.add('hidden');
+                            
+                            if (previewModeText) previewModeText.textContent = '软件详情预览';
+                            
+                            // 更新预览内容
+                            if (typeof updateSoftwarePreview === 'function') {
+                                updateSoftwarePreview();
+                            } else {
+                                console.warn('updateSoftwarePreview函数未定义');
+                            }
+                        } catch (error) {
+                            console.error('切换软件详情编辑模式时出错:', error);
+                        }
+                    });
+                }
+                
+                console.log('软件详情编辑功能初始化完成');
+            } catch (error) {
+                console.error('初始化软件详情编辑功能时发生错误:', error);
+            }
+        });
+        
+        // 添加特点按钮
+        document.getElementById('add-feature').addEventListener('click', function() {
+            const container = document.getElementById('features-container');
+            const newFeature = document.createElement('div');
+            newFeature.className = 'flex items-center';
+            newFeature.innerHTML = `
+                <input type="text" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入特点...">
+                <button type="button" class="ml-2 text-neutral-400 hover:text-red-500 remove-feature">
+                    <i class="fa fa-times"></i>
+                </button>
+            `;
+            container.appendChild(newFeature);
+            
+            // 绑定删除按钮事件
+            newFeature.querySelector('.remove-feature').addEventListener('click', function() {
+                newFeature.remove();
+            });
+        });
+        
+        // 添加系统要求按钮
+        document.getElementById('add-requirement').addEventListener('click', function() {
+            const container = document.getElementById('requirements-container');
+            const newRequirement = document.createElement('div');
+            newRequirement.className = 'flex items-center';
+            newRequirement.innerHTML = `
+                <input type="text" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入系统要求...">
+                <button type="button" class="ml-2 text-neutral-400 hover:text-red-500 remove-requirement">
+                    <i class="fa fa-times"></i>
+                </button>
+            `;
+            container.appendChild(newRequirement);
+            
+            // 绑定删除按钮事件
+            newRequirement.querySelector('.remove-requirement').addEventListener('click', function() {
+                newRequirement.remove();
+            });
+        });
+        
+        // 添加截图按钮
+        document.getElementById('add-screenshot').addEventListener('click', function() {
+            const container = document.getElementById('screenshots-container');
+            const newScreenshot = document.createElement('div');
+            newScreenshot.className = 'flex items-center';
+            newScreenshot.innerHTML = `
+                <input type="url" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入截图URL...">
+                <button type="button" class="ml-2 text-neutral-400 hover:text-red-500 remove-screenshot">
+                    <i class="fa fa-times"></i>
+                </button>
+            `;
+            container.appendChild(newScreenshot);
+            
+            // 绑定删除按钮事件
+            newScreenshot.querySelector('.remove-screenshot').addEventListener('click', function() {
+                newScreenshot.remove();
+            });
+        });
+        
+        // 添加步骤按钮
+        document.getElementById('add-step').addEventListener('click', function() {
+            const container = document.getElementById('steps-container');
+            const stepCount = container.children.length + 1;
+            
+            const newStep = document.createElement('div');
+            newStep.className = 'step-item border border-neutral-200 rounded-lg p-4';
+            newStep.innerHTML = `
+                <div class="flex justify-between items-center mb-3">
+                    <h4 class="font-medium">步骤 ${stepCount}</h4>
+                    <button type="button" class="text-neutral-400 hover:text-red-500 remove-step">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-sm text-neutral-600 mb-1">步骤标题</label>
+                        <input type="text" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="如: 下载安装包">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-neutral-600 mb-1">步骤描述</label>
+                        <textarea rows="2" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="详细描述该步骤的操作..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-neutral-600 mb-1">步骤截图URL（可选）</label>
+                        <input type="url" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入截图URL...">
+                    </div>
+                </div>
+            `;
+            container.appendChild(newStep);
+            
+            // 绑定删除按钮事件
+            newStep.querySelector('.remove-step').addEventListener('click', function() {
+                newStep.remove();
+                // 更新步骤编号
+                updateStepNumbers();
+            });
+        });
+        
+        // 更新步骤编号
+        function updateStepNumbers() {
+            const steps = document.querySelectorAll('.step-item');
+            steps.forEach((step, index) => {
+                step.querySelector('h4').textContent = `步骤 ${index + 1}`;
+            });
+        }
+        
+        // 绑定初始删除按钮事件
+        document.querySelectorAll('.remove-feature').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.closest('.flex').remove();
+            });
+        });
+        
+        document.querySelectorAll('.remove-requirement').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.closest('.flex').remove();
+            });
+        });
+        
+        document.querySelectorAll('.remove-screenshot').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.closest('.flex').remove();
+            });
+        });
+        
+        document.querySelectorAll('.remove-step').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.closest('.step-item').remove();
+                updateStepNumbers();
+            });
+        });
+        
+        // 表单验证函数
+        function validateSoftwareForm() {
+            let isValid = true;
+            const errors = [];
+            
+            // 重置所有错误提示
+            document.querySelectorAll('.error-message').forEach(el => el.remove());
+            document.querySelectorAll('input, textarea, select').forEach(el => {
+                el.classList.remove('border-red-500');
+            });
+            
+            // 验证必填字段
+            const requiredFields = [
+                { id: 'software-name', name: '软件名称' },
+                { id: 'software-version', name: '软件版本' },
+                { id: 'software-icon', name: '软件图标URL' },
+                { id: 'software-category', name: '软件分类' },
+                { id: 'software-summary', name: '软件简介' }
+            ];
+            
+            requiredFields.forEach(field => {
+                const element = document.getElementById(field.id);
+                if (!element.value.trim()) {
+                    isValid = false;
+                    showError(element, `${field.name}不能为空`);
+                    errors.push(`${field.name}不能为空`);
+                }
+            });
+            
+            // 验证URL格式
+            const urlFields = [
+                { id: 'software-icon', name: '软件图标URL' },
+                { id: 'baidu-pan-link', name: '百度网盘链接' },
+                { id: 'cloud189-link', name: '天翼云盘链接' }
+            ];
+            
+            const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+            
+            urlFields.forEach(field => {
+                const element = document.getElementById(field.id);
+                if (element.value.trim() && !urlPattern.test(element.value.trim())) {
+                    isValid = false;
+                    showError(element, `${field.name}格式不正确`);
+                    errors.push(`${field.name}格式不正确`);
+                }
+            });
+            
+            // 验证截图URL
+            document.querySelectorAll('#screenshots-container input').forEach((input, index) => {
+                if (input.value.trim() && !urlPattern.test(input.value.trim())) {
+                    isValid = false;
+                    showError(input, `截图${index + 1}URL格式不正确`);
+                    errors.push(`截图${index + 1}URL格式不正确`);
+                }
+            });
+            
+            // 验证步骤截图URL
+            document.querySelectorAll('.step-item input[type="url"]').forEach((input, index) => {
+                if (input.value.trim() && !urlPattern.test(input.value.trim())) {
+                    isValid = false;
+                    showError(input, `步骤${index + 1}截图URL格式不正确`);
+                    errors.push(`步骤${index + 1}截图URL格式不正确`);
+                }
+            });
+            
+            // 验证至少有一个下载链接
+            const baiduLink = document.getElementById('baidu-pan-link').value.trim();
+            const cloud189Link = document.getElementById('cloud189-link').value.trim();
+            
+            if (!baiduLink && !cloud189Link) {
+                isValid = false;
+                const downloadSection = document.querySelector('.bg-neutral-50.p-4.rounded-lg');
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message text-red-500 text-sm mt-2';
+                errorDiv.textContent = '请至少提供一个下载链接';
+                downloadSection.appendChild(errorDiv);
+                errors.push('请至少提供一个下载链接');
+            }
+            
+            // 验证至少有一个特点
+            const features = Array.from(document.querySelectorAll('#features-container input'))
+                .filter(input => input.value.trim());
+            
+            if (features.length === 0) {
+                isValid = false;
+                const featuresSection = document.getElementById('features-container');
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message text-red-500 text-sm mt-2';
+                errorDiv.textContent = '请至少添加一个软件特点';
+                featuresSection.parentNode.appendChild(errorDiv);
+                errors.push('请至少添加一个软件特点');
+            }
+            
+            // 验证至少有一个步骤
+            const steps = document.querySelectorAll('.step-item');
+            if (steps.length === 0) {
+                isValid = false;
+                const stepsSection = document.getElementById('steps-container');
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message text-red-500 text-sm mt-2';
+                errorDiv.textContent = '请至少添加一个安装步骤';
+                stepsSection.parentNode.appendChild(errorDiv);
+                errors.push('请至少添加一个安装步骤');
+            } else {
+                // 验证每个步骤都有标题和描述
+                steps.forEach((step, index) => {
+                    const titleInput = step.querySelector('input[type="text"]');
+                    const descInput = step.querySelector('textarea');
+                    
+                    if (!titleInput.value.trim()) {
+                        isValid = false;
+                        showError(titleInput, `步骤${index + 1}标题不能为空`);
+                        errors.push(`步骤${index + 1}标题不能为空`);
+                    }
+                    
+                    if (!descInput.value.trim()) {
+                        isValid = false;
+                        showError(descInput, `步骤${index + 1}描述不能为空`);
+                        errors.push(`步骤${index + 1}描述不能为空`);
+                    }
+                });
+            }
+            
+            return { isValid, errors };
+        }
+        
+        // 显示错误信息
+        function showError(element, message) {
+            element.classList.add('border-red-500');
+            
+            // 检查是否已经有错误提示
+            if (!element.nextElementSibling || !element.nextElementSibling.classList.contains('error-message')) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message text-red-500 text-sm mt-1';
+                errorDiv.textContent = message;
+                
+                // 如果输入框有兄弟按钮，则插入到按钮前面
+                if (element.nextElementSibling && element.nextElementSibling.tagName === 'BUTTON') {
+                    element.parentNode.insertBefore(errorDiv, element.nextElementSibling);
+                } else {
+                    element.parentNode.appendChild(errorDiv);
+                }
+            }
+        }
+        
+        // 添加实时验证
+        function addRealTimeValidation() {
+            const requiredFields = document.querySelectorAll('#software-editor [required], #software-editor .required-field');
+            
+            requiredFields.forEach(field => {
+                field.addEventListener('blur', function() {
+                    if (!this.value.trim()) {
+                        showError(this, '此字段不能为空');
+                    } else {
+                        // 清除错误
+                        this.classList.remove('border-red-500');
+                        const errorEl = this.nextElementSibling;
+                        if (errorEl && errorEl.classList.contains('error-message')) {
+                            errorEl.remove();
+                        }
+                    }
+                });
+            });
+            
+            // URL字段实时验证
+            const urlFields = document.querySelectorAll('#software-editor input[type="url"]');
+            const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+            
+            urlFields.forEach(field => {
+                field.addEventListener('blur', function() {
+                    if (this.value.trim() && !urlPattern.test(this.value.trim())) {
+                        showError(this, 'URL格式不正确');
+                    } else {
+                        // 清除错误
+                        this.classList.remove('border-red-500');
+                        const errorEl = this.nextElementSibling;
+                        if (errorEl && errorEl.classList.contains('error-message')) {
+                            errorEl.remove();
+                        }
+                    }
+                });
+            });
+        }
+        
+        // 初始化实时验证
+        addRealTimeValidation();
+        
+        // 更新软件预览
+        function updateSoftwarePreview() {
+            const softwareName = document.getElementById('software-name').value || '软件名称';
+            previewTitle.textContent = softwareName;
+            
+            // 这里可以扩展更复杂的预览逻辑
+            // ...
+        }
+        
+        // 绑定表单输入事件，实时更新预览
+        const softwareInputs = softwareEditor.querySelectorAll('input, textarea, select');
+        softwareInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                updateSoftwarePreview();
+                
+                // 输入时清除错误提示
+                this.classList.remove('border-red-500');
+                const errorEl = this.nextElementSibling;
+                if (errorEl && errorEl.classList.contains('error-message')) {
+                    errorEl.remove();
+                }
+            });
+        });
+        
+        // 收集软件表单数据
+        function collectSoftwareFormData() {
+            // 收集基本信息
+            const basicInfo = {
+                name: document.getElementById('software-name').value.trim(),
+                version: document.getElementById('software-version').value.trim(),
+                icon: document.getElementById('software-icon').value.trim(),
+                category: document.getElementById('software-category').value,
+                summary: document.getElementById('software-summary').value.trim(),
+                tags: document.getElementById('software-tags').value.trim()
+            };
+            
+            // 收集下载信息
+            const downloadInfo = {
+                baiduPanLink: document.getElementById('baidu-pan-link').value.trim(),
+                cloud189Link: document.getElementById('cloud189-link').value.trim(),
+                password: document.getElementById('download-password').value.trim(),
+                notes: document.getElementById('download-notes').value.trim()
+            };
+            
+            // 收集软件特点
+            const features = Array.from(document.querySelectorAll('#features-container input'))
+                .map(input => input.value.trim())
+                .filter(feature => feature);
+            
+            // 收集系统要求
+            const requirements = Array.from(document.querySelectorAll('#requirements-container input'))
+                .map(input => input.value.trim())
+                .filter(req => req);
+            
+            // 收集适用场景
+            const scenarios = document.getElementById('software-scenarios').value.trim();
+            
+            // 收集详细介绍
+            const description = document.getElementById('software-description').innerHTML;
+            
+            // 收集截图
+            const screenshots = Array.from(document.querySelectorAll('#screenshots-container input'))
+                .map(input => input.value.trim())
+                .filter(shot => shot);
+            
+            // 收集安装步骤
+            const steps = Array.from(document.querySelectorAll('.step-item')).map(step => {
+                return {
+                    title: step.querySelector('input[type="text"]').value.trim(),
+                    description: step.querySelector('textarea').value.trim(),
+                    screenshot: step.querySelector('input[type="url"]').value.trim()
+                };
+            });
+            
+            // 收集安装注意事项
+            const installationNotes = document.getElementById('installation-notes').value.trim();
+            
+            return {
+                basicInfo,
+                downloadInfo,
+                features,
+                requirements,
+                scenarios,
+                description,
+                screenshots,
+                steps,
+                installationNotes,
+                createdAt: new Date().toISOString(),
+                slug: generateSlug(basicInfo.name)
+            };
+        }
+        
+        // 生成URL友好的slug
+        function generateSlug(text) {
+            return text.toLowerCase()
+                .replace(/[\s\u4e00-\u9fa5]+/g, '-')  // 中文和空格替换为连字符
+                .replace(/[^\w\-]/g, '')           // 移除所有非单词字符
+                .replace(/\-+/g, '-')               // 多个连字符替换为单个
+                .replace(/^-|-$/g, '');             // 移除首尾连字符
+        }
+        
+        // 提交软件数据
+        function submitSoftwareData(formData) {
+            // 显示加载状态
+            const publishBtn = document.getElementById('publish-software-button');
+            const originalText = publishBtn.innerHTML;
+            publishBtn.disabled = true;
+            publishBtn.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> 发布中...';
+            
+            // 模拟API请求延迟
+            setTimeout(() => {
+                try {
+                    // 这里是模拟提交到后端的逻辑
+                    console.log('提交的软件数据:', formData);
+                    
+                    // 生成模拟的成功响应
+                    const response = {
+                        success: true,
+                        message: '软件详情页发布成功！',
+                        data: {
+                            id: 'sw' + Date.now(),
+                            url: `/software/${formData.slug}.html`,
+                            publishedAt: new Date().toISOString()
+                        }
+                    };
+                    
+                    // 显示成功提示
+                    showToast(response.message, true);
+                    
+                    // 显示发布结果信息
+                    showPublishResult(response.data);
+                    
+                    // 重置表单（可选）
+                    // resetSoftwareForm();
+                    
+                } catch (error) {
+                    // 显示错误提示
+                    showToast('发布失败：' + (error.message || '未知错误'), false);
+                    console.error('发布失败:', error);
+                } finally {
+                    // 恢复按钮状态
+                    publishBtn.disabled = false;
+                    publishBtn.innerHTML = originalText;
+                }
+            }, 1500); // 模拟1.5秒的网络延迟
+        }
+        
+        // 显示发布结果信息
+        function showPublishResult(data) {
+            // 创建结果信息元素
+            const resultContainer = document.createElement('div');
+            resultContainer.className = 'bg-green-50 border border-green-200 rounded-lg p-4 mb-4';
+            resultContainer.innerHTML = `
+                <h4 class="text-green-700 font-medium mb-2">发布成功！</h4>
+                <p class="text-sm text-green-600 mb-2">软件ID: ${data.id}</p>
+                <p class="text-sm text-green-600">访问地址: <a href="${data.url}" target="_blank" class="text-blue-500 hover:underline">${data.url}</a></p>
+            `;
+            
+            // 插入到表单顶部
+            const softwareEditor = document.getElementById('software-editor');
+            softwareEditor.insertBefore(resultContainer, softwareEditor.firstChild);
+            
+            // 5秒后自动移除
+            setTimeout(() => {
+                resultContainer.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+                setTimeout(() => resultContainer.remove(), 500);
+            }, 5000);
+        }
+        
+        // 重置软件表单
+        function resetSoftwareForm() {
+            document.getElementById('software-name').value = '';
+            document.getElementById('software-version').value = '';
+            document.getElementById('software-icon').value = '';
+            document.getElementById('software-category').value = '';
+            document.getElementById('software-summary').value = '';
+            document.getElementById('software-tags').value = '';
+            document.getElementById('baidu-pan-link').value = '';
+            document.getElementById('cloud189-link').value = '';
+            document.getElementById('download-password').value = '';
+            document.getElementById('download-notes').value = '';
+            document.getElementById('software-scenarios').value = '';
+            document.getElementById('software-description').innerHTML = '<p>输入软件的详细介绍...</p>';
+            document.getElementById('installation-notes').value = '';
+            
+            // 重置动态添加的字段
+            const featuresContainer = document.getElementById('features-container');
+            featuresContainer.innerHTML = `
+                <div class="flex items-center">
+                    <input type="text" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入特点...">
+                    <button type="button" class="ml-2 text-neutral-400 hover:text-red-500 remove-feature">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            const requirementsContainer = document.getElementById('requirements-container');
+            requirementsContainer.innerHTML = `
+                <div class="flex items-center">
+                    <input type="text" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入系统要求...">
+                    <button type="button" class="ml-2 text-neutral-400 hover:text-red-500 remove-requirement">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            const screenshotsContainer = document.getElementById('screenshots-container');
+            screenshotsContainer.innerHTML = `
+                <div class="flex items-center">
+                    <input type="url" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入截图URL...">
+                    <button type="button" class="ml-2 text-neutral-400 hover:text-red-500 remove-screenshot">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+                <div class="flex items-center">
+                    <input type="url" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入截图URL...">
+                    <button type="button" class="ml-2 text-neutral-400 hover:text-red-500 remove-screenshot">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            const stepsContainer = document.getElementById('steps-container');
+            stepsContainer.innerHTML = `
+                <div class="step-item border border-neutral-200 rounded-lg p-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-medium">步骤 1</h4>
+                        <button type="button" class="text-neutral-400 hover:text-red-500 remove-step">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm text-neutral-600 mb-1">步骤标题</label>
+                            <input type="text" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="如: 下载安装包">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-neutral-600 mb-1">步骤描述</label>
+                            <textarea rows="2" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="详细描述该步骤的操作..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-neutral-600 mb-1">步骤截图URL（可选）</label>
+                            <input type="url" class="w-full px-4 py-2 border border-neutral-300 rounded-lg editor-focus" placeholder="输入截图URL...">
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 重新绑定事件
+            bindDynamicElementEvents();
+            
+            // 更新预览
+            updateSoftwarePreview();
+        }
+        
+        // 绑定动态元素事件
+        function bindDynamicElementEvents() {
+            // 重新绑定删除按钮事件
+            document.querySelectorAll('.remove-feature').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.flex').remove();
+                });
+            });
+            
+            document.querySelectorAll('.remove-requirement').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.flex').remove();
+                });
+            });
+            
+            document.querySelectorAll('.remove-screenshot').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.flex').remove();
+                });
+            });
+            
+            document.querySelectorAll('.remove-step').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.step-item').remove();
+                    updateStepNumbers();
+                });
+            });
+        }
+        
+        // 增强的URL验证函数，兼容所有浏览器
+        function isValidURL(string) {
+            // 基础URL格式验证，使用更通用的正则表达式
+            const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
+            
+            // 针对中文和特殊字符的处理
+            try {
+                // 在IE中，URL对象可能不可用
+                if (typeof URL !== 'undefined') {
+                    new URL(string);
+                    return true;
+                } else {
+                    return urlPattern.test(string);
+                }
+            } catch (e) {
+                return urlPattern.test(string);
+            }
+        }
+        
+        // 增强的错误显示函数
+        function showError(element, message) {
+            if (!element) return;
+            
+            element.classList.add('border-red-500');
+            
+            // 检查是否已经有错误提示
+            let errorDiv = element.nextElementSibling;
+            while (errorDiv && !errorDiv.classList.contains('error-message')) {
+                errorDiv = errorDiv.nextElementSibling;
+            }
+            
+            if (!errorDiv || !errorDiv.classList.contains('error-message')) {
+                errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message text-red-500 text-sm mt-1';
+                
+                // 如果输入框有兄弟按钮，则插入到按钮前面
+                if (element.nextElementSibling && element.nextElementSibling.tagName === 'BUTTON') {
+                    element.parentNode.insertBefore(errorDiv, element.nextElementSibling);
+                } else {
+                    element.parentNode.appendChild(errorDiv);
+                }
+            }
+            
+            errorDiv.textContent = message;
+        }
+        
+        // 增强的步骤编号更新函数
+        function updateStepNumbers() {
+            const steps = document.querySelectorAll('.step-item');
+            steps.forEach((step, index) => {
+                if (!step) return;
+                
+                const stepTitle = step.querySelector('h4');
+                if (stepTitle) {
+                    stepTitle.textContent = `步骤 ${index + 1}`;
+                }
+            });
+        }
+        
+        // 调整编辑器高度以适应屏幕
+        function adjustEditorHeight() {
+            if (typeof window === 'undefined') return; // 检查窗口对象是否存在
+            
+            const editorContainer = document.getElementById('content-editor-container');
+            if (editorContainer) {
+                // 确保在不同浏览器中都能正确获取视窗高度
+                const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+                const headerHeight = document.querySelector('header') ? document.querySelector('header').offsetHeight : 0;
+                
+                editorContainer.style.minHeight = Math.max(600, windowHeight - headerHeight - 40) + 'px';
+            }
+        }
+        
+        // 应用响应式布局
+        function applyResponsiveLayout() {
+            if (typeof window === 'undefined') return;
+            
+            const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            const editorWrapper = document.getElementById('editor-wrapper');
+            const previewSection = document.getElementById('preview-section');
+            const softwareEditor = document.getElementById('software-editor');
+            
+            if (editorWrapper && previewSection && softwareEditor) {
+                if (windowWidth < 768) {
+                    // 移动端布局：预览部分折叠
+                    editorWrapper.classList.remove('grid', 'grid-cols-5');
+                    editorWrapper.classList.add('flex', 'flex-col');
+                    previewSection.classList.add('hidden');
+                    softwareEditor.classList.add('w-full');
+                } else {
+                    // 桌面端布局：分栏显示
+                    editorWrapper.classList.add('grid', 'grid-cols-5');
+                    editorWrapper.classList.remove('flex', 'flex-col');
+                    previewSection.classList.remove('hidden');
+                    softwareEditor.classList.remove('w-full');
+                }
+            }
+        }
+        
+        // IE 兼容性处理 - 修复某些IE特有的问题
+        function handleIECompatibility() {
+            // 检查是否是IE浏览器
+            const isIE = /*@cc_on!@*/false || !!document.documentMode;
+            
+            if (isIE) {
+                // 添加IE特定的CSS类
+                document.body.classList.add('ie-compatibility');
+                
+                // 修复IE中的一些常见问题
+                // 例如：修复IE中flex布局的问题
+                const flexContainers = document.querySelectorAll('.flex');
+                flexContainers.forEach(container => {
+                    if (container) {
+                        container.style.display = 'block'; // 对于IE，可能需要降级为block
+                    }
+                });
+            }
+        }
+        
+        // 发布软件详情按钮事件
+        const publishButton = document.getElementById('publish-software-button');
+        if (publishButton) {
+            if (publishButton.addEventListener) {
+                publishButton.addEventListener('click', function() {
+                    // 执行表单验证
+                    const validation = validateSoftwareForm();
+                    
+                    if (validation.isValid) {
+                        // 收集表单数据
+                        const formData = collectSoftwareFormData();
+                        
+                        // 提交数据
+                        submitSoftwareData(formData);
+                    } else {
+                        // 显示验证错误
+                        showToast('验证失败，请检查表单中的错误', false);
+                        
+                        // 滚动到第一个错误位置
+                        const firstError = document.querySelector('.error-message');
+                        if (firstError) {
+                            // 兼容的滚动方式
+                            if (firstError.scrollIntoView) {
+                                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            } else {
+                                // IE 兼容
+                                firstError.scrollIntoView(true);
+                            }
+                        }
+                    }
+                });
+            } else if (publishButton.attachEvent) { // IE 兼容
+                publishButton.attachEvent('onclick', function() {
+                    // 执行表单验证
+                    const validation = validateSoftwareForm();
+                    
+                    if (validation.isValid) {
+                        // 收集表单数据
+                        const formData = collectSoftwareFormData();
+                        
+                        // 提交数据
+                        submitSoftwareData(formData);
+                    } else {
+                        // 显示验证错误
+                        showToast('验证失败，请检查表单中的错误', false);
+                        
+                        // 滚动到第一个错误位置
+                        const firstError = document.querySelector('.error-message');
+                        if (firstError) {
+                            // IE 兼容
+                            firstError.scrollIntoView(true);
+                        }
+                    }
+                });
+            }
+        }
+        
+        // 移动端菜单切换
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        if (mobileMenuButton) {
+            if (mobileMenuButton.addEventListener) {
+                mobileMenuButton.addEventListener('click', function() {
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu) {
+                        mobileMenu.classList.toggle('hidden');
+                    }
+                });
+            } else if (mobileMenuButton.attachEvent) { // IE 兼容
+                mobileMenuButton.attachEvent('onclick', function() {
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu) {
+                        mobileMenu.className = mobileMenu.className.replace('hidden', '') || 'hidden';
+                    }
+                });
+            }
+        }
+        
+        // 初始化响应式设置
+        function initializeResponsiveSettings() {
+            // 初始化时应用响应式布局
+            applyResponsiveLayout();
+            adjustEditorHeight();
+            
+            // 添加窗口大小改变事件监听器
+            if (window.addEventListener) {
+                window.addEventListener('resize', function() {
+                    applyResponsiveLayout();
+                    adjustEditorHeight();
+                });
+            } else if (window.attachEvent) { // IE 兼容
+                window.attachEvent('onresize', function() {
+                    applyResponsiveLayout();
+                    adjustEditorHeight();
+                });
+            }
+        }
+        
+        // 页面加载完成后初始化
+        if (window.addEventListener) {
+            window.addEventListener('DOMContentLoaded', initializeResponsiveSettings);
+            window.addEventListener('DOMContentLoaded', handleIECompatibility);
+        } else if (window.attachEvent) { // IE 兼容
+            window.attachEvent('onload', initializeResponsiveSettings);
+            window.attachEvent('onload', handleIECompatibility);
+        } else {
+            // 兜底方案
+            initializeResponsiveSettings();
+            handleIECompatibility();
+        }
+    </script>
+    
+    <style>
+        /* 添加响应式样式 */
+        @media (max-width: 767px) {
+            #software-editor .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            #software-editor .space-y-4 > div {
+                margin-bottom: 1rem;
+            }
+            
+            #software-editor button {
+                width: 100%;
+            }
+            
+            /* 移动端表单输入框优化 */
+            #software-editor input, #software-editor textarea, #software-editor select {
+                font-size: 16px; /* 防止iOS缩放 */
+                padding: 10px;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1023px) {
+            #editor-wrapper {
+                grid-template-columns: 3fr 2fr;
+            }
+        }
+        
+        /* IE兼容性样式 */
+        .ie-compatibility #software-editor .flex {
+            display: block;
+        }
+        
+        .ie-compatibility #software-editor .flex > div {
+            margin-bottom: 10px;
+        }
+        
+        /* 编辑器内容区域滚动优化 */
+        #software-editor {
+            max-height: none;
+        }
+        
+        /* 确保表单元素在各种浏览器中表现一致 */
+        input[type="text"],
+        input[type="url"],
+        textarea,
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 8px;
+        }
+        
+        /* 滚动条样式优化 */
+        #software-editor::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        #software-editor::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        #software-editor::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+        
+        #software-editor::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</body>
+</html>

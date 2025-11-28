@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容管理面板 - 系统重装一站式网站</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#0FC6C2',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        dark: '#1D2129',
+                        light: '#F2F3F5'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .transition-height {
+                transition: max-height 0.3s ease-in-out;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50 min-h-screen">
+    <!-- 导航栏 -->
+    <header id="navbar" class="bg-white shadow-md transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <i class="fa fa-refresh text-primary text-2xl"></i>
+                    <a href="index.html" class="text-xl font-bold text-dark">系统重装一站式</a>
+                </div>
+                
+                <!-- 桌面端导航菜单 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-dark hover:text-primary transition-colors">首页</a>
+                    <a href="guides.html" class="text-dark hover:text-primary transition-colors">安装指南</a>
+                    <a href="#" class="text-dark hover:text-primary transition-colors">常见问题</a>
+                    <a href="#" class="text-dark hover:text-primary transition-colors">工具下载</a>
+                    <a href="#" class="text-dark hover:text-primary transition-colors">关于我们</a>
+                    <a href="admin-panel.html" class="text-primary font-medium">管理面板</a>
+                    
+                    <!-- 搜索框 -->
+                    <div class="relative ml-4">
+                        <input type="text" placeholder="搜索内容..." class="py-2 pl-10 pr-4 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/50 w-44 lg:w-56 transition-all">
+                        <i class="fa fa-search absolute left-4 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="mobile-menu-btn" class="md:hidden text-dark focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </nav>
+            
+            <!-- 移动端导航菜单 -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-dark hover:text-primary py-2 transition-colors">首页</a>
+                    <a href="guides.html" class="text-dark hover:text-primary py-2 transition-colors">安装指南</a>
+                    <a href="#" class="text-dark hover:text-primary py-2 transition-colors">常见问题</a>
+                    <a href="#" class="text-dark hover:text-primary py-2 transition-colors">工具下载</a>
+                    <a href="#" class="text-dark hover:text-primary py-2 transition-colors">关于我们</a>
+                    <a href="admin-panel.html" class="text-primary font-medium py-2">管理面板</a>
+                    
+                    <!-- 移动端搜索框 -->
+                    <div class="relative mt-2">
+                        <input type="text" placeholder="搜索内容..." class="w-full py-2 pl-10 pr-4 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                        <i class="fa fa-search absolute left-4 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 面包屑导航 -->
+    <div class="bg-light py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center text-sm">
+                <a href="index.html" class="text-gray-600 hover:text-primary">首页</a>
+                <i class="fa fa-angle-right mx-2 text-gray-400"></i>
+                <span class="text-dark">管理面板</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="mb-8">
+            <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-2">内容管理面板</h1>
+            <p class="text-gray-600">管理您的文章、教程和页面内容</p>
+        </div>
+        
+        <!-- 统计卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-6 transition-transform hover:scale-[1.02]">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-gray-500 text-sm">总文章数</p>
+                        <h3 class="text-3xl font-bold text-dark">9</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                        <i class="fa fa-file-text-o text-xl text-primary"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-success text-sm">
+                    <i class="fa fa-arrow-up mr-1"></i>
+                    <span>3 篇新增</span>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 transition-transform hover:scale-[1.02]">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-gray-500 text-sm">已发布</p>
+                        <h3 class="text-3xl font-bold text-dark">6</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-success/10 rounded-lg flex items-center justify-center">
+                        <i class="fa fa-check-circle text-xl text-success"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-success text-sm">
+                    <i class="fa fa-arrow-up mr-1"></i>
+                    <span>66.7% 完成率</span>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 transition-transform hover:scale-[1.02]">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-gray-500 text-sm">草稿</p>
+                        <h3 class="text-3xl font-bold text-dark">3</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-warning/10 rounded-lg flex items-center justify-center">
+                        <i class="fa fa-pencil text-xl text-warning"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-gray-500 text-sm">
+                    <i class="fa fa-hourglass-half mr-1"></i>
+                    <span>需要审核</span>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 transition-transform hover:scale-[1.02]">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-gray-500 text-sm">总阅读量</p>
+                        <h3 class="text-3xl font-bold text-dark">12,890</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center">
+                        <i class="fa fa-eye text-xl text-secondary"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-success text-sm">
+                    <i class="fa fa-arrow-up mr-1"></i>
+                    <span>12.5% 增长率</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 操作栏 -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="content-editor.html" class="flex items-center justify-center bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                        <i class="fa fa-plus mr-2"></i>
+                        <span>新建文章</span>
+                    </a>
+                    
+                    <div class="relative">
+                        <select id="filter-status" class="appearance-none bg-light border-0 rounded-lg py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/50 text-dark cursor-pointer">
+                            <option value="all">全部状态</option>
+                            <option value="published">已发布</option>
+                            <option value="draft">草稿</option>
+                            <option value="archived">已归档</option>
+                        </select>
+                        <i class="fa fa-chevron-down absolute right-4 top-3 text-gray-400 pointer-events-none"></i>
+                    </div>
+                    
+                    <div class="relative">
+                        <select id="filter-category" class="appearance-none bg-light border-0 rounded-lg py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/50 text-dark cursor-pointer">
+                            <option value="all">全部分类</option>
+                            <option value="Windows">Windows</option>
+                            <option value="macOS">macOS</option>
+                            <option value="Linux">Linux</option>
+                            <option value="通用教程">通用教程</option>
+                            <option value="常见问题">常见问题</option>
+                        </select>
+                        <i class="fa fa-chevron-down absolute right-4 top-3 text-gray-400 pointer-events-none"></i>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="relative">
+                        <input type="text" id="search-content" placeholder="搜索文章标题..." class="py-2 pl-10 pr-4 rounded-lg bg-light focus:outline-none focus:ring-2 focus:ring-primary/50 w-full sm:w-64">
+                        <i class="fa fa-search absolute left-4 top-3 text-gray-400"></i>
+                    </div>
+                    
+                    <div class="relative">
+                        <select id="sort-options" class="appearance-none bg-light border-0 rounded-lg py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/50 text-dark cursor-pointer">
+                            <option value="newest">最新发布</option>
+                            <option value="oldest">最早发布</option>
+                            <option value="most_read">阅读最多</option>
+                            <option value="a-z">标题 A-Z</option>
+                            <option value="z-a">标题 Z-A</option>
+                        </select>
+                        <i class="fa fa-chevron-down absolute right-4 top-3 text-gray-400 pointer-events-none"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 文章列表 -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
+            <div class="hidden md:grid grid-cols-12 border-b border-gray-200 text-sm font-medium text-gray-500 py-4">
+                <div class="col-span-4 px-6">标题</div>
+                <div class="col-span-2 px-6">分类</div>
+                <div class="col-span-2 px-6">发布日期</div>
+                <div class="col-span-1 px-6">阅读量</div>
+                <div class="col-span-1 px-6">状态</div>
+                <div class="col-span-2 px-6 text-right">操作</div>
+            </div>
+            
+            <!-- 文章项 -->
+            <div id="articles-container">
+                <!-- 文章项将由JS动态生成 -->
+            </div>
+            
+            <!-- 加载更多 -->
+            <div class="text-center py-6 border-t border-gray-200">
+                <button id="load-more" class="text-primary hover:text-primary/80 font-medium flex items-center justify-center mx-auto">
+                    <span>加载更多</span>
+                    <i class="fa fa-angle-down ml-1"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 分页 -->
+        <div class="flex justify-between items-center">
+            <div class="text-sm text-gray-500">
+                显示 <span id="showing-start">1</span>-<span id="showing-end">6</span> 条，共 <span id="total-items">9</span> 条
+            </div>
+            
+            <div class="flex space-x-1">
+                <button class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-400 bg-light hover:bg-gray-200 transition-colors" disabled>
+                    <i class="fa fa-angle-left"></i>
+                </button>
+                <button class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary text-white">1</button>
+                <button class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-600 hover:bg-light transition-colors">2</button>
+                <button class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-400 bg-light hover:bg-gray-200 transition-colors">
+                    <i class="fa fa-angle-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- 关于我们 -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">关于我们</h3>
+                    <p class="text-gray-400 mb-4">系统重装一站式网站致力于为用户提供全面、详细的系统安装教程和技术支持，帮助您轻松解决系统问题。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-wechat"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 快速链接 -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+                        <li><a href="guides.html" class="text-gray-400 hover:text-white transition-colors">安装指南</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">常见问题</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">工具下载</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
+                        <li><a href="admin-panel.html" class="text-gray-400 hover:text-white transition-colors">管理面板</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 热门教程 -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">热门教程</h3>
+                    <ul class="space-y-2">
+                        <li><a href="article.html?id=1" class="text-gray-400 hover:text-white transition-colors">Windows 11安装教程</a></li>
+                        <li><a href="article.html?id=2" class="text-gray-400 hover:text-white transition-colors">macOS Sonoma安装指南</a></li>
+                        <li><a href="article.html?id=3" class="text-gray-400 hover:text-white transition-colors">Ubuntu 22.04 LTS安装步骤</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">双系统安装最佳实践</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">系统备份与恢复全攻略</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 联系我们 -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">联系我们</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa fa-envelope-o mr-3 text-gray-500"></i>
+                            <span>contact@example.com</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa fa-github mr-3 text-gray-500"></i>
+                            <a href="#" class="hover:text-white transition-colors">GitHub</a>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa fa-book mr-3 text-gray-500"></i>
+                            <a href="#" class="hover:text-white transition-colors">帮助文档</a>
+                        </li>
+                    </ul>
+                    
+                    <!-- 订阅 -->
+                    <div class="mt-6">
+                        <h4 class="text-sm font-medium mb-2">订阅更新</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 rounded-l-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 w-full">
+                            <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition-colors">
+                                <i class="fa fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 底部版权信息 -->
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2023 系统重装一站式网站. 保留所有权利.</p>
+                <div class="mt-2 space-x-4">
+                    <a href="#" class="hover:text-gray-400 transition-colors">隐私政策</a>
+                    <a href="#" class="hover:text-gray-400 transition-colors">使用条款</a>
+                    <a href="#" class="hover:text-gray-400 transition-colors">网站地图</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 状态变更确认对话框 -->
+    <div id="status-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-lg p-6 max-w-md w-full mx-4">
+            <h3 class="text-xl font-bold text-dark mb-4">更改文章状态</h3>
+            <p class="text-gray-600 mb-6" id="status-modal-text">确定要将文章"[文章标题]"的状态更改为"[新状态]"吗？</p>
+            <div class="flex space-x-3 justify-end">
+                <button id="status-cancel" class="py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">取消</button>
+                <button id="status-confirm" class="py-2 px-4 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除确认对话框 -->
+    <div id="delete-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-lg p-6 max-w-md w-full mx-4">
+            <div class="text-center mb-4">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-danger/10 text-danger text-2xl mb-4">
+                    <i class="fa fa-trash-o"></i>
+                </div>
+                <h3 class="text-xl font-bold text-dark mb-2">确认删除</h3>
+                <p class="text-gray-600" id="delete-modal-text">确定要删除文章"[文章标题]"吗？此操作不可撤销。</p>
+            </div>
+            <div class="flex space-x-3 justify-end">
+                <button id="delete-cancel" class="py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">取消</button>
+                <button id="delete-confirm" class="py-2 px-4 bg-danger text-white rounded-lg hover:bg-danger/90 transition-colors">删除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 成功提示 -->
+    <div id="success-toast" class="fixed bottom-5 right-5 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-y-20 opacity-0 flex items-center z-50">
+        <i class="fa fa-check-circle mr-2"></i>
+        <span id="toast-message">操作成功！</span>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/admin-panel.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
