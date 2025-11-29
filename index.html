@@ -23,8 +23,7 @@
       <div class="flex justify-between items-center py-3">
         <!-- Logo -->
         <a href="index.html" class="flex items-center space-x-2">
-          <i class="fa fa-desktop text-primary text-2xl"></i>
-          <span class="text-xl font-bold text-primary">系统安装指南</span>
+          <img src="images/index/网站logo.png" alt="系统安装指南" class="h-8">
         </a>
         
         <!-- 桌面导航 -->
@@ -78,7 +77,13 @@
   </header>
 
   <!-- 首页Hero区域 -->
-  <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+  <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-cover bg-center relative overflow-hidden" style="background-image: url('images/index/hero背景（亮）.png');">
+    <!-- 左侧透视卡片 -->
+    <div class="perspective-card left-card hidden lg:block" data-images="images/index/广告/adobe.png,images/index/广告/arcgis.png"></div>
+    
+    <!-- 右侧透视卡片 -->
+    <div class="perspective-card right-card hidden lg:block" data-images="images/index/广告/office.png,images/index/广告/Windows.png"></div>
+    
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center">
         <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-dark mb-6 leading-tight text-shadow">
@@ -89,23 +94,635 @@
         </p>
         
         <!-- 系统选择按钮组 -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-7 max-w-3xl mx-auto">
           <a href="guides.html" class="bg-white rounded-xl shadow-lg p-2 flex flex-col items-center text-center hover-scale">
-            <img src="images/安装教程.png" class="w-36 h-46 rounded-lg mb-0">
+            <img src="images/index/安装教程.png" class="w-36 h-46 rounded-lg mb-0">
           </a>
           <a href="tools.html" class="bg-white rounded-xl shadow-lg p-2 flex flex-col items-center text-center hover-scale">
-            <img src="images/装机工具.png" class="w-36 h-46 rounded-lg mb-0">
+            <img src="images/index/装机工具.png" class="w-36 h-46 rounded-lg mb-0">
           </a>
           <a href="software-share.html" class="bg-white rounded-xl shadow-lg p-2 flex flex-col items-center text-center hover-scale">
-            <img src="images/好软分享.png" class="w-36 h-46 rounded-lg mb-0">
+            <img src="images/index/好软分享.png" class="w-36 h-46 rounded-lg mb-0">
           </a>
           <a href="sites-share.html" class="bg-white rounded-xl shadow-lg p-2 flex flex-col items-center text-center hover-scale">
-            <img src="images/好站分享.png" class="w-36 h-46 rounded-lg mb-0">
+            <img src="images/index/好站分享.png" class="w-36 h-46 rounded-lg mb-0">
           </a>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- 透视卡片和图片切换的JavaScript -->
+  <script>
+    // 性能优化: 使用IIFE封装代码，避免全局变量污染
+    (function() {
+      'use strict'; // 启用严格模式
+      
+      // 检查浏览器支持
+      function checkBrowserSupport() {
+        return ('querySelectorAll' in document && 
+                'requestAnimationFrame' in window && 
+                'transform' in document.documentElement.style);
+      }
+      
+      // 只有在支持的浏览器中执行
+      if (!checkBrowserSupport()) {
+        console.warn('当前浏览器可能不完全支持所需的功能');
+        return;
+      }
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        const perspectiveCards = document.querySelectorAll('.perspective-card');
+        
+        // 性能优化: 图片缓存对象
+        const imageCache = new Map();
+        
+        // 预加载图片函数 - 修复版
+        function preloadImages(imageUrls) {
+          const promises = imageUrls.map(url => {
+            // 检查缓存
+            if (imageCache.has(url)) {
+              return Promise.resolve(imageCache.get(url));
+            }
+            
+            return new Promise((resolve, reject) => {
+              const img = new Image();
+              img.src = url;
+              
+              img.onload = function() {
+                imageCache.set(url, img);
+                resolve(img);
+              };
+              
+              img.onerror = function() {
+                console.warn(`图片加载失败: ${url}`);
+                // 即使失败也加入缓存，避免重复尝试
+                imageCache.set(url, img);
+                resolve(img); // 失败时也resolve，确保其他图片能继续加载
+              };
+              
+              // 添加超时处理
+              setTimeout(() => {
+                console.warn(`图片加载超时: ${url}`);
+                resolve(img);
+              }, 5000);
+            });
+          });
+          
+          return Promise.allSettled(promises);
+        }
+        
+        // 性能优化: 检测设备性能
+        function isLowPerformanceDevice() {
+          // 基本的性能检测
+          const hasLowMemory = navigator.deviceMemory && navigator.deviceMemory < 4;
+          const hasLowCpuCores = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4;
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+          
+          return hasLowMemory || hasLowCpuCores || (isMobile && window.innerWidth < 768);
+        }
+        
+        const isLowPerformance = isLowPerformanceDevice();
+        const transitionSpeed = isLowPerformance ? 300 : 600; // 低性能设备使用更快的过渡
+        const switchIntervalTime = 5000; // 切换间隔时间
+        
+        // 为每个卡片设置图片切换
+        perspectiveCards.forEach(card => {
+          try {
+            // 获取图片列表并去除可能的空白
+            const images = card.dataset.images.split(',').map(img => img.trim()).filter(Boolean);
+            
+            // 为每张图片定义对应的超链接
+            // 这里可以根据图片名称或其他逻辑生成链接
+            const imageLinks = images.map(imgUrl => {
+              // 根据图片名称生成相应的链接
+              if (imgUrl.includes('adobe')) return 'https://www.adobe.com/';
+              if (imgUrl.includes('arcgis')) return 'https://www.esri.com/';
+              if (imgUrl.includes('office')) return 'https://www.office.com/';
+              if (imgUrl.includes('Windows')) return 'https://www.microsoft.com/zh-cn/windows';
+              return 'https://www.microsoft.com/'; // 默认链接
+            });
+            
+            // 确保有图片可显示
+            if (!images.length) {
+              console.error('没有可用的图片');
+              return;
+            }
+            
+            let currentIndex = 0;
+            let animationFrameId = null;
+            let isTransitioning = false;
+            let switchInterval = null;
+            let currentLink = null; // 当前图片的超链接元素
+            
+            // 预加载所有图片
+            preloadImages(images).then(results => {
+              console.log('所有图片预加载完成');
+              // 预加载完成后立即开始第一张图片的显示
+              if (currentImg && images.length > 0) {
+                currentImg.src = images[currentIndex];
+              }
+            });
+            
+            // 创建图片容器以支持双重图片淡入淡出
+            const imgContainer = document.createElement('div');
+            imgContainer.className = 'w-full h-full relative';
+            card.appendChild(imgContainer);
+            
+            // 创建两个图片元素用于平滑过渡
+            const currentImg = document.createElement('img');
+            currentImg.src = images.length > 0 ? images[currentIndex] : '';
+            currentImg.alt = '系统重装相关图片';
+            currentImg.className = 'w-full h-full object-cover absolute top-0 left-0';
+            currentImg.style.opacity = '1';
+            currentImg.style.willChange = 'opacity';
+            
+            const nextImg = document.createElement('img');
+            nextImg.src = images.length > 0 ? images[currentIndex] : '';
+            nextImg.alt = '系统重装相关图片';
+            nextImg.className = 'w-full h-full object-cover absolute top-0 left-0';
+            nextImg.style.opacity = '0';
+            nextImg.style.willChange = 'opacity';
+            
+            imgContainer.appendChild(currentImg);
+            imgContainer.appendChild(nextImg);
+            
+            // 修复的图片切换函数
+            function switchImage() {
+              if (isTransitioning || images.length <= 1) return;
+              isTransitioning = true;
+              
+              // 计算下一张图片的索引，实现循环切换
+              const nextIndex = (currentIndex + 1) % images.length;
+              const newImageUrl = images[nextIndex];
+              
+              // 设置下一张图片
+              nextImg.src = newImageUrl;
+              nextImg.style.opacity = '0';
+              
+              // 图片加载处理 - 修复关键问题
+              const handleImageSwitch = () => {
+                // 清除之前的事件监听器，防止内存泄漏
+                nextImg.onload = null;
+                nextImg.onerror = null;
+                
+                // 淡出当前图片，同时淡入下一张图片
+                currentImg.style.transition = `opacity ${transitionSpeed}ms ease-in-out`;
+                nextImg.style.transition = `opacity ${transitionSpeed}ms ease-in-out`;
+                currentImg.style.opacity = '0';
+                nextImg.style.opacity = '1';
+                
+                // 过渡完成后重置
+                setTimeout(() => {
+                  requestAnimationFrame(() => {
+                    // 更新索引（关键点：确保索引正确更新）
+                    currentIndex = nextIndex;
+                    
+                    // 重置图片状态，为下一次切换做准备
+                    currentImg.src = nextImg.src;
+                    currentImg.style.opacity = '1';
+                    nextImg.style.opacity = '0';
+                    
+                    // 移除过渡样式
+                    currentImg.style.transition = 'none';
+                    nextImg.style.transition = 'none';
+                    
+                    // 如果当前有激活的超链接，更新其href
+                    if (currentLink) {
+                      currentLink.href = imageLinks[currentIndex];
+                    }
+                    
+                    isTransitioning = false;
+                  });
+                }, transitionSpeed);
+              };
+              
+              // 设置图片加载和错误处理
+              nextImg.onload = handleImageSwitch;
+              nextImg.onerror = function() {
+                console.warn(`图片加载失败: ${newImageUrl}，尝试使用占位图`);
+                // 使用占位图或直接继续切换
+                handleImageSwitch();
+              };
+              
+              // 添加超时处理，确保即使图片加载失败也能继续切换
+              setTimeout(() => {
+                if (isTransitioning) {
+                  console.warn(`图片切换超时，强制继续`);
+                  handleImageSwitch();
+                }
+              }, transitionSpeed + 1000);
+            }
+            
+            // 设置自动切换定时器
+            switchInterval = setInterval(switchImage, switchIntervalTime);
+            
+            // 立即触发一次切换以确保图片正常显示
+            setTimeout(() => {
+              if (images.length > 1) {
+                switchImage();
+              }
+            }, 1000);
+            
+            // 鼠标悬停时暂停自动切换并添加超链接
+            card.addEventListener('mouseenter', function() {
+              // 暂停自动切换
+              if (switchInterval) {
+                clearInterval(switchInterval);
+                switchInterval = null;
+              }
+              
+              // 确保超链接只创建一次
+              if (!currentLink) {
+                // 创建超链接元素并覆盖在当前图片上
+                currentLink = document.createElement('a');
+                currentLink.href = imageLinks[currentIndex];
+                currentLink.target = '_blank'; // 在新标签页打开
+                currentLink.className = 'absolute inset-0 z-20';
+                // 添加样式使超链接在悬停时可见（通过CSS变量控制）
+                currentLink.style.opacity = '0';
+                currentLink.style.transition = 'opacity 0.3s ease';
+                
+                // 为超链接添加悬停效果
+                currentLink.addEventListener('mouseenter', function() {
+                  this.style.opacity = '1';
+                });
+                
+                // 将超链接添加到图片容器中
+                imgContainer.appendChild(currentLink);
+              } else {
+                // 更新超链接的目标地址
+                currentLink.href = imageLinks[currentIndex];
+              }
+              
+              // 显示超链接（通过设置透明度）
+              if (currentLink) {
+                currentLink.style.opacity = '1';
+              }
+            });
+            
+            // 鼠标离开时恢复自动切换并隐藏超链接
+            card.addEventListener('mouseleave', function() {
+              // 恢复自动切换
+              if (!switchInterval) {
+                switchInterval = setInterval(switchImage, switchIntervalTime);
+              }
+              
+              // 隐藏超链接（通过设置透明度）
+              if (currentLink) {
+                currentLink.style.opacity = '0';
+              }
+            });
+            
+            // 清理函数 - 防止内存泄漏
+            function cleanup() {
+              if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+              }
+              if (switchInterval) {
+                clearInterval(switchInterval);
+                switchInterval = null;
+              }
+              // 移除事件监听器
+              currentImg.onload = null;
+              nextImg.onload = null;
+              currentImg.onerror = null;
+              nextImg.onerror = null;
+              
+              // 移除鼠标事件监听器
+              card.removeEventListener('mouseenter', mouseEnterHandler);
+              card.removeEventListener('mouseleave', mouseLeaveHandler);
+              
+              // 移除超链接相关事件监听器
+              if (currentLink) {
+                currentLink.removeEventListener('mouseenter', linkMouseEnterHandler);
+              }
+            }
+            
+            // 保存事件处理函数引用以便后续清理
+            const mouseEnterHandler = function() {
+              // 暂停自动切换
+              if (switchInterval) {
+                clearInterval(switchInterval);
+                switchInterval = null;
+              }
+              
+              // 确保超链接只创建一次
+              if (!currentLink) {
+                // 创建超链接元素并覆盖在当前图片上
+                currentLink = document.createElement('a');
+                currentLink.href = imageLinks[currentIndex];
+                currentLink.target = '_blank'; // 在新标签页打开
+                currentLink.className = 'absolute inset-0 z-20';
+                // 添加样式使超链接在悬停时可见（通过CSS变量控制）
+                currentLink.style.opacity = '0';
+                currentLink.style.transition = 'opacity 0.3s ease';
+                
+                // 为超链接添加悬停效果
+                currentLink.addEventListener('mouseenter', linkMouseEnterHandler);
+                
+                // 将超链接添加到图片容器中
+                imgContainer.appendChild(currentLink);
+              } else {
+                // 更新超链接的目标地址
+                currentLink.href = imageLinks[currentIndex];
+              }
+              
+              // 显示超链接（通过设置透明度）
+              if (currentLink) {
+                currentLink.style.opacity = '1';
+              }
+            };
+            
+            const mouseLeaveHandler = function() {
+              // 恢复自动切换
+              if (!switchInterval) {
+                switchInterval = setInterval(switchImage, switchIntervalTime);
+              }
+              
+              // 隐藏超链接（通过设置透明度）
+              if (currentLink) {
+                currentLink.style.opacity = '0';
+              }
+            };
+            
+            const linkMouseEnterHandler = function() {
+              this.style.opacity = '1';
+            };
+            
+            // 添加鼠标事件监听器
+            card.addEventListener('mouseenter', mouseEnterHandler);
+            card.addEventListener('mouseleave', mouseLeaveHandler);
+            
+            // 页面可见性改变时暂停/恢复动画
+            document.addEventListener('visibilitychange', function visibilityChangeHandler() {
+              if (document.hidden) {
+                if (switchInterval) {
+                  clearInterval(switchInterval);
+                  switchInterval = null;
+                }
+              } else if (!switchInterval && !document.querySelector(':hover').closest('.perspective-card')) {
+                // 只有在页面可见且鼠标不在卡片上时才恢复自动切换
+                switchInterval = setInterval(switchImage, switchIntervalTime);
+              }
+            });
+            
+            // 组件卸载时清理
+            card._cleanup = cleanup;
+            
+          } catch (error) {
+            console.error('处理透视卡片时出错:', error);
+          }
+        });
+        
+        // 窗口卸载时清理定时器
+        window.addEventListener('beforeunload', function() {
+          perspectiveCards.forEach(card => {
+            if (card._cleanup && typeof card._cleanup === 'function') {
+              try {
+                card._cleanup();
+              } catch (error) {
+                console.error('清理卡片资源时出错:', error);
+              }
+            }
+          });
+        });
+        
+      });
+    })();
+  </script>
+
+  <!-- 透视卡片样式 -->
+  <style>
+    /* 性能优化: 使用CSS变量便于维护和动态调整 */
+    :root {
+      --card-transition-time: 0.6s;
+      --card-hover-scale: 1.05;
+      --card-shadow-base: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.4);
+      --perspective-base: 1500px;
+    }
+    
+    /* 增强perspective效果的容器 */
+    section {
+      perspective: var(--perspective-base);
+      /* 避免子元素溢出 */
+      overflow: hidden;
+    }
+    
+    /* 性能优化: 减少重绘和重排 */
+    .perspective-card {
+      position: absolute;
+      width: 280px;
+      height: 400px;
+      top: 55%;
+      transform-style: preserve-3d;
+      transition: all var(--card-transition-time) cubic-bezier(0.23, 1, 0.32, 1);
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: var(--card-shadow-base);
+      background-color: #000;
+      /* 添加backface-visibility避免闪烁 */
+      backface-visibility: hidden;
+      /* 硬件加速优化 */
+      will-change: transform;
+      /* 性能优化: 使用translateZ触发GPU加速 */
+      transform: translateZ(0);
+    }
+    
+    .left-card {
+      left: 5%;
+      transform: translateY(-50%) rotateY(55deg) translateZ(0);
+    }
+    
+    .right-card {
+      right: 5%;
+      transform: translateY(-50%) rotateY(-55deg) translateZ(0);
+    }
+    
+    .perspective-card:hover {
+      transform: translateY(-50%) rotateY(0deg) translateZ(50px) scale(var(--card-hover-scale));
+      z-index: 10;
+      box-shadow: var(--card-shadow-hover);
+      /* 避免过渡期间的性能问题 */
+      will-change: transform, box-shadow;
+    }
+    
+    /* 图片容器样式 */
+    .perspective-card > div {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      /* 性能优化: 减少布局计算 */
+      contain: layout paint;
+    }
+    
+    .perspective-card img {
+      transition: opacity 0.4s ease-in-out;
+      opacity: 1;
+      /* 防止图片在转换过程中变形 */
+      transform-origin: center;
+      /* 性能优化: 减少重排 */
+      will-change: opacity;
+    }
+    
+    /* 添加一个轻微的渐变叠加层增强视觉效果 */
+    .perspective-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 50%);
+      pointer-events: none;
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+    
+    .perspective-card:hover::after {
+      opacity: 0;
+    }
+    
+    /* 低性能设备的优化 */
+    @media (prefers-reduced-motion: reduce) {
+      .perspective-card {
+        transition: none;
+      }
+      
+      .perspective-card:hover {
+        transform: translateY(-50%) rotateY(0deg) translateZ(0) scale(1);
+        box-shadow: var(--card-shadow-base);
+      }
+    }
+    
+    /* 响应式设计 - windows */
+    @media (min-width: 1400px) {
+      .perspective-card {
+        width: 350px;
+        height: 400px;
+      }
+      
+      .left-card {
+        left: 4%;
+      }
+      
+      .right-card {
+        right: 4%;
+      }
+    }
+    
+    /* 响应式设计 - 大型屏幕 */
+    @media (max-width: 1200px) {
+      section {
+        --perspective-base: 1400px;
+      }
+      
+      .perspective-card {
+        width: 250px;
+        height: 360px;
+      }
+      
+      .left-card {
+        left: 6%;
+      }
+      
+      .right-card {
+        right: 6%;
+      }
+    }
+    
+    /* 响应式设计 - 中型屏幕 */
+    @media (max-width: 1024px) {
+      section {
+        --perspective-base: 1300px;
+      }
+      
+      .perspective-card {
+        width: 200px;
+        height: 280px;
+      }
+      
+      .left-card {
+        left: 4%;
+        transform: translateY(-50%) rotateY(35deg) translateZ(0);
+      }
+      
+      .right-card {
+        right: 4%;
+        transform: translateY(-50%) rotateY(-35deg) translateZ(0);
+      }
+    }
+    
+    /* 响应式设计 - 小型屏幕（平板） */
+    @media (max-width: 900px) {
+      section {
+        --perspective-base: 1200px;
+      }
+      
+      .perspective-card {
+        width: 180px;
+        height: 250px;
+      }
+      
+      .left-card {
+        left: 2%;
+        transform: translateY(-50%) rotateY(30deg) translateZ(0);
+      }
+      
+      .right-card {
+        right: 2%;
+        transform: translateY(-50%) rotateY(-30deg) translateZ(0);
+      }
+    }
+    
+    /* 响应式设计 - 更小屏幕 */
+    @media (max-width: 800px) {
+      .perspective-card {
+        width: 150px;
+        height: 220px;
+        --card-transition-time: 0.4s;
+        --card-hover-scale: 1.03;
+      }
+      
+      .left-card {
+        left: 1%;
+        transform: translateY(-50%) rotateY(25deg) translateZ(0);
+      }
+      
+      .right-card {
+        right: 1%;
+        transform: translateY(-50%) rotateY(-25deg) translateZ(0);
+      }
+      
+      .perspective-card:hover {
+        transform: translateY(-50%) rotateY(0deg) translateZ(30px) scale(var(--card-hover-scale));
+      }
+    }
+    
+    /* 响应式设计 - 移动设备 */
+    @media (max-width: 768px) {
+      .perspective-card {
+        display: none;
+      }
+    }
+    
+    /* 针对横屏移动设备的特殊处理 */
+    @media (max-width: 768px) and (orientation: landscape) {
+      section {
+        min-height: 60vh;
+      }
+    }
+    
+    /* 打印样式 - 避免打印动画和装饰元素 */
+    @media print {
+      .perspective-card {
+        display: none !important;
+      }
+    }
+  </style>
 
   <!-- 特色内容区域 -->
   <section class="py-16 bg-white">
@@ -148,7 +765,7 @@
 
   <!-- 最新教程 -->
   <section class="py-16 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 hover-scale">
       <div class="flex justify-between items-center mb-10">
         <h2 class="text-2xl md:text-3xl font-bold">最新教程</h2>
       </div>
