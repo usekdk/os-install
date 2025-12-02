@@ -1,474 +1,786 @@
 // 完整的文章数据，包含详细内容
+// 定义网站内部链接变量
+const siteLinks = {
+  softwareShare: 'software-share.html',
+  sitesShare: 'sites-share.html'
+};
+
 const articlesData = [
   {
     id: 1,
-    title: "Windows 11 2023 更新版本全新安装教程",
+    title: "Windows 系统全新安装教程",
     date: "2023-11-15",
     description: "详细介绍Windows 11最新版本的系统安装步骤，包括UEFI设置、分区方案、驱动安装和系统优化，适合初学者和进阶用户。",
-    thumbnail: "https://picsum.photos/id/26/1200/600",
+    thumbnail: "images/article/1/封面.png",
     category: "Windows",
     readCount: 12543,
     commentsCount: 326,
     content: `
-      <h2>准备工作</h2>
-      <p>在开始Windows 11安装前，请确保您已完成以下准备工作：</p>
-      <ul>
-        <li>备份所有重要数据到外部存储设备</li>
-        <li>确保您的电脑符合Windows 11的系统要求</li>
-        <li>下载最新版Windows 11安装镜像</li>
-        <li>准备一个至少8GB的U盘作为启动盘</li>
-      </ul>
-      
-      <h2>制作Windows 11启动盘</h2>
-      <p>使用Media Creation Tool或Rufus制作Windows 11启动盘：</p>
-      <ol>
-        <li>下载并安装<a href="#" class="text-primary hover:underline">Media Creation Tool</a></li>
-        <li>运行工具，选择"创建安装媒体(USB闪存驱动器、DVD或ISO文件)"</li>
-        <li>按照提示选择语言、版本和架构</li>
-        <li>选择"USB闪存驱动器"并指定您的U盘</li>
-        <li>等待工具完成启动盘创建</li>
-      </ol>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/48/1200/600" alt="Windows 11 Media Creation Tool" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图1: 使用Media Creation Tool制作启动盘</p>
-      </div>
-      
-      <h2>进入BIOS/UEFI设置</h2>
-      <p>重启电脑并进入BIOS/UEFI设置，更改启动顺序：</p>
-      <ul>
-        <li>重启电脑，在开机时按下对应的BIOS/UEFI快捷键（通常是F2、F10、F12、Delete等）</li>
-        <li>在BIOS/UEFI中，找到启动选项（Boot Options）</li>
-        <li>将U盘设置为第一启动设备</li>
-        <li>启用UEFI启动模式（如果您的电脑支持）</li>
-        <li>保存设置并退出</li>
-      </ul>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/49/1200/600" alt="BIOS启动设置" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图2: 配置BIOS启动顺序</p>
-      </div>
-      
-      <h2>开始安装Windows 11</h2>
-      <p>电脑将从U盘启动，进入Windows 11安装界面：</p>
-      <ol>
-        <li>选择语言、时间和键盘输入方式，点击"下一步"</li>
-        <li>点击"现在安装"开始安装过程</li>
-        <li>输入您的Windows产品密钥（如果没有，可以选择"我没有产品密钥"）</li>
-        <li>选择您想要安装的Windows 11版本</li>
-        <li>接受许可条款</li>
-        <li>选择"自定义：仅安装Windows（高级）"选项</li>
-      </ol>
-      
-      <h2>硬盘分区</h2>
-      <p>在分区界面，您可以创建、删除或格式化分区：</p>
-      <pre class="bg-gray-100 p-4 rounded-lg text-sm">
-          1. 选择您想要安装Windows的硬盘
-          2. 根据需要删除现有分区
-          3. 点击"新建"创建新分区
-          4. 输入分区大小（建议至少100GB）
-          5. 点击"应用"确认分区创建
-          6. Windows会自动创建必要的系统分区
-          7. 选择主分区并点击"下一步"
-      </pre>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/60/1200/600" alt="Windows 11分区界面" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图3: Windows 11安装时的分区界面</p>
-      </div>
-      
-      <h2>等待安装完成</h2>
-      <p>Windows 11将开始安装，这个过程可能需要一段时间：</p>
-      <ul>
-        <li>电脑可能会自动重启多次，这是正常现象</li>
-        <li>安装过程中请勿关闭电源或断开U盘</li>
-        <li>耐心等待安装完成，直到出现设置界面</li>
-      </ul>
-      
-      <h2>初始设置</h2>
-      <p>安装完成后，您需要进行一些初始设置：</p>
-      <ol>
-        <li>选择您的地区和键盘布局</li>
-        <li>连接到Wi-Fi网络</li>
-        <li>设置您的Microsoft账户或创建本地账户</li>
-        <li>选择隐私设置</li>
-        <li>等待系统完成最终设置</li>
-      </ol>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/61/1200/600" alt="Windows 11初始设置" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图4: Windows 11的初始设置界面</p>
-      </div>
-      
-      <h2>安装驱动程序</h2>
-      <p>Windows 11安装完成后，您应该确保所有驱动程序都是最新的：</p>
-      <ul>
-        <li>使用Windows更新检查并安装驱动更新</li>
-        <li>访问电脑制造商的官方网站下载最新驱动</li>
-        <li>特别是显卡、声卡和网卡驱动</li>
-      </ul>
-      
-      <h2>系统优化</h2>
-      <p>以下是一些Windows 11系统优化建议：</p>
-      <ol>
-        <li>禁用不必要的启动项</li>
-        <li>调整电源选项以获得最佳性能或电池寿命</li>
-        <li>设置Windows安全中心的实时保护</li>
-        <li>创建系统还原点，以备将来需要</li>
-        <li>考虑使用<a href="#" class="text-primary hover:underline">磁盘清理</a>和<a href="#" class="text-primary hover:underline">磁盘碎片整理</a></li>
-      </ol>
-      
-      <div class="bg-blue-50 border-l-4 border-blue-400 p-4 my-6">
-        <h4 class="text-blue-700 font-medium mb-1">提示</h4>
-        <p class="text-blue-700">如果您在安装过程中遇到问题，请参考<a href="#" class="underline">Windows 11安装常见问题解答</a>或在下方评论区提问。</p>
-      </div>
-      
-      <h2>结论</h2>
-      <p>恭喜您成功安装了Windows 11！这个最新版本带来了全新的界面设计、更好的性能和新的功能。随着您继续使用，您会发现更多Windows 11的特性和优势。</p>
-    `
+      <!-- 可复用文章模板结构 -->
+      <div class="article-content article-template" style="
+        /* 基础样式变量 */
+        --primary-color: #2563eb;
+        --secondary-color: #6366f1;
+        --success-color: #16a34a;
+        --warning-color: #eab308;
+        --danger-color: #dc2626;
+        --text-primary: #1f2937;
+        --text-secondary: #4b5563;
+        --bg-primary: #ffffff;
+        --bg-secondary: #f9fafb;
+        --border-color: #e5e7eb;
+        
+        /* 基础排版 */
+        font-size: 16px;
+        line-height: 1.7;
+        letter-spacing: 0.02em;
+        word-spacing: 0.05em;
+        color: var(--text-primary);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      ">
+        <!-- 可复用组件：文章介绍 -->
+        <div class="article-intro" style="margin-bottom: 2.5rem;">
+          <p class="template-lead-text" style="
+            font-size: 18px;
+            line-height: 1.8;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+          ">本安装教程仅适用于<strong class="text-red-700">可以正常开机并可以正常进入系统桌面的电脑</strong>，主要是为了给系统运行卡顿的电脑给一次重生的机会，请参照本教程救活您的爱机吧！</p>
+        </div>
+
+        <!-- 目录已移至左侧侧边栏 -->
+
+        <!-- 第1节：准备工作 -->
+        <!-- 可复用组件：文章章节 -->
+          <section id="1" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">1. 准备工作</h2>
+          <p class="mb-4" style="margin-bottom: 1.5rem;">在开始Windows安装前，请确保您已完成以下准备工作：</p>
+          <ul class="list-disc pl-6 space-y-2 mb-4" style="margin-bottom: 1.5rem; line-height: 1.7;">
+            <li>备份所有重要数据到外部存储设备<strong>（尤其是系统盘文件，以及桌面文件）</strong></li>
+            <li>下载Windows系统安装镜像（系统包）</li>
+            <li>下载PE系统制作工具</li>
+            <li>下载windows系统激活工具</li>
+          </ul>
+          <p class="mb-4" style="margin-bottom: 1.5rem;">您将得到下列文件，<strong>请将这些文件存放在系统盘以外的盘符内：</strong></p>
+
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg transition-transform duration-300" style="box-shadow: 0 0px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
+              <img src="images/article/1/001.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+            <figcaption class="image-caption text-sm text-gray-600 mt-3 text-center">图1: 文件列表</figcaption>
+          </figure>
+        </section>
+
+        <!-- 第2节：制作本地PE系统 -->
+        <section id="2" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">2. 制作本地PE系统</h2>
+          <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
+            <li>点击屏幕右下角小箭头，打开windows安全中心</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/002.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/004.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>点击“病毒和威胁防护”进入子页面，然后点击“管理设置”"</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/003.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/005.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>关闭“实时保护”功能</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/006.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>接下来<strong>以管理员权限运行</strong>“FirPE”软件，在弹出的窗口中点击“确定”</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/007.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/008.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>等待软件加载完毕后，直接点击“本地安装”，在弹出的窗口中点击“确定”</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/009.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/010.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>然后等待进度条加载完毕，弹出如图所示窗口则表示PE系统安装成功，点击“确定”后关闭“FirPE”软件即可</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/011.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/012.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          </ol>
+        </section>
+
+        <!-- 第3节：进入本地PE系统 -->
+        <section id="3" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">3. 进入本地PE系统</h2>
+          <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
+            <li>关闭电脑上打开的所有软件后，打开开始菜单中的“电源”选项，<strong>按住键盘上的“Shift”键并单击“重启”按钮</strong>，等待电脑进入“恢复选项”界面</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/013.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/014.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>点击“使用其他操作系统”，进入子页面后再点击“FirPE维护系统”，然后等待电脑进入PE系统</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/015.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/016.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          </ol>
+        </section>
+
+        <!-- 第4节：进行windows系统重装 -->
+        <section id="4" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">4. 进行windows系统重装</h2>
+          <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
+            <li>进入PE系统后，打开“EasyRC一键重装”软件</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/017.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/018.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>在软件中，首先“选择镜像”<strong>（此处以windows11系统包为例，其他系统安装只需要选择您所下载的系统包即可）</strong></li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/019.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/020.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>接下来选择您电脑的系统盘符（通常为C盘，如图所示），以及选择您要安装的系统版本（此处选择“专业版”）</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/021.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li><strong>其他设置不动</strong>，然后点击“开始安装”，在弹出的窗口中点击“确定”</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/022.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>然后等待进度条加载完毕，提示“系统安装完成”后，点击“立即重启”</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/023.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/024.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+          <div class="template-info-box" style="background-color: #eff6ff; border-left: 4px solid var(--primary-color); padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <h4 class="template-info-title" style="color: #1e40af; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.1rem; font-family: inherit;">重要提示</h4>
+            <p style="color: #1e40af; line-height: 1.7; margin: 0;">接下来<strong>请勿操作电脑</strong>，电脑会重启多次，请耐心等待</p>
+          </div>
+          </ol>
+        </section>
+
+        <!-- 第5节： 完成Windows系统安装 -->
+        <section id="5" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">5. 完成Windows系统安装</h2>
+          <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
+            <li>当出现如下界面时，表示系统已安装完成，正在进行最后的部署</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/026.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/027.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>当系统自动进入桌面时则表示系统已经安装与部署完成，您现在以及可以使用您的电脑了</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/028.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+          </ol>
+        </section>
+
+        <!-- 第6节： 激活Windows系统 -->
+        <section id="6" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">6. 激活Windows系统</h2>
+          <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
+            <li>1.	进入“此电脑”，右键以管理员权限运行“HEU KMS Activator”软件署</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/030.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/031.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>点击“开始”，然后等待进度条加载完毕</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/032.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+         <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/033.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>当出现如图所示弹窗，则表示激活成功，点击“确定”即可</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/034.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <div class="info-box" style="background-color: #f0fdf4; border-left: 4px solid var(--success-color); padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <h4 style="color: #166534; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.1rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">🎉恭喜🎉</h4>
+            <p style="color: #166534; line-height: 1.7; margin: 0;">至此，Windows系统重装已全部完成，您现在可以正常使用您的电脑了。</p>
+            <p style="color: #166534; line-height: 1.7; margin: 0;">您可以访问本网站的 <a href="${siteLinks.softwareShare}" style="color: #166534; text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#0e7490';" onmouseout="this.style.color='#166534';">好软分享</a> 以及 <a href="${siteLinks.sitesShare}" style="color: #166534; text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#0e7490';" onmouseout="this.style.color='#166534';">好站分享</a> 页面，获取更多有用的软件和网站推荐。</p>
+          </div>
+          </ol>
+        </section>
+
+
+
+        <section style="margin-bottom: 3rem; transition: all 0.3s;">
+          <!-- 可复用组件：提示框 -->
+          <div class="template-callout-box p-5" style="
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+          ">
+            <h4 class="template-callout-title" style="
+              font-weight: 600;
+              color: var(--text-primary);
+              margin-bottom: 0.5rem;
+              font-size: 1.1rem;
+              font-family: inherit;
+            ">后续工作</h4>
+            <p class="text-purple-700 mb-3" style="margin-bottom: 1.2rem; line-height: 1.7;">如果您想深入了解Windows 11的更多功能，请查看我们的其他教程：</p>
+            <ul class="list-disc pl-6 space-y-1 text-purple-700" style="line-height: 1.7;">
+              <li><a href="#" style="color: var(--secondary-color); text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#312e81';" onmouseout="this.style.color='var(--secondary-color)';">Windows 11新功能详解</a></li>
+              <li><a href="#" style="color: var(--secondary-color); text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#312e81';" onmouseout="this.style.color='var(--secondary-color)';">Windows 11安全设置最佳实践</a></li>
+              <li><a href="#" style="color: var(--secondary-color); text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#312e81';" onmouseout="this.style.color='var(--secondary-color)';">Windows 11性能优化指南</a></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 可复用组件：安装提示框 -->
+        <div class="template-tips-box bg-amber-50 border border-amber-200 rounded-lg p-6 my-8">
+          <h3 class="template-tips-title text-lg font-semibold text-amber-800 mb-3">安装过程中的常见问题</h3>
+          <p class="mb-4 text-amber-700" style="margin-bottom: 1.5rem; line-height: 1.7;">如果您在安装过程中遇到问题，请参考<a href="#" class="underline hover:text-amber-900">Windows 11安装常见问题解答</a>或在下方评论区提问。</p>
+        </div>
+      </div>`
   },
+
   {
     id: 2,
-    title: "macOS Sonoma 升级与全新安装完整指南",
-    date: "2023-11-10",
-    description: "苹果最新macOS Sonoma系统的升级方法和全新安装教程，包含兼容性检查、数据备份、安装过程和常见问题解决方案。",
-    thumbnail: "https://picsum.photos/id/27/1200/600",
-    category: "macOS",
-    readCount: 8921,
-    commentsCount: 189,
+    title: "Windows 625654系统全新安装教程",
+    date: "2023-11-15",
+    description: "详细介绍Windows 11最新版本的系统安装步骤，包括UEFI设置、分区方案、驱动安装和系统优化，适合初学者和进阶用户。",
+    thumbnail: "images/article/1/封面.png",
+    category: "Windows",
+    readCount: 12543,
+    commentsCount: 326,
     content: `
-      <h2>macOS Sonoma 概述</h2>
-      <p>macOS Sonoma是苹果公司最新的桌面操作系统，带来了全新的功能和性能改进。在开始安装前，让我们先了解一下这篇指南将涵盖的内容。</p>
-      
-      <h2>兼容性检查</h2>
-      <p>首先，您需要确认您的Mac是否兼容macOS Sonoma：</p>
-      <ul>
-        <li>MacBook Pro (2018年及更新机型)</li>
-        <li>MacBook Air (2018年及更新机型)</li>
-        <li>Mac mini (2018年及更新机型)</li>
-        <li>iMac (2019年及更新机型)</li>
-        <li>iMac Pro (2017年)</li>
-        <li>Mac Pro (2019年及更新机型)</li>
-        <li>Mac Studio (2022年及更新机型)</li>
-      </ul>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/160/1200/600" alt="macOS Sonoma" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图1: macOS Sonoma主界面</p>
-      </div>
-      
-      <h2>升级前准备工作</h2>
-      <p>在升级到macOS Sonoma之前，请完成以下准备工作：</p>
-      <ol>
-        <li><strong>备份数据</strong>：使用Time Machine或其他备份方法备份您的所有重要数据</li>
-        <li><strong>检查可用空间</strong>：确保您的Mac至少有20GB的可用存储空间</li>
-        <li><strong>更新应用程序</strong>：确保所有已安装的应用程序都是最新版本</li>
-        <li><strong>检查第三方软件兼容性</strong>：确认您使用的关键软件与macOS Sonoma兼容</li>
-      </ol>
-      
-      <h2>升级安装方法</h2>
-      <p>如果您当前运行的是较新版本的macOS，可以直接升级：</p>
-      <ol>
-        <li>打开App Store</li>
-        <li>搜索"macOS Sonoma"</li>
-        <li>点击"获取"按钮开始下载</li>
-        <li>下载完成后，安装程序将自动启动</li>
-        <li>按照屏幕上的提示完成安装过程</li>
-        <li>Mac将重启并完成安装</li>
-      </ol>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/161/1200/600" alt="macOS升级安装" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图2: macOS Sonoma下载页面</p>
-      </div>
-      
-      <h2>全新安装方法</h2>
-      <p>如果您想要进行全新安装，按照以下步骤操作：</p>
-      
-      <h3>1. 创建可引导安装器</h3>
-      <ol>
-        <li>从App Store下载macOS Sonoma（但不要运行安装）</li>
-        <li>准备一个至少16GB的USB驱动器</li>
-        <li>打开终端应用程序</li>
-        <li>输入以下命令（将"MyVolume"替换为您的USB驱动器名称）：</li>
-      </ol>
-      
-      <pre class="bg-gray-100 p-4 rounded-lg text-sm">
-        sudo /Applications/Install\ macOS\ Sonoma.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
-      </pre>
-      
-      <h3>2. 使用可引导安装器安装</h3>
-      <ol>
-        <li>将创建好的可引导安装器连接到Mac</li>
-        <li>关闭Mac</li>
-        <li>按住特定的启动键启动到恢复模式（Intel Mac按住Option键，Apple Silicon Mac按住电源按钮）</li>
-        <li>选择从USB驱动器启动</li>
-        <li>在macOS实用工具中，选择"磁盘工具"</li>
-        <li>选择您的Mac主驱动器并点击"抹掉"，选择APFS格式</li>
-        <li>退出磁盘工具，选择"安装macOS Sonoma"</li>
-        <li>按照屏幕提示完成安装</li>
-      </ol>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/162/1200/600" alt="macOS全新安装" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图3: macOS实用工具界面</p>
-      </div>
-      
-      <h2>安装后设置</h2>
-      <p>安装完成后，您需要完成以下设置：</p>
-      <ul>
-        <li>登录您的Apple ID</li>
-        <li>设置Touch ID或密码</li>
-        <li>选择隐私设置</li>
-        <li>从备份恢复数据（如果您之前进行了备份）</li>
-      </ul>
-      
-      <h2>macOS Sonoma新功能</h2>
-      <p>macOS Sonoma带来了许多新功能，包括：</p>
-      <ul>
-        <li>桌面小部件</li>
-        <li>游戏模式，提供更好的游戏性能</li>
-        <li>视频会议增强功能</li>
-        <li>新的Safari功能</li>
-        <li>改进的系统性能和电池寿命</li>
-      </ul>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/163/1200/600" alt="macOS Sonoma新功能" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图4: macOS Sonoma的桌面小部件功能</p>
-      </div>
-      
-      <h2>常见问题解答</h2>
-      <p>以下是安装过程中可能遇到的一些常见问题：</p>
-      
-      <h3>1. 安装过程卡住或失败怎么办？</h3>
-      <p>如果安装过程卡住或失败，您可以尝试：</p>
-      <ul>
-        <li>重新启动Mac并再次尝试</li>
-        <li>确保您的Mac连接到稳定的网络</li>
-        <li>检查Mac的存储空间是否充足</li>
-      </ul>
-      
-      <h3>2. 升级后应用程序不兼容怎么办？</h3>
-      <p>如果某些应用程序在升级后不兼容，您可以：</p>
-      <ul>
-        <li>检查应用程序开发者的网站获取更新</li>
-        <li>尝试使用Rosetta 2运行不兼容的应用程序</li>
-        <li>考虑使用替代应用程序</li>
-      </ul>
-      
-      <div class="bg-green-50 border-l-4 border-green-400 p-4 my-6">
-        <h4 class="text-green-700 font-medium mb-1">成功提示</h4>
-        <p class="text-green-700">恭喜您成功安装了macOS Sonoma！享受新系统带来的功能和改进吧。</p>
-      </div>
-    `
+      <!-- 可复用文章模板结构 -->
+      <div class="article-content article-template" style="
+        /* 基础样式变量 */
+        --primary-color: #2563eb;
+        --secondary-color: #6366f1;
+        --success-color: #16a34a;
+        --warning-color: #eab308;
+        --danger-color: #dc2626;
+        --text-primary: #1f2937;
+        --text-secondary: #4b5563;
+        --bg-primary: #ffffff;
+        --bg-secondary: #f9fafb;
+        --border-color: #e5e7eb;
+        
+        /* 基础排版 */
+        font-size: 16px;
+        line-height: 1.7;
+        letter-spacing: 0.02em;
+        word-spacing: 0.05em;
+        color: var(--text-primary);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      ">
+        <!-- 可复用组件：文章介绍 -->
+        <div class="article-intro" style="margin-bottom: 2.5rem;">
+          <p class="template-lead-text" style="
+            font-size: 18px;
+            line-height: 1.8;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+          ">本安装教程仅适用于<strong class="text-red-700">可以正常开机并可以正常进入系统桌面的电脑</strong>，主要是为了给系统运行卡顿的电脑给一次重生的机会，请参照本教程救活您的爱机吧！</p>
+        </div>
+
+        <!-- 目录已移至左侧侧边栏 -->
+
+        <!-- 第1节：准备工作 -->
+        <!-- 可复用组件：文章章节 -->
+          <section id="1" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">1. 准备</h2>
+          <p class="mb-4" style="margin-bottom: 1.5rem;">在开始Windows安装前，请确保您已完成以下准备工作：</p>
+          <ul class="list-disc pl-6 space-y-2 mb-4" style="margin-bottom: 1.5rem; line-height: 1.7;">
+            <li>备份所有重要数据到外部存储设备<strong>（尤其是系统盘文件，以及桌面文件）</strong></li>
+            <li>下载Windows系统安装镜像（系统包）</li>
+            <li>下载PE系统制作工具</li>
+            <li>下载windows系统激活工具</li>
+          </ul>
+          <p class="mb-4" style="margin-bottom: 1.5rem;">您将得到下列文件，<strong>请将这些文件存放在系统盘以外的盘符内：</strong></p>
+
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg transition-transform duration-300" style="box-shadow: 0 0px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
+              <img src="images/article/1/001.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+            <figcaption class="image-caption text-sm text-gray-600 mt-3 text-center">图1: 文件列表</figcaption>
+          </figure>
+        </section>
+
+        <!-- 第2节：制作本地PE系统 -->
+        <section id="2" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">2. 制作本地PE系统</h2>
+          <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
+            <li>点击屏幕右下角小箭头，打开windows安全中心</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/002.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/004.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>点击“病毒和威胁防护”进入子页面，然后点击“管理设置”"</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/003.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/005.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>关闭“实时保护”功能</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/006.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>接下来<strong>以管理员权限运行</strong>“FirPE”软件，在弹出的窗口中点击“确定”</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/007.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/008.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>等待软件加载完毕后，直接点击“本地安装”，在弹出的窗口中点击“确定”</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/009.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/010.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>然后等待进度条加载完毕，弹出如图所示窗口则表示PE系统安装成功，点击“确定”后关闭“FirPE”软件即可</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/011.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/012.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          </ol>
+        </section>
+
+        <!-- 第3节：进入本地PE系统 -->
+        <section id="3" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">3. 进入本地PE系统</h2>
+          <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
+            <li>关闭电脑上打开的所有软件后，打开开始菜单中的“电源”选项，<strong>按住键盘上的“Shift”键并单击“重启”按钮</strong>，等待电脑进入“恢复选项”界面</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/013.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/014.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>点击“使用其他操作系统”，进入子页面后再点击“FirPE维护系统”，然后等待电脑进入PE系统</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/015.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/016.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          </ol>
+        </section>
+
+        <!-- 第4节：进行windows系统重装 -->
+        <section id="4" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">4. 进行windows系统重装</h2>
+          <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
+            <li>进入PE系统后，打开“EasyRC一键重装”软件</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/017.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/018.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>在软件中，首先“选择镜像”<strong>（此处以windows11系统包为例，其他系统安装只需要选择您所下载的系统包即可）</strong></li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/019.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/020.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>接下来选择您电脑的系统盘符（通常为C盘，如图所示），以及选择您要安装的系统版本（此处选择“专业版”）</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/021.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li><strong>其他设置不动</strong>，然后点击“开始安装”，在弹出的窗口中点击“确定”</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/022.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>然后等待进度条加载完毕，提示“系统安装完成”后，点击“立即重启”</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/023.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/024.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+          <div class="template-info-box" style="background-color: #eff6ff; border-left: 4px solid var(--primary-color); padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <h4 class="template-info-title" style="color: #1e40af; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.1rem; font-family: inherit;">重要提示</h4>
+            <p style="color: #1e40af; line-height: 1.7; margin: 0;">接下来<strong>请勿操作电脑</strong>，电脑会重启多次，请耐心等待</p>
+          </div>
+          </ol>
+        </section>
+
+        <!-- 第5节： 完成Windows系统安装 -->
+        <section id="5" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">5. 完成Windows系统安装</h2>
+          <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
+            <li>当出现如下界面时，表示系统已安装完成，正在进行最后的部署</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/026.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/027.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>当系统自动进入桌面时则表示系统已经安装与部署完成，您现在以及可以使用您的电脑了</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/028.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+          </ol>
+        </section>
+
+        <!-- 第6节： 激活Windows系统 -->
+        <section id="6" style="margin-bottom: 3rem; transition: all 0.3s;">
+            <h2 class="template-section-title" style="
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: var(--text-primary);
+              margin-bottom: 1.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid var(--primary-color);
+              display: inline-block;
+              font-family: inherit;
+            ">6. 激活Windows系统</h2>
+          <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
+            <li>1.	进入“此电脑”，右键以管理员权限运行“HEU KMS Activator”软件署</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/030.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/031.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>点击“开始”，然后等待进度条加载完毕</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/032.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+         <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/033.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+
+            <li>当出现如图所示弹窗，则表示激活成功，点击“确定”即可</li>
+          <figure class="image-container my-8">
+            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+              <img src="images/article/1/034.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+          </figure>
+          <div class="info-box" style="background-color: #f0fdf4; border-left: 4px solid var(--success-color); padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <h4 style="color: #166534; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.1rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">🎉恭喜🎉</h4>
+            <p style="color: #166534; line-height: 1.7; margin: 0;">至此，Windows系统重装已全部完成，您现在可以正常使用您的电脑了。</p>
+            <p style="color: #166534; line-height: 1.7; margin: 0;">您可以访问本网站的 <a href="${siteLinks.softwareShare}" style="color: #166534; text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#0e7490';" onmouseout="this.style.color='#166534';">好软分享</a> 以及 <a href="${siteLinks.sitesShare}" style="color: #166534; text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#0e7490';" onmouseout="this.style.color='#166534';">好站分享</a> 页面，获取更多有用的软件和网站推荐。</p>
+          </div>
+          </ol>
+        </section>
+
+
+
+        <section style="margin-bottom: 3rem; transition: all 0.3s;">
+          <!-- 可复用组件：提示框 -->
+          <div class="template-callout-box p-5" style="
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+          ">
+            <h4 class="template-callout-title" style="
+              font-weight: 600;
+              color: var(--text-primary);
+              margin-bottom: 0.5rem;
+              font-size: 1.1rem;
+              font-family: inherit;
+            ">后续工作</h4>
+            <p class="text-purple-700 mb-3" style="margin-bottom: 1.2rem; line-height: 1.7;">如果您想深入了解Windows 11的更多功能，请查看我们的其他教程：</p>
+            <ul class="list-disc pl-6 space-y-1 text-purple-700" style="line-height: 1.7;">
+              <li><a href="#" style="color: var(--secondary-color); text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#312e81';" onmouseout="this.style.color='var(--secondary-color)';">Windows 11新功能详解</a></li>
+              <li><a href="#" style="color: var(--secondary-color); text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#312e81';" onmouseout="this.style.color='var(--secondary-color)';">Windows 11安全设置最佳实践</a></li>
+              <li><a href="#" style="color: var(--secondary-color); text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#312e81';" onmouseout="this.style.color='var(--secondary-color)';">Windows 11性能优化指南</a></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 可复用组件：安装提示框 -->
+        <div class="template-tips-box bg-amber-50 border border-amber-200 rounded-lg p-6 my-8">
+          <h3 class="template-tips-title text-lg font-semibold text-amber-800 mb-3">安装过程中的常见问题</h3>
+          <p class="mb-4 text-amber-700" style="margin-bottom: 1.5rem; line-height: 1.7;">如果您在安装过程中遇到问题，请参考<a href="#" class="underline hover:text-amber-900">Windows 11安装常见问题解答</a>或在下方评论区提问。</p>
+        </div>
+      </div>`
   },
-  {
-    id: 3,
-    title: "Ubuntu 22.04 LTS 长期支持版安装详解",
-    date: "2023-11-05",
-    description: "从制作启动盘到系统分区，再到软件配置的完整Ubuntu 22.04 LTS安装教程，让Linux新手也能轻松上手。",
-    thumbnail: "https://picsum.photos/id/28/1200/600",
-    category: "Linux",
-    readCount: 6754,
-    commentsCount: 234,
-    content: `
-      <h2>Ubuntu 22.04 LTS 简介</h2>
-      <p>Ubuntu 22.04 LTS（Jammy Jellyfish）是一个长期支持版本，提供5年的安全更新和技术支持，非常适合桌面用户和服务器环境。本教程将指导您完成从准备到安装的全过程。</p>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/180/1200/600" alt="Ubuntu 22.04 LTS桌面" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图1: Ubuntu 22.04 LTS桌面环境</p>
-      </div>
-      
-      <h2>系统要求</h2>
-      <p>在安装Ubuntu 22.04 LTS之前，请确保您的计算机满足以下最低系统要求：</p>
-      <ul>
-        <li>2 GHz双核处理器或更高</li>
-        <li>4 GB内存（推荐8 GB）</li>
-        <li>25 GB的硬盘空间（推荐50 GB）</li>
-        <li>支持1024x768分辨率的显卡和显示器</li>
-        <li>互联网连接（用于下载更新和安装额外软件）</li>
-        <li>可启动的USB驱动器或DVD</li>
-      </ul>
-      
-      <h2>准备工作</h2>
-      
-      <h3>1. 下载Ubuntu 22.04 LTS ISO镜像</h3>
-      <ol>
-        <li>访问<a href="https://ubuntu.com/download/desktop" class="text-primary hover:underline">Ubuntu官方下载页面</a></li>
-        <li>下载Ubuntu 22.04 LTS桌面版ISO镜像</li>
-        <li>下载完成后，验证ISO文件的完整性（可选）</li>
-      </ol>
-      
-      <h3>2. 创建Ubuntu安装U盘</h3>
-      <p>您可以使用以下工具创建可启动的Ubuntu安装U盘：</p>
-      
-      <h4>在Windows上：</h4>
-      <ol>
-        <li>下载并安装<a href="https://rufus.ie/" class="text-primary hover:underline">Rufus</a>工具</li>
-        <li>插入您的USB驱动器（至少4GB）</li>
-        <li>打开Rufus，选择您的USB驱动器</li>
-        <li>点击"选择"并浏览到您下载的Ubuntu ISO文件</li>
-        <li>保持默认设置，点击"开始"</li>
-        <li>等待Rufus完成U盘创建</li>
-      </ol>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/181/1200/600" alt="使用Rufus创建Ubuntu安装U盘" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图2: 使用Rufus创建Ubuntu安装U盘</p>
-      </div>
-      
-      <h4>在macOS上：</h4>
-      <ol>
-        <li>打开终端应用程序</li>
-        <li>使用diskutil命令查找您的USB驱动器</li>
-        <li>使用dd命令将ISO镜像写入USB驱动器</li>
-      </ol>
-      
-      <h2>开始安装</h2>
-      
-      <h3>1. 从USB启动</h3>
-      <ol>
-        <li>将Ubuntu安装U盘插入您的计算机</li>
-        <li>重新启动计算机</li>
-        <li>在启动过程中，按下对应的键进入启动菜单（通常是F12、F10、F2或Delete键，具体取决于您的计算机型号）</li>
-        <li>从启动菜单中选择您的USB驱动器</li>
-      </ol>
-      
-      <h3>2. 选择安装选项</h3>
-      <p>当Ubuntu启动菜单出现时，您有以下选项：</p>
-      <ul>
-        <li><strong>Try Ubuntu</strong>：在安装前先体验Ubuntu</li>
-        <li><strong>Install Ubuntu</strong>：直接开始安装过程</li>
-      </ul>
-      <p>选择"Install Ubuntu"开始安装。</p>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/182/1200/600" alt="Ubuntu安装选项" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图3: Ubuntu安装选项界面</p>
-      </div>
-      
-      <h3>3. 选择语言和键盘布局</h3>
-      <ol>
-        <li>选择您的首选语言（推荐选择中文简体）</li>
-        <li>选择您的键盘布局（默认通常是正确的）</li>
-      </ol>
-      
-      <h3>4. 连接到网络</h3>
-      <p>如果您有可用的无线网络，选择并连接到它。这将允许Ubuntu在安装过程中下载更新和第三方软件。</p>
-      
-      <h3>5. 选择安装类型</h3>
-      <p>您有几个安装选项：</p>
-      
-      <h4>选项1: 与Windows一起安装Ubuntu</h4>
-      <p>如果您想在保留Windows的同时安装Ubuntu（双系统），选择此选项。安装程序将自动为Ubuntu分配空间。</p>
-      
-      <h4>选项2: 清除整个磁盘并安装Ubuntu</h4>
-      <p>如果您想完全替换当前的操作系统，选择此选项。<strong>注意：这将删除所有数据，请确保已备份重要文件！</strong></p>
-      
-      <h4>选项3: 其他选项</h4>
-      <p>如果您想手动分区，请选择此选项。这适合高级用户。</p>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/183/1200/600" alt="Ubuntu安装类型" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图4: Ubuntu安装类型选择</p>
-      </div>
-      
-      <h3>6. 手动分区（高级选项）</h3>
-      <p>如果您选择了"其他选项"，您需要手动创建分区：</p>
-      <ol>
-        <li>选择空闲空间，点击"+"按钮</li>
-        <li>创建以下分区：</li>
-      </ol>
-      
-      <ul>
-        <li><strong>根分区 (/)</strong>：建议至少20GB，使用Ext4文件系统</li>
-        <li><strong>交换分区</strong>：建议与您的内存大小相同，用于休眠功能</li>
-        <li><strong>/home分区</strong>：剩余空间，用于存储用户数据，使用Ext4文件系统</li>
-      </ul>
-      
-      <h3>7. 设置您的身份</h3>
-      <ol>
-        <li>输入您的姓名</li>
-        <li>输入您的计算机名称</li>
-        <li>创建用户名</li>
-        <li>设置密码</li>
-        <li>选择是否自动登录或需要密码登录</li>
-      </ol>
-      
-      <h3>8. 等待安装完成</h3>
-      <p>安装过程将开始，这可能需要一些时间，具体取决于您的计算机性能和网络速度。安装完成后，您将被提示重新启动计算机。</p>
-      
-      <div class="bg-amber-50 border-l-4 border-amber-400 p-4 my-6">
-        <h4 class="text-amber-700 font-medium mb-1">重要提示</h4>
-        <p class="text-amber-700">安装完成并重启时，请确保移除安装U盘，以免再次从U盘启动。</p>
-      </div>
-      
-      <h2>安装后的设置</h2>
-      
-      <h3>1. 安装更新</h3>
-      <p>首次登录后，建议更新您的系统：</p>
-      <ol>
-        <li>打开"软件更新器"</li>
-        <li>检查可用更新</li>
-        <li>安装所有更新</li>
-      </ol>
-      
-      <h3>2. 安装额外的驱动程序</h3>
-      <p>Ubuntu可能需要一些额外的驱动程序，特别是对于显卡：</p>
-      <ol>
-        <li>打开"软件和更新"</li>
-        <li>切换到"附加驱动"选项卡</li>
-        <li>选择推荐的驱动程序</li>
-        <li>点击"应用更改"</li>
-      </ol>
-      
-      <h3>3. 安装常用软件</h3>
-      <p>您可以使用Ubuntu软件中心安装常用软件，如：</p>
-      <ul>
-        <li>Firefox（已预装）</li>
-        <li>Google Chrome</li>
-        <li>LibreOffice（已预装）</li>
-        <li>VLC媒体播放器</li>
-        <li>GIMP图像编辑器</li>
-      </ul>
-      
-      <div class="my-6">
-        <img src="https://picsum.photos/id/184/1200/600" alt="Ubuntu软件中心" class="w-full h-auto rounded-lg shadow-md">
-        <p class="text-sm text-gray-500 mt-2 text-center">图5: Ubuntu软件中心</p>
-      </div>
-      
-      <h2>基本的Ubuntu命令</h2>
-      <p>作为初学者，以下是一些基本的Ubuntu终端命令：</p>
-      
-      <pre class="bg-gray-100 p-4 rounded-lg text-sm">
-        sudo apt update          # 更新软件包列表
-        sudo apt upgrade         # 升级已安装的软件包
-        sudo apt install 软件名   # 安装软件
-        sudo apt remove 软件名    # 卸载软件
-        cd 目录路径              # 切换目录
-        ls                      # 列出文件和目录
-        mkdir 目录名             # 创建新目录
-        rm 文件名                # 删除文件
-        rm -r 目录名             # 删除目录及其内容
-      </pre>
-      
-      <h2>获取帮助</h2>
-      <p>如果您在使用Ubuntu过程中遇到问题，可以通过以下途径获取帮助：</p>
-      <ul>
-        <li><a href="https://help.ubuntu.com/" class="text-primary hover:underline">Ubuntu官方帮助文档</a></li>
-        <li><a href="https://askubuntu.com/" class="text-primary hover:underline">Ask Ubuntu社区</a></li>
-        <li>Ubuntu中文社区论坛</li>
-        <li>Ubuntu IRC频道</li>
-      </ul>
-      
-      <div class="bg-green-50 border-l-4 border-green-400 p-4 my-6">
-        <h4 class="text-green-700 font-medium mb-1">恭喜您！</h4>
-        <p class="text-green-700">您已成功安装了Ubuntu 22.04 LTS。随着使用，您将发现Linux系统的强大功能和灵活性。</p>
-      </div>
-    `
-  }
 ];
 
 // 格式化日期为中文显示格式
@@ -514,6 +826,317 @@ function getRelatedArticles(currentId, category, limit = 3) {
     .slice(0, limit);
 }
 
+// 防抖函数
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// 动态生成文章目录
+function generateTableOfContents(articleContent) {
+  try {
+    // 参数验证
+    if (!articleContent || typeof articleContent !== 'string') {
+      console.error('无效的文章内容参数');
+      return false;
+    }
+    
+    // 创建一个临时容器来解析HTML
+    const tempContainer = document.createElement('div');
+    tempContainer.innerHTML = articleContent;
+    
+    // 获取所有带ID的section元素
+    const sections = tempContainer.querySelectorAll('section[id]');
+    const tocList = document.querySelector('.toc-list');
+    
+    if (!tocList) {
+      console.error('找不到目录容器 .toc-list');
+      return false;
+    }
+    
+    // 清空现有的目录项
+    tocList.innerHTML = '';
+    
+    // 遍历所有section元素，生成目录项
+    sections.forEach(section => {
+      const sectionId = section.getAttribute('id');
+      const sectionTitle = section.querySelector('h2')?.textContent?.trim() || '未命名章节';
+      
+      if (sectionId) {
+        // 创建目录项链接
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = '#' + sectionId;
+        a.className = 'toc-item block py-1.5 px-2 rounded hover:bg-gray-50 transition-colors';
+        a.textContent = sectionTitle;
+        
+        // 添加到目录列表
+        li.appendChild(a);
+        tocList.appendChild(li);
+      }
+    });
+    
+    console.log(`目录生成成功，包含 ${sections.length} 个章节`);
+    return true;
+  } catch (error) {
+    console.error('生成目录时发生错误:', error);
+    return false;
+  }
+}
+
+// 存储之前的滚动事件监听器引用和最后激活的章节索引
+let previousScrollHandler = null;
+let lastActiveSectionIndex = -1;
+
+// 确保元素在其父容器中可见
+function ensureElementVisible(element) {
+  if (!element) return;
+  
+  const parent = element.parentElement;
+  if (!parent) return;
+  
+  const parentTop = parent.scrollTop;
+  const parentHeight = parent.clientHeight;
+  const elementTop = element.offsetTop;
+  const elementHeight = element.offsetHeight;
+  
+  // 元素在视口上方
+  if (elementTop < parentTop) {
+    parent.scrollTo({
+      top: elementTop,
+      behavior: 'smooth'
+    });
+  }
+  // 元素在视口下方
+  else if (elementTop + elementHeight > parentTop + parentHeight) {
+    parent.scrollTo({
+      top: elementTop + elementHeight - parentHeight,
+      behavior: 'smooth'
+    });
+  }
+}
+
+// 初始化目录交互功能
+function initTableOfContents() {
+  try {
+    // 移除之前的滚动事件监听器（如果存在）
+    if (previousScrollHandler) {
+      window.removeEventListener('scroll', previousScrollHandler);
+    }
+    
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.toc-item');
+    
+    if (sections.length === 0) {
+      console.warn('未找到文章章节，无法初始化目录');
+      return;
+    }
+    
+    // 预计算并缓存section信息
+    const sectionData = Array.from(sections).map((section, index) => ({
+      id: section.getAttribute('id'),
+      element: section,
+      index
+    }));
+    
+    // 使用防抖优化的滚动事件处理函数
+    const updateActiveLink = debounce(() => {
+      const scrollPosition = window.scrollY;
+      let activeIndex = -1;
+      
+      // 从下往上查找当前可见的章节（更符合用户阅读体验）
+      for (let i = sectionData.length - 1; i >= 0; i--) {
+        const section = sectionData[i].element;
+        const sectionTop = section.offsetTop - 100; // 偏移量，提前高亮
+        
+        if (scrollPosition >= sectionTop) {
+          activeIndex = i;
+          break;
+        }
+      }
+      
+      // 只有当活动章节发生变化时才更新DOM，减少不必要的操作
+      if (activeIndex !== lastActiveSectionIndex) {
+        // 移除所有链接的活动类
+        navLinks.forEach(link => link.classList.remove('active'));
+        
+        // 为当前活动章节添加活动类
+        if (activeIndex >= 0) {
+          const activeSectionId = sectionData[activeIndex].id;
+          const activeLink = document.querySelector(`.toc-item[href="#${activeSectionId}"]`);
+          
+          if (activeLink) {
+            activeLink.classList.add('active');
+            // 确保活动的目录项在其容器中可见
+            ensureElementVisible(activeLink);
+          }
+        }
+        
+        lastActiveSectionIndex = activeIndex;
+      }
+    }, 100); // 100ms防抖延迟
+    
+    // 为锚点链接添加平滑滚动，使用事件委托优化
+    const tocList = document.querySelector('.toc-list');
+    if (tocList) {
+      // 移除所有子元素的事件监听器
+      const newTocList = tocList.cloneNode(true);
+      tocList.parentNode.replaceChild(newTocList, tocList);
+      
+      // 使用事件委托处理点击
+      newTocList.addEventListener('click', function(e) {
+        const link = e.target.closest('.toc-item');
+        if (link) {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            // 禁用滚动监听器，防止滚动时触发不必要的更新
+            window.removeEventListener('scroll', updateActiveLink);
+            
+            // 滚动到目标位置
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+            
+            // 滚动结束后重新启用滚动监听器
+            setTimeout(() => {
+              window.addEventListener('scroll', updateActiveLink);
+              updateActiveLink(); // 更新活动状态
+            }, 1000);
+          }
+        }
+      });
+    }
+    
+    // 保存滚动事件处理函数的引用
+    previousScrollHandler = updateActiveLink;
+    
+    // 重置最后活动章节索引
+    lastActiveSectionIndex = -1;
+    
+    // 监听滚动事件
+    window.addEventListener('scroll', updateActiveLink);
+    
+    // 初始调用一次，根据页面滚动位置设置正确的激活状态
+    setTimeout(updateActiveLink, 200); // 使用稍长的延迟确保DOM完全加载
+    
+    console.log('目录交互功能初始化完成');
+  } catch (error) {
+    console.error('初始化目录交互功能时发生错误:', error);
+  }
+}
+
+// 测试函数：验证不同图文切换时目录的更新功能
+function testTableOfContentsUpdate() {
+  console.log('开始测试目录更新功能...');
+  
+  // 获取所有可用的文章ID
+  const allArticleIds = articlesData.map(article => article.id);
+  
+  // 如果文章数量少于2，无法进行切换测试
+  if (allArticleIds.length < 2) {
+    console.warn('文章数量不足，无法进行切换测试');
+    return;
+  }
+  
+  // 记录测试结果
+  const testResults = [];
+  
+  // 测试函数：切换到指定文章ID并验证目录
+  function testArticleSwitch(articleId, expectedSectionCount) {
+    console.log(`测试切换到文章ID: ${articleId}`);
+    
+    // 切换文章
+    const article = getArticleById(articleId);
+    if (!article) {
+      testResults.push({ articleId, passed: false, error: '找不到指定文章' });
+      return;
+    }
+    
+    // 渲染文章
+    renderArticle(article);
+    
+    // 等待目录生成完成
+    setTimeout(() => {
+      // 验证目录项数量是否与文章章节数量匹配
+      const renderedSections = document.querySelectorAll('section[id]');
+      const tocItems = document.querySelectorAll('.toc-item');
+      
+      const actualSectionCount = renderedSections.length;
+      const tocItemCount = tocItems.length;
+      
+      console.log(`文章章节数量: ${actualSectionCount}`);
+      console.log(`目录项数量: ${tocItemCount}`);
+      
+      // 验证每个章节ID是否在目录中有对应项
+      let allSectionsLinked = true;
+      renderedSections.forEach(section => {
+        const sectionId = section.getAttribute('id');
+        const matchingTocItem = document.querySelector(`.toc-item[href="#${sectionId}"]`);
+        if (!matchingTocItem) {
+          console.warn(`章节 ${sectionId} 没有在目录中找到对应项`);
+          allSectionsLinked = false;
+        }
+      });
+      
+      const testPassed = tocItemCount === actualSectionCount && allSectionsLinked;
+      testResults.push({
+        articleId,
+        passed: testPassed,
+        details: {
+          expectedSectionCount,
+          actualSectionCount,
+          tocItemCount,
+          allSectionsLinked
+        }
+      });
+      
+      console.log(`测试结果: ${testPassed ? '通过' : '失败'}`);
+      
+      // 如果还有更多文章要测试，继续下一个
+      const nextIndex = allArticleIds.indexOf(articleId) + 1;
+      if (nextIndex < allArticleIds.length) {
+        setTimeout(() => {
+          testArticleSwitch(allArticleIds[nextIndex], 0);
+        }, 1000); // 等待1秒后测试下一篇文章
+      } else {
+        // 所有测试完成，显示总结
+        console.log('\n测试完成！总结:');
+        const passedCount = testResults.filter(result => result.passed).length;
+        console.log(`通过: ${passedCount}/${testResults.length}`);
+        
+        testResults.forEach(result => {
+          console.log(`文章ID ${result.articleId}: ${result.passed ? '通过' : '失败'}`);
+          if (!result.passed && result.error) {
+            console.log(`  错误: ${result.error}`);
+          }
+        });
+      }
+    }, 500); // 等待目录生成
+  }
+  
+  // 开始测试第一篇文章
+  testArticleSwitch(allArticleIds[0], 0);
+  
+  // 返回测试结果函数
+  return {
+    getResults: () => testResults,
+    runTest: () => testArticleSwitch(allArticleIds[0], 0)
+  };
+}
+
+// 提示：在控制台中调用 testTableOfContentsUpdate() 开始测试目录更新功能
+
 // 渲染文章内容
 function renderArticle(article) {
   if (!article) {
@@ -548,6 +1171,12 @@ function renderArticle(article) {
 
   // 渲染文章内容
   document.getElementById('article-content').innerHTML = article.content;
+  
+  // 动态生成文章目录
+  generateTableOfContents(article.content);
+  
+  // 初始化目录交互功能
+  setTimeout(initTableOfContents, 200); // 使用稍长的延迟确保目录DOM元素已生成
 
   // 渲染上一篇/下一篇链接
   const prevArticle = getPreviousArticle(article.id);

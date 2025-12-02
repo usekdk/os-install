@@ -5,91 +5,21 @@ const guidesData = [
     title: "Windows 11 2023 更新版本全新安装教程",
     date: "2023-11-15",
     description: "详细介绍Windows 11最新版本的系统安装步骤，包括UEFI设置、分区方案、驱动安装和系统优化，适合初学者和进阶用户。",
-    thumbnail: "https://picsum.photos/id/26/600/400",
+    thumbnail: "images/index/article/1/封面.png",
     category: "Windows",
     readCount: 12543,
     commentsCount: 326
   },
   {
     id: 2,
-    title: "macOS Sonoma 升级与全新安装完整指南",
-    date: "2023-11-10",
-    description: "苹果最新macOS Sonoma系统的升级方法和全新安装教程，包含兼容性检查、数据备份、安装过程和常见问题解决方案。",
-    thumbnail: "https://picsum.photos/id/27/600/400",
-    category: "macOS",
-    readCount: 8921,
-    commentsCount: 189
-  },
-  {
-    id: 3,
-    title: "Ubuntu 22.04 LTS 长期支持版安装详解",
-    date: "2023-11-05",
-    description: "从制作启动盘到系统分区，再到软件配置的完整Ubuntu 22.04 LTS安装教程，让Linux新手也能轻松上手。",
-    thumbnail: "https://picsum.photos/id/28/600/400",
-    category: "Linux",
-    readCount: 6754,
-    commentsCount: 234
-  },
-  {
-    id: 4,
-    title: "Windows 11 + Ubuntu 22.04 双系统安装完全指南",
-    date: "2023-10-28",
-    description: "详细介绍如何在一台电脑上同时安装Windows 11和Ubuntu 22.04双系统，包括硬盘分区、引导配置和系统切换技巧。",
-    thumbnail: "https://picsum.photos/id/29/600/400",
-    category: "双系统",
-    readCount: 15678,
-    commentsCount: 456
-  },
-  {
-    id: 5,
-    title: "系统备份与恢复全攻略：从入门到精通",
-    date: "2023-10-20",
-    description: "全面讲解Windows和macOS系统的备份方法，包括系统镜像制作、文件备份、云备份方案以及恢复步骤详解。",
-    thumbnail: "https://picsum.photos/id/30/600/400",
-    category: "备份",
-    readCount: 9345,
-    commentsCount: 213
-  },
-  {
-    id: 6,
-    title: "Windows 10 升级到Windows 11官方方法与注意事项",
-    date: "2023-10-15",
-    description: "官方推荐的Windows 10升级Windows 11方法，包括系统要求检查、升级前准备工作、升级过程和常见问题处理。",
-    thumbnail: "https://picsum.photos/id/31/600/400",
+    title: "Windows 10 2025 安装教程",
+    date: "2023-11-20",
+    description: "详细介绍Windows 10最新版本的系统安装步骤，包括UEFI设置、分区方案、驱动安装和系统优化，适合初学者和进阶用户。",
+    thumbnail: "images/index/article/1/封面.png",
     category: "Windows",
-    readCount: 18765,
-    commentsCount: 567
+    readCount: 12543,
+    commentsCount: 326
   },
-  {
-    id: 7,
-    title: "macOS Ventura 降级到旧版本教程",
-    date: "2023-10-10",
-    description: "当新版macOS出现兼容性问题时，如何安全地将系统降级到之前的稳定版本，包含完整的数据保留方案。",
-    thumbnail: "https://picsum.photos/id/32/600/400",
-    category: "macOS",
-    readCount: 7654,
-    commentsCount: 178
-  },
-  {
-    id: 8,
-    title: "Linux Mint 21.2 安装与美化教程",
-    date: "2023-10-05",
-    description: "适合Linux新手的Linux Mint 21.2安装教程，以及桌面美化、常用软件安装和系统优化的完整指南。",
-    thumbnail: "https://picsum.photos/id/33/600/400",
-    category: "Linux",
-    readCount: 5432,
-    commentsCount: 145
-  },
-  {
-    id: 9,
-    title: "NVMe SSD系统迁移与安装优化指南",
-    date: "2023-09-30",
-    description: "如何将系统从传统硬盘迁移到NVMe SSD，以及NVMe SSD上全新安装系统的优化方法，提升系统性能。",
-    thumbnail: "https://picsum.photos/id/34/600/400",
-    category: "硬件",
-    readCount: 10234,
-    commentsCount: 289
-  }
 ];
 
 // 每页显示的教程数量
@@ -154,7 +84,7 @@ function renderGuides() {
     guideCard.className = 'bg-white rounded-xl shadow-md overflow-hidden hover-scale transition-all duration-300';
     guideCard.innerHTML = `
       <div class="relative">
-        <img src="${guide.thumbnail}" alt="${guide.title}" class="w-full h-48 object-cover">
+        <img src="${guide.thumbnail}" alt="${guide.title}" class="w-full h-49 object-cover">
         <span class="absolute top-3 left-3 bg-primary/90 text-white text-xs font-medium px-2 py-1 rounded-full">${guide.category}</span>
       </div>
       <div class="p-5">

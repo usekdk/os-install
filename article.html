@@ -14,6 +14,14 @@
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .toc-item.active {
+      color: var(--primary-color);
+      font-weight: 500;
+      background-color: rgba(37, 99, 235, 0.08);
+      border-left: 3px solid var(--primary-color);
+    }
+  </style>
 </head>
 
 <body class="font-inter bg-gray-50 text-dark">
@@ -23,13 +31,13 @@
       <div class="flex justify-between items-center py-3">
         <!-- Logo -->
         <a href="index.html" class="flex items-center space-x-2">
-          <img src="images/网站logo.png" alt="系统安装指南" class="h-8">
+          <img src="images/index/网站logo.png" alt="系统安装指南" class="h-8">
         </a>
         
         <!-- 桌面导航 -->
         <nav class="hidden md:flex items-center space-x-8">
           <a href="index.html" class="font-medium text-gray-700 hover:text-primary transition-colors">首页</a>
-          <a href="guides.html" class="font-medium text-primary border-b-2 border-primary pb-1">安装指南</a>
+          <a href="guides.html" class="font-medium text-primary border-b-2 border-primary pb-1">安装教程</a>
           <a href="tools.html" class="font-medium text-gray-700 hover:text-primary transition-colors">装机工具</a>
           <a href="software-share.html" class="font-medium text-gray-700 hover:text-primary transition-colors">好软分享</a>
           <a href="sites-share.html" class="font-medium text-gray-700 hover:text-primary transition-colors">好站分享</a>
@@ -90,9 +98,28 @@
         <span id="breadcrumb-title" class="text-gray-700 truncate max-w-xs">文章标题</span>
       </nav>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <!-- 左侧目录侧边栏 -->
+        <aside id="toc-sidebar" class="hidden lg:block bg-white rounded-xl shadow-sm p-4 lg:col-span-1" style="width: 300px; margin-left: -100px;">
+          <div class="sticky top-24">
+            <h3 class="font-bold text-lg mb-4 text-gray-800">文章目录</h3>
+            <ul class="space-y-2 text-sm toc-list">
+              <li><a href="#1" class="toc-item block py-1.5 px-2 rounded hover:bg-gray-50 transition-colors">1. 准备工作</a></li>
+              <li><a href="#2" class="toc-item block py-1.5 px-2 rounded hover:bg-gray-50 transition-colors">2. 制作Windows 11启动盘</a></li>
+              <li><a href="#3" class="toc-item block py-1.5 px-2 rounded hover:bg-gray-50 transition-colors">3. 进入BIOS/UEFI设置</a></li>
+              <li><a href="#4" class="toc-item block py-1.5 px-2 rounded hover:bg-gray-50 transition-colors">4. 开始安装Windows 11</a></li>
+              <li><a href="#5" class="toc-item block py-1.5 px-2 rounded hover:bg-gray-50 transition-colors">5. 硬盘分区</a></li>
+              <li><a href="#6" class="toc-item block py-1.5 px-2 rounded hover:bg-gray-50 transition-colors">6. 等待安装完成</a></li>
+              <li><a href="#7" class="toc-item block py-1.5 px-2 rounded hover:bg-gray-50 transition-colors">7. 初始设置</a></li>
+              <li><a href="#8" class="toc-item block py-1.5 px-2 rounded hover:bg-gray-50 transition-colors">8. 安装驱动程序</a></li>
+              <li><a href="#9" class="toc-item block py-1.5 px-2 rounded hover:bg-gray-50 transition-colors">9. 系统优化</a></li>
+              <li><a href="#10" class="toc-item block py-1.5 px-2 rounded hover:bg-gray-50 transition-colors">10. 结论</a></li>
+            </ul>
+          </div>
+        </aside>
+        
         <!-- 主要内容区域 -->
-        <article class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 sm:p-8">
+        <article class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 sm:p-8" style="margin-left: -150px; margin-right: -150px;">
           <!-- 文章标题区域 -->
           <div class="mb-6">
             <h1 id="article-title" class="text-2xl sm:text-3xl font-bold mb-4 leading-tight">文章标题</h1>
@@ -168,8 +195,8 @@
           </div>
         </article>
 
-        <!-- 侧边栏 -->
-        <aside class="lg:col-span-1 space-y-6">
+        <!-- 侧边栏 - 已添加固定定位 -->
+        <aside class="lg:col-span-1 space-y-6 lg:ml-auto lg:mr-0" style="position: sticky; top: 5rem; align-self: flex-start; width: 300px; margin-right: -100px;">
           <!-- 作者信息卡片 -->
           <div class="bg-white rounded-xl shadow-sm p-6">
             <h3 class="text-lg font-semibold mb-4 flex items-center">
@@ -315,5 +342,7 @@
   <!-- JavaScript -->
   <script src="js/main.js"></script>
   <script src="js/article.js"></script>
+  
+  <!-- 目录高亮功能已移至article.js中 -->
 </body>
 </html>
