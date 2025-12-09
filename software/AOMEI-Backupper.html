@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AOMEI Backupper(傲梅轻松备份)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind 配置 -->
+  <script src="../js/tailwind.config.js"></script>
+  <!-- 自定义工具类 -->
+  <link rel="stylesheet" href="../css/custom-utilities.css">
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- 自定义CSS变量 -->
+  <style>
+
+    :root {
+      --main-content-left-margin: -50px; /* 主体内容左边距变量 - 可通过修改此值调整左边距 */
+      --main-content-right-margin: -100px; /* 主体内容右边距变量 - 可通过修改此值调整右边距 */
+      --sidebar-right-margin: -50px; /* 右侧内容区域右边距变量 - 可通过修改此值调整右边距 */
+      --sidebar-left-margin: 100px; /* 右侧内容区域左边距变量 - 可通过修改此值调整左边距 */
+    }
+  /* 广告图片扫光效果 */
+  #ad-container .bg-gray-200 {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #ad-container .bg-gray-200::before {
+    content: '';
+    position: absolute;
+    top: 100%; /* 初始位置在图片下方 */
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.0) 0%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0.0) 100%
+    );
+    transition: top 0.8s ease-in-out; /* 过渡动画，持续0.8秒 */
+    z-index: 1;
+  }
+  
+  #ad-container .bg-gray-200:hover::before {
+    top: -100%; /* 鼠标悬停时移动到图片上方 */
+  }
+  
+  #ad-container img {
+    position: relative;
+    z-index: 0; /* 确保图片在扫光效果下方 */
+  }
+  </style>
+</head>
+
+<body class="font-inter bg-gray-50 text-dark">
+  <!-- 导航栏 - 与index.html完全相同 -->
+  <header id="navbar" class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+    <div class="container mx-auto px-1 sm:px-2 lg:px-4">
+      <div class="flex justify-between items-center py-3">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center space-x-2">
+          <img src="../images/index/网站logo.png" alt="系统安装指南" class="h-8">
+        </a>
+        
+        <!-- 桌面导航 -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="../index.html" class="font-medium text-gray-700 hover:text-primary transition-colors">首页</a>
+          <a href="../guides.html" class="font-medium text-gray-700 hover:text-primary transition-colors">安装指南</a>
+          <a href="../tools.html" class="font-medium text-gray-700 hover:text-primary transition-colors">装机工具</a>
+          <a href="../software-share.html" class="font-medium text-primary hover:text-primary-dark transition-colors">好软分享</a>
+          <a href="../websites.html" class="font-medium text-gray-700 hover:text-primary transition-colors">好站分享</a>
+          <a href="../about.html" class="font-medium text-gray-700 hover:text-primary transition-colors">关于网站</a>
+        </nav>
+        
+        <!-- 搜索框 -->
+        <div class="hidden md:flex items-center">
+          <div class="relative">
+            <input type="text" placeholder="搜索软件、教程..." class="py-1.5 pl-3 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm">
+            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 移动端菜单按钮 -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-700 hover:text-primary">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg">
+      <div class="container mx-auto px-4 py-3 space-y-3">
+        <a href="../index.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">首页</a>
+        <a href="../guides.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">安装指南</a>
+        <a href="../tools.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">装机工具</a>
+        <a href="../software-share.html" class="block py-2 font-medium text-primary hover:text-primary-dark transition-colors">好软分享</a>
+        <a href="../websites.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">好站分享</a>
+        <a href="../about.html" class="block py-2 font-medium text-gray-700 hover:text-primary transition-colors">关于网站</a>
+        
+        <!-- 移动端搜索框 -->
+        <div class="pt-2">
+          <div class="relative">
+            <input type="text" placeholder="搜索软件、教程..." class="w-full py-2 pl-3 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm">
+            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 页面标题区域 -->
+  <section class="pt-24 pb-10 bg-gradient-to-br from-primary/5 to-secondary/5">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center">
+          <h1 class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold text-dark">AOMEI Backupper(傲梅轻松备份)</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主体内容区域 -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-1 sm:px-2 lg:px-3">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- 左侧主体内容区域 -->
+        <div class="lg:col-span-8 lg:ml-[var(--main-content-left-margin)] lg:mr-[var(--main-content-right-margin)]">
+      <!-- 软件概览区域 -->
+      <div class="bg-gray-50 rounded-xl pt-6 pr-6 pb-6 pl-6 mb-12 shadow-md">
+        <div class="flex flex-col md:flex-row gap-8 items-center">
+          <!-- 软件图标 -->
+          <div class="bg-white p-4 rounded-lg shadow-sm">
+            <img src="../images/software/傲梅轻松备份/logo.png" alt="AOMEI Backupper" class="w-24 h-24 rounded-lg">
+          </div>
+          
+          <!-- 软件信息 -->
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-4 mb-4">
+              <h2 class="text-2xl font-bold">AOMEI Backupper(傲梅轻松备份)</h2>
+              <span class="text-gray-500">v8.0.0 技术师增强版</span>
+            </div>
+            <p class="text-gray-600 mb-6">提供极速系统、磁盘备份与一键还原，操作简便，可替代GHOST等工具。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 软件截图展示区 - 核心模块3 -->
+      <section class="mb-12">
+        <!-- 标题 -->
+        <h3 class="text-2xl font-bold mb-8 text-gray-800 flex items-center">
+          <svg class="w-8 h-8 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          软件截图
+        </h3>
+        
+        <!-- 现代化卡片容器 -->
+        <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl overflow-hidden border border-gray-100 p-8 relative">
+          <!-- 顶部装饰条 -->
+          <div class="h-1 bg-gradient-to-r from-blue-600 to-blue-400 mb-6 absolute top-0 left-0 right-0"></div>
+          
+          <!-- 截图网格 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-50 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+              <div class="relative overflow-hidden">
+                <img src="../images/software/傲梅轻松备份/软件截图/001.png" alt="AOMEI Backupper截图1" class="w-full h-auto transition-transform duration-500 hover:scale-105">
+              </div>
+            </div>
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-50 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+              <div class="relative overflow-hidden">
+                <img src="../images/software/傲梅轻松备份/软件截图/002.png" alt="AOMEI Backupper截图2" class="w-full h-auto transition-transform duration-500 hover:scale-105">
+              </div>
+            </div>
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-50 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+              <div class="relative overflow-hidden">
+                <img src="../images/software/傲梅轻松备份/软件截图/003.png" alt="AOMEI Backupper截图3" class="w-full h-auto transition-transform duration-500 hover:scale-105">
+              </div>
+            </div>
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-50 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+              <div class="relative overflow-hidden">
+                <img src="../images/software/傲梅轻松备份/软件截图/004.png" alt="AOMEI Backupper截图4" class="w-full h-auto transition-transform duration-500 hover:scale-105">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 软件介绍详情 - 核心模块2 -->
+      <!-- 软件介绍区域 -->
+      <section class="mb-12">
+        <!-- 标题 -->
+        <h3 class="text-2xl font-bold mb-8 text-gray-800 flex items-center">
+          <svg class="w-8 h-8 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          软件介绍
+        </h3>
+        
+        <!-- 现代化卡片容器 -->
+        <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+          <!-- 顶部装饰条 -->
+          <div class="h-1 bg-gradient-to-r from-blue-600 to-blue-400"></div>
+          
+          <!-- 内容区域 -->
+          <div class="p-8">
+            <!-- 软件描述 -->
+            <div class="mb-8">
+              <p class="text-gray-700 leading-relaxed text-lg">
+                AOMEI Backupper（傲梅轻松备份）是一款专业的数据备份与还原软件，由傲梅公司推出。它以极快的备份速度为核心优势，旨在简化系统、磁盘及文件的备份流程，让用户无需复杂操作即可轻松实现一键备份与还原，有效避免重装系统的麻烦，并支持将整个硬盘或指定数据完整备份。
+              </p>
+            </div>
+            
+            <!-- 主要特点 -->
+            <div class="mb-8">
+              <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                  <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h4 class="text-xl font-semibold text-gray-800">主要特点</h4>
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-50 hover:shadow-md transition-shadow">
+                  <div class="flex items-start">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                      <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-gray-800 mb-1">全面的备份功能</h5>
+                      <p class="text-sm text-gray-600">支持系统、整个磁盘/分区以及特定文件或文件夹的备份与还原。</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-50 hover:shadow-md transition-shadow">
+                  <div class="flex items-start">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                      <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-gray-800 mb-1">高效的备份技术</h5>
+                      <p class="text-sm text-gray-600">提供增量与差异备份，仅备份变化的数据，大幅提升速度并节省存储空间。</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-50 hover:shadow-md transition-shadow">
+                  <div class="flex items-start">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                      <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-gray-800 mb-1">灵活的定时任务</h5>
+                      <p class="text-sm text-gray-600">可设置按每天、每周、每月等周期自动执行备份任务。</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-50 hover:shadow-md transition-shadow">
+                  <div class="flex items-start">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                      <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-gray-800 mb-1">便捷的一键操作</h5>
+                      <p class="text-sm text-gray-600">系统备份与还原过程简单，通过几次点击即可完成，无需使用Ghost等复杂工具。</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-50 hover:shadow-md transition-shadow md:col-span-2">
+                  <div class="flex items-start">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                      <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-gray-800 mb-1">智能通知机制</h5>
+                      <p class="text-sm text-gray-600">备份完成后，可通过电子邮件发送日志报告，方便用户及时了解备份状态。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 适用场景 -->
+            <div class="mb-8">
+              <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                  <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                  </svg>
+                </div>
+                <h4 class="text-xl font-semibold text-gray-800">适用场景</h4>
+              </div>
+              
+              <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-5 border-l-4 border-blue-500">
+                <p class="text-gray-700 leading-relaxed">
+                  适用于个人用户系统备份、企业数据保护、IT技术人员系统部署、重要文件定期备份等场景。无论是家庭用户还是企业用户，都能通过AOMEI Backupper轻松实现数据安全保护。
+                </p>
+              </div>
+            </div>
+            
+            <!-- 系统要求 -->
+            <div>
+              <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                  <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <h4 class="text-xl font-semibold text-gray-800">系统要求</h4>
+              </div>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white rounded-lg p-5 shadow-sm border border-gray-50 text-center hover:shadow-md transition-shadow">
+                  <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+                    </svg>
+                  </div>
+                  <h5 class="font-medium text-gray-800 mb-1">操作系统</h5>
+                  <p class="text-sm text-gray-600">​Windows XP / Vista / 7 / 8 / 8.1 / 10 / 11</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-5 shadow-sm border border-gray-50 text-center hover:shadow-md transition-shadow">
+                  <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                    </svg>
+                  </div>
+                  <h5 class="font-medium text-gray-800 mb-1">处理器</h5>
+                  <p class="text-sm text-gray-600">500 MHz 或更快的 x86 兼容处理器</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-5 shadow-sm border border-gray-50 text-center hover:shadow-md transition-shadow">
+                  <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                  </div>
+                  <h5 class="font-medium text-gray-800 mb-1">内存</h5>
+                  <p class="text-sm text-gray-600">至少 256MB</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-5 shadow-sm border border-gray-50 text-center hover:shadow-md transition-shadow">
+                  <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                    </svg>
+                  </div>
+                  <h5 class="font-medium text-gray-800 mb-1">存储空间</h5>
+                  <p class="text-sm text-gray-600">约60MB至137MB+</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 软件安装步骤 - 核心模块4 -->
+      <section class="mb-12">
+        <!-- 标题 -->
+        <h3 class="text-2xl font-bold mb-8 text-gray-800 flex items-center">
+          <svg class="w-8 h-8 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+          </svg>
+          安装步骤
+        </h3>
+        
+        <!-- 现代化卡片容器 -->
+        <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+          <!-- 顶部装饰条 -->
+          <div class="h-1 bg-gradient-to-r from-blue-600 to-blue-400"></div>
+          
+          <!-- 内容区域 -->
+          <div class="p-8">
+            <div class="space-y-8">
+              <!-- 步骤1 -->
+              <div class="flex flex-col md:flex-row gap-6 items-start p-4 bg-white rounded-xl shadow-sm border border-gray-50 hover:shadow-md transition-shadow">
+                <div class="flex-shrink-0 w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xl">1</div>
+                <div class="flex-1">
+                  <h4 class="text-xl font-semibold mb-3 text-gray-800">下载安装包</h4>
+                  <div class="flex flex-col md:flex-row gap-6 items-center mb-3">
+                    <p class="text-gray-700 leading-relaxed">点击网站底部的<a href="#software-download" class="text-blue-600 font-bold hover:underline hover:text-blue-800 transition-colors">下载按钮</a>，下载AOMEI Backupper安装包。</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 步骤2 -->
+              <div class="flex flex-col md:flex-row gap-6 items-start p-4 bg-white rounded-xl shadow-sm border border-gray-50 hover:shadow-md transition-shadow">
+                <div class="flex-shrink-0 w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xl">2</div>
+                <div class="flex-1">
+                  <h4 class="text-xl font-semibold mb-3 text-gray-800">运行安装程序</h4>
+                  <div class="flex flex-col md:flex-row gap-6 items-center mb-3">
+                    <p class="text-gray-700 leading-relaxed">下载完成后，解压缩下载的文件，双击安装文件<strong>"AOMEI_Backupper_8.0.0.exe"</strong>开始安装过程。Windows可能会显示用户账户控制提示，请点击"是"继续。</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 步骤3 -->
+              <div class="flex flex-col md:flex-row gap-6 items-start p-4 bg-white rounded-xl shadow-sm border border-gray-50 hover:shadow-md transition-shadow">
+                <div class="flex-shrink-0 w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xl">3</div>
+                <div class="flex-1">
+                  <h4 class="text-xl font-semibold mb-3 text-gray-800">安装过程操作</h4>
+                  <div class="flex flex-col md:flex-row gap-6 items-center mb-3">
+                    <p class="text-gray-700 leading-relaxed">按照图示操作，完成软件的安装过程<strong>（安装路径可自定义）</strong>。</p>
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-6 items-center mb-3">
+                    <div class="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                      <img src="../images/software/傲梅轻松备份/安装步骤/001.png" alt="AOMEI Backupper安装过程" class="w-full h-auto transition-transform duration-500 hover:scale-105">
+                    </div>
+                    <div class="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                      <img src="../images/software/傲梅轻松备份/安装步骤/002.png" alt="AOMEI Backupper安装过程" class="w-full h-auto transition-transform duration-500 hover:scale-105">
+                    </div>
+                    <div class="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                      <img src="../images/software/傲梅轻松备份/安装步骤/003.png" alt="AOMEI Backupper安装过程" class="w-full h-auto transition-transform duration-500 hover:scale-105">
+                    </div>
+                    <div class="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                      <img src="../images/software/傲梅轻松备份/安装步骤/004.png" alt="AOMEI Backupper安装过程" class="w-full h-auto transition-transform duration-500 hover:scale-105">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+
+            </div>
+            
+            <!-- 安装注意事项 -->
+            <div class="mt-8 p-5 bg-amber-50 border-l-4 border-amber-400 rounded-lg shadow-sm">
+              <h4 class="text-amber-800 font-semibold mb-3 flex items-center">
+                <svg class="w-5 h-5 text-amber-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+                安装注意事项
+              </h4>
+              <ul class="list-disc pl-6 text-amber-700 space-y-2">
+                <li>安装前请确保您的系统满足最低要求</li>
+                <li>安装过程中请关闭其他可能冲突的安全软件</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 软件概览和下载区域 -->
+      <div id="software-download" class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-6 mb-12 shadow-md">
+        <div class="flex flex-col md:flex-row gap-8 items-start">
+          <!-- 软件图标 -->
+          <div class="bg-white p-4 rounded-lg shadow-sm">
+            <img src="../images/software/傲梅轻松备份/logo.png" alt="AOMEI Backupper" class="w-24 h-24 rounded-lg">
+          </div>
+          
+          <!-- 软件信息 -->
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-4 mb-4">
+              <h2 class="text-2xl font-bold">AOMEI Backupper(傲梅轻松备份)</h2>
+              <span class="text-gray-500">v8.0.0 技术师增强版</span>
+            </div>
+            <p class="text-gray-600 mb-6">提供极速系统、磁盘备份与一键还原，操作简便，可替代GHOST等工具。</p>
+            
+            <!-- 软件下载按钮 - 核心模块1 -->
+            <div class="flex flex-wrap justify-start items-center gap-4">
+              <!-- 添加入口动画样式 -->
+              <style>
+                @keyframes scanlight {
+                  0% {
+                    transform: translateX(-100%) skew(-12deg);
+                    opacity: 0;
+                  }
+                  20% {
+                    opacity: 1;
+                  }
+                  80% {
+                    opacity: 1;
+                  }
+                  100% {
+                    transform: translateX(100%) skew(-12deg);
+                    opacity: 0;
+                  }
+                }
+                .animate-scanlight {
+                  animation: scanlight 2.5s ease-in-out infinite;
+                  will-change: transform, opacity;
+                }
+              </style>
+
+              <!-- VIP高速下载按钮 - 带扫光效果 -->
+              <a href="https://cloud.189.cn/t/abcdefg123456" class="relative inline-block p-2 m-0 rounded-md overflow-hidden align-middle">
+                <img src="../images/icon/下载.png" alt="VIP高速下载" class="w-auto h-11 transition-all duration-300 hover:scale-110 hover:brightness-150">
+                <!-- 扫光效果层 - 添加pointer-events-none确保不影响鼠标事件 -->
+                <div class="absolute inset-2 bg-gradient-to-r from-transparent via-white/40 to-transparent transform -skew-x-12 animate-scanlight pointer-events-none"></div>
+              </a>
+              <a href="https://cloud.189.cn/t/abcdefg123456" class="inline-flex items-center justify-center h-11 px-2 bg-[#06a7ff] text-white rounded-lg text-base font-medium hover:bg-[#06a7ff]/70 transition-all duration-300 shadow-sm">
+                <i class="fa fa-cloud mr-2"></i>百度网盘下载
+              </a>
+              <a href="https://cloud.189.cn/t/abcdefg123456" class="inline-flex items-center justify-center h-11 px-2 bg-secondary text-white rounded-lg text-base font-medium hover:bg-secondary/70 transition-all duration-300 shadow-sm">
+                <i class="fa fa-cloud mr-2"></i>迅雷网盘下载
+              </a>
+            </div>
+            <p class="text-gray-500 text-sm mt-3">
+              <i class="fa fa-info-circle mr-1"></i> 提取码：1234
+            </p>
+          </div>
+        </div>
+      </div>
+        </div>
+        
+        <!-- 右侧边栏区域 -->
+        <div class="lg:col-span-4 lg:mr-[var(--sidebar-right-margin)] lg:ml-[var(--sidebar-left-margin)] space-y-8 lg:sticky lg:top-20 lg:bottom-20 lg:self-start">
+
+          <!-- 广告位模块 -->
+          <div class="relative" id="ad-container">
+            <div class="bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
+              <!-- 广告链接容器 -->
+              <a id="adLink" href="" target="_blank" class="w-full h-full flex items-center justify-center">
+                <img id="adImage" src="" alt="" class="w-full h-auto object-contain transition-opacity">
+              </a>
+            </div>
+          </div>
+          
+          <!-- 加载广告配置脚本 -->
+          <script src="../js/adConfig.js"></script>
+          <script>
+            // 广告轮播功能实现
+            document.addEventListener('DOMContentLoaded', function() {
+              const adContainer = document.getElementById('ad-container');
+              const adLink = document.getElementById('adLink');
+              const adImage = document.getElementById('adImage');
+              
+              // 检查配置是否存在
+              if (!adLink || !adImage || typeof adConfig === 'undefined' || !adConfig.images || adConfig.images.length === 0) {
+                // 如果没有配置，使用默认图片
+                adImage.src = '../images/index/广告/Windows.png';
+                adImage.alt = '广告图片';
+                return;
+              }
+              
+              // 设置过渡时间
+              adImage.style.transition = `opacity ${adConfig.transitionDuration || 500}ms ease-in-out`;
+              
+              let currentIndex = 0;
+              let slideshowInterval = null;
+              const images = adConfig.images;
+              const interval = adConfig.interval || 3000;
+              
+              // 切换到指定索引的图片
+              function showImage(index) {
+                // 确保索引在有效范围内
+                index = index < 0 ? images.length - 1 : index % images.length;
+                
+                // 获取当前图片配置
+                const imageConfig = images[index];
+                
+                // 淡出当前图片
+                adImage.style.opacity = '0';
+                
+                // 等待淡出完成后更新图片和链接
+                setTimeout(() => {
+                  // 更新图片
+                  adImage.src = imageConfig.imageUrl;
+                  adImage.alt = imageConfig.imageAlt || '广告图片';
+                  
+                  // 更新链接
+                  if (imageConfig.linkUrl) {
+                    adLink.href = imageConfig.linkUrl;
+                    adLink.target = imageConfig.linkTarget || '_blank';
+                    adLink.style.cursor = 'pointer';
+                  } else {
+                    adLink.removeAttribute('href');
+                    adLink.style.cursor = 'default';
+                  }
+                  
+                  // 淡入新图片
+                  adImage.style.opacity = '1';
+                }, adConfig.transitionDuration || 500);
+                
+                currentIndex = index;
+              }
+              
+              // 开始轮播
+              function startSlideshow() {
+                slideshowInterval = setInterval(() => {
+                  showImage(currentIndex + 1);
+                }, interval);
+              }
+              
+              // 停止轮播
+              function stopSlideshow() {
+                if (slideshowInterval) {
+                  clearInterval(slideshowInterval);
+                  slideshowInterval = null;
+                }
+              }
+              
+              // 初始显示第一张图片
+              showImage(0);
+              
+              // 开始轮播
+              startSlideshow();
+              
+              // 鼠标悬停时停止轮播
+              adContainer.addEventListener('mouseenter', stopSlideshow);
+              
+              // 鼠标离开时继续轮播
+              adContainer.addEventListener('mouseleave', startSlideshow);
+            });
+          </script>
+
+          <!-- 软件推荐模块 -->
+          <div class="bg-white rounded-xl shadow-md p-6">
+            <h3 class="text-xl font-bold mb-4 text-gray-800">软件推荐</h3>
+            <div class="space-y-3">
+              <!-- 软件项1 -->
+              <a href="winrar.html" class="relative flex items-center bg-gray-50 hover:bg-gray-100 p-4 rounded-lg transition-colors shadow-sm">
+                <div class="w-14 h-14 bg-white rounded-lg shadow-sm p-2 mr-4 flex items-center justify-center">
+                  <img src="../images/software/Perfect Backup/logo.png" alt="Perfect Backup" class="w-full h-full object-contain">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="text-sm font-medium text-gray-800 truncate">Perfect Backup</div>
+                  <div class="text-xs text-gray-500 mt-0.5">v3.5.0 专业版</div>
+               </div>
+              </a>
+
+            </div>
+          </div>
+          
+          <!-- 好站分享模块 -->
+          <div class="bg-white rounded-xl shadow-md p-6">
+            <h3 class="text-xl font-bold mb-4 text-gray-800">好站分享</h3>
+            <div class="grid grid-cols-2 gap-3">
+              <!-- 网站项1 -->
+              <a href="#" class="text-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
+                <span class="text-sm font-medium text-gray-700">系统之家</span>
+              </a>
+              <!-- 网站项2 -->
+              <a href="#" class="text-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
+                <span class="text-sm font-medium text-gray-700">MSDN</span>
+              </a>
+              <!-- 网站项3 -->
+              <a href="#" class="text-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
+                <span class="text-sm font-medium text-gray-700">驱动之家</span>
+              </a>
+              <!-- 网站项4 -->
+              <a href="#" class="text-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
+                <span class="text-sm font-medium text-gray-700">太平洋电脑网</span>
+              </a>
+              <!-- 网站项5 -->
+              <a href="#" class="text-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
+                <span class="text-sm font-medium text-gray-700">中关村在线</span>
+              </a>
+              <!-- 网站项6 -->
+              <a href="#" class="text-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
+                <span class="text-sm font-medium text-gray-700">IT之家</span>
+              </a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 网站底部 - 与index.html完全相同 -->
+  <footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <!-- 关于我们 -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+          <p class="text-gray-400 mb-4">系统安装一站式网站，致力于为用户提供简单易懂的系统安装教程和优质软件推荐。</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-github text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-twitter text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-envelope text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- 快速链接 -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="../index.html" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+            <li><a href="../systems.html" class="text-gray-400 hover:text-white transition-colors">系统选择</a></li>
+            <li><a href="../tools.html" class="text-gray-400 hover:text-white transition-colors">装机工具</a></li>
+            <li><a href="../software-share.html" class="text-gray-400 hover:text-white transition-colors">好软分享</a></li>
+            <li><a href="../websites.html" class="text-gray-400 hover:text-white transition-colors">好站分享</a></li>
+          </ul>
+        </div>
+        
+        <!-- 热门教程 -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">热门教程</h3>
+          <ul class="space-y-2">
+            <li><a href="../windows.html" class="text-gray-400 hover:text-white transition-colors">Windows 11安装教程</a></li>
+            <li><a href="../macos.html" class="text-gray-400 hover:text-white transition-colors">macOS Ventura安装教程</a></li>
+            <li><a href="../ubuntu.html" class="text-gray-400 hover:text-white transition-colors">Ubuntu双系统安装</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">系统备份与恢复教程</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">常见安装问题解决</a></li>
+          </ul>
+        </div>
+        
+        <!-- 联系我们 -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">联系我们</h3>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fa fa-envelope-o text-gray-400 mt-1 mr-3"></i>
+              <span class="text-gray-400">contact@sysinstall.com</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-github text-gray-400 mt-1 mr-3"></i>
+              <span class="text-gray-400">github.com/sysinstall</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-comment-o text-gray-400 mt-1 mr-3"></i>
+              <span class="text-gray-400">有任何问题或建议，请随时联系我们</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 系统安装一站式网站. 保留所有权利.</p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">隐私政策</a>
+            <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">使用条款</a>
+            <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">网站地图</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../js/main.js"></script>
+  
+  <!-- 平滑滚动到下载区域并居中显示 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取所有指向下载区域的链接
+      const downloadLinks = document.querySelectorAll('a[href="#software-download"]');
+      
+      downloadLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // 获取目标元素
+          const targetElement = document.getElementById('software-download');
+          if (targetElement) {
+            // 计算滚动位置：目标元素顶部 - 视口高度的一半 + 目标元素高度的一半
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            const elementHeight = targetElement.offsetHeight;
+            const scrollPosition = targetPosition - (windowHeight / 2) + (elementHeight / 2);
+            
+            // 平滑滚动
+            window.scrollTo({
+              top: scrollPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
+  
+  <!-- 广告位宽高比调整功能 -->
+  <script>
+    function changeAdRatio(ratio) {
+      const adContainer = document.getElementById('ad-container');
+      const adElement = adContainer.querySelector('div:first-child');
+      const ratioText = adContainer.querySelector('span');
+      
+      // 移除现有的aspect-*类
+      adElement.classList.remove('aspect-video', 'aspect-square', 'aspect-[4/3]', 'aspect-[3/2]');
+      
+      // 添加新的aspect-*类
+      if (ratio === 16/9) {
+        adElement.classList.add('aspect-video');
+        ratioText.textContent = '当前比例: 16:9';
+      } else if (ratio === 1) {
+        adElement.classList.add('aspect-square');
+        ratioText.textContent = '当前比例: 1:1';
+      } else if (ratio === 4/3) {
+        adElement.classList.add('aspect-[4/3]');
+        ratioText.textContent = '当前比例: 4:3';
+      } else if (ratio === 3/2) {
+        adElement.classList.add('aspect-[3/2]');
+        ratioText.textContent = '当前比例: 3:2';
+      }
+    }
+  </script>
+
+  <!-- 图片放大查看功能 -->
+  <!-- 图片查看器HTML结构 -->
+  <div id="imageViewer" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 opacity-0 pointer-events-none transition-opacity duration-500">
+    <div class="relative max-w-[90vw] max-h-[90vh]">
+      <!-- 关闭按钮 -->
+      <button id="closeViewer" class="absolute -top-10 right-0 text-white/90 hover:text-white text-2xl font-bold transition-colors duration-500">
+        <i class="fa fa-times"></i>
+      </button>
+      <!-- 放大后的图片容器 -->
+      <div id="viewerImageContainer" class="transform scale-90 opacity-0 transition-all duration-500 ease-out">
+        <img id="viewerImage" src="" alt="放大查看" class="w-full h-full object-contain rounded-lg shadow-2xl">
+      </div>
+    </div>
+  </div>
+
+  <!-- 图片放大查看功能脚本 -->
+  <script>
+    // 等待DOM加载完成
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取图片查看器元素
+      const imageViewer = document.getElementById('imageViewer');
+      const closeViewer = document.getElementById('closeViewer');
+      const viewerImageContainer = document.getElementById('viewerImageContainer');
+      const viewerImage = document.getElementById('viewerImage');
+
+      // 获取目标图片：软件截图和安装步骤下的所有图片
+      const targetImages = document.querySelectorAll(
+        '.bg-gradient-to-br.from-white.to-gray-50 .relative.overflow-hidden img'
+      );
+
+      // 为每个目标图片添加点击事件监听
+      targetImages.forEach(image => {
+        image.addEventListener('click', function() {
+          // 设置查看器图片源
+          viewerImage.src = this.src;
+          viewerImage.alt = this.alt;
+          
+          // 显示查看器（添加过渡动画）
+          imageViewer.style.opacity = '1';
+          imageViewer.style.pointerEvents = 'auto';
+          
+          // 触发图片容器的放大动画
+          setTimeout(() => {
+            viewerImageContainer.style.transform = 'scale(1)';
+            viewerImageContainer.style.opacity = '1';
+          }, 10);
+          
+          // 禁止页面滚动并补偿滚动条空间
+          const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+          document.body.style.overflow = 'hidden';
+          if (scrollbarWidth > 0) {
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
+          }
+        });
+      });
+
+      // 关闭查看器的函数
+      function closeImageViewer() {
+        // 同时触发图片容器和查看器的关闭动画
+        viewerImageContainer.style.transform = 'scale(0.9)';
+        viewerImageContainer.style.opacity = '0';
+        imageViewer.style.opacity = '0';
+        
+        // 在动画结束后恢复页面状态
+        setTimeout(() => {
+          imageViewer.style.pointerEvents = 'none';
+          // 恢复页面滚动和移除滚动条补偿
+          document.body.style.overflow = '';
+          document.body.style.paddingRight = '';
+        }, 300);
+      }
+
+      // 点击关闭按钮关闭查看器
+      closeViewer.addEventListener('click', closeImageViewer);
+
+      // 点击查看器背景关闭查看器
+      imageViewer.addEventListener('click', function(e) {
+        // 确保点击的是背景区域而不是图片容器
+        if (e.target === imageViewer) {
+          closeImageViewer();
+        }
+      });
+
+      // 按ESC键关闭查看器
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && imageViewer.style.opacity === '1') {
+          closeImageViewer();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

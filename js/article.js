@@ -48,6 +48,16 @@ const articlesData = [
             margin-bottom: 1rem;
           ">本安装教程仅适用于<strong class="text-red-700">可以正常开机并可以正常进入系统桌面的电脑</strong>，主要是为了给系统运行卡顿的电脑给一次重生的机会，请参照本教程救活您的爱机吧！</p>
         </div>
+        <!-- 可复用组件：文章介绍 -->
+        <div class="article-intro" style="margin-bottom: 2.5rem;">
+          <p class="template-lead-text" style="
+            font-size: 18px;
+            line-height: 1.8;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+          ">这份文档为您提供了一份真正适合小白的Windows系统重装指南。它用清晰的步骤，从备份资料到制作PE系统，再到安装激活，全程手把手教学，贴心提醒每一个细节。即使您是电脑新手，也能跟着这份保姆级教程，轻松为电脑换上焕然一新的系统。</p>
+        </div>
 
         <!-- 目录已移至左侧侧边栏 -->
 
@@ -72,13 +82,13 @@ const articlesData = [
             <li>下载windows系统激活工具</li>
           </ul>
           <p class="mb-4" style="margin-bottom: 1.5rem;">您将得到下列文件，<strong>请将这些文件存放在系统盘以外的盘符内：</strong></p>
-
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg transition-transform duration-300" style="box-shadow: 0 0px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
-              <img src="images/article/1/001.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-            <figcaption class="image-caption text-sm text-gray-600 mt-3 text-center">图1: 文件列表</figcaption>
-          </figure>
+          <div class="flex justify-center my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/001.png" class="featured-image h-auto transition-transform duration-500 hover:scale-105" style="max-width: 100%; width: auto; height: auto; margin: 0 auto;">
+              </div>
+            </figure>
+          </div>
         </section>
 
         <!-- 第2节：制作本地PE系统 -->
@@ -94,72 +104,84 @@ const articlesData = [
               font-family: inherit;
             ">2. 制作本地PE系统</h2>
           <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
-            <li>点击屏幕右下角小箭头，打开windows安全中心</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/002.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/004.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">点击屏幕右下角小箭头，打开windows安全中心</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/002.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/004.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
 
-            <li>点击“病毒和威胁防护”进入子页面，然后点击“管理设置”"</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/003.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/005.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">点击“病毒和威胁防护”进入子页面，然后点击“管理设置”</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/003.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/005.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
 
-            <li>关闭“实时保护”功能</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/006.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">关闭“实时保护”功能</li>
+          <div class="flex justify-center my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/006.png" class="featured-image h-auto transition-transform duration-500 hover:scale-105" style="max-width: 100%; width: auto; height: auto; margin: 0 auto;">
+              </div>
+            </figure>
+          </div>
 
-            <li>接下来<strong>以管理员权限运行</strong>“FirPE”软件，在弹出的窗口中点击“确定”</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/007.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/008.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">接下来<strong>以管理员权限运行</strong>“FirPE”软件，在弹出的窗口中点击“确定”</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/007.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/008.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
 
-            <li>等待软件加载完毕后，直接点击“本地安装”，在弹出的窗口中点击“确定”</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/009.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/010.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">等待软件加载完毕后，直接点击“本地安装”，在弹出的窗口中点击“确定”</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/009.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/010.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
 
-            <li>然后等待进度条加载完毕，弹出如图所示窗口则表示PE系统安装成功，点击“确定”后关闭“FirPE”软件即可</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/011.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/012.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">然后等待进度条加载完毕，弹出如图所示窗口则表示PE系统安装成功，点击“确定”后关闭“FirPE”软件即可</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/011.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/012.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
           </ol>
         </section>
 
@@ -176,29 +198,33 @@ const articlesData = [
               font-family: inherit;
             ">3. 进入本地PE系统</h2>
           <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
-            <li>关闭电脑上打开的所有软件后，打开开始菜单中的“电源”选项，<strong>按住键盘上的“Shift”键并单击“重启”按钮</strong>，等待电脑进入“恢复选项”界面</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/013.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/014.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">关闭电脑上打开的所有软件后，打开开始菜单中的“电源”选项，<strong>按住键盘上的“Shift”键并单击“重启”按钮</strong>，等待电脑进入“恢复选项”界面</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/013.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/014.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
 
-            <li>点击“使用其他操作系统”，进入子页面后再点击“FirPE维护系统”，然后等待电脑进入PE系统</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/015.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/016.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">点击“使用其他操作系统”，进入子页面后再点击“FirPE维护系统”，然后等待电脑进入PE系统</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/015.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/016.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
           </ol>
         </section>
 
@@ -215,59 +241,69 @@ const articlesData = [
               font-family: inherit;
             ">4. 进行windows系统重装</h2>
           <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
-            <li>进入PE系统后，打开“EasyRC一键重装”软件</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/017.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/018.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">进入PE系统后，打开“EasyRC一键重装”软件</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/017.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/018.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
 
-            <li>在软件中，首先“选择镜像”<strong>（此处以windows11系统包为例，其他系统安装只需要选择您所下载的系统包即可）</strong></li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/019.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/020.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">在软件中，首先“选择镜像”<strong>（此处以windows11系统包为例，其他系统安装只需要选择您所下载的系统包即可）</strong></li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/019.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/020.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
 
-            <li>接下来选择您电脑的系统盘符（通常为C盘，如图所示），以及选择您要安装的系统版本（此处选择“专业版”）</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/021.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">接下来选择您电脑的系统盘符（通常为C盘，如图所示），以及选择您要安装的系统版本（此处选择“专业版”）</li>
+          <div class="flex justify-center my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/021.png" class="featured-image h-auto transition-transform duration-500 hover:scale-105" style="max-width: 100%; width: auto; height: auto; margin: 0 auto;">
+              </div>
+            </figure>
+          </div>
 
-            <li><strong>其他设置不动</strong>，然后点击“开始安装”，在弹出的窗口中点击“确定”</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/022.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;"><strong>其他设置不动</strong>，然后点击“开始安装”，在弹出的窗口中点击“确定”</li>
+          <div class="flex justify-center my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/022.png" class="featured-image h-auto transition-transform duration-500 hover:scale-105" style="max-width: 100%; width: auto; height: auto; margin: 0 auto;">
+              </div>
+            </figure>
+          </div>
 
-            <li>然后等待进度条加载完毕，提示“系统安装完成”后，点击“立即重启”</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/023.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/024.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">然后等待进度条加载完毕，提示“系统安装完成”后，点击“立即重启”</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/023.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/024.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
 
           <div class="template-info-box" style="background-color: #eff6ff; border-left: 4px solid var(--primary-color); padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-            <h4 class="template-info-title" style="color: #1e40af; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.1rem; font-family: inherit;">重要提示</h4>
-            <p style="color: #1e40af; line-height: 1.7; margin: 0;">接下来<strong>请勿操作电脑</strong>，电脑会重启多次，请耐心等待</p>
+            <h4 class="template-info-title" style="color: #1e40af; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.5rem; font-family: inherit;">重要提示</h4>
+            <p style="color: #1e40af; line-height: 1.7; margin: 0; font-size: 20px">接下来<strong>请勿操作电脑</strong>，电脑会重启多次，请耐心等待</p>
           </div>
           </ol>
         </section>
@@ -285,25 +321,28 @@ const articlesData = [
               font-family: inherit;
             ">5. 完成Windows系统安装</h2>
           <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
-            <li>当出现如下界面时，表示系统已安装完成，正在进行最后的部署</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/026.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/027.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">当出现如下界面时，表示系统已安装完成，正在进行最后的部署</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/026.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/027.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
 
-            <li>当系统自动进入桌面时则表示系统已经安装与部署完成，您现在以及可以使用您的电脑了</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/028.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-
+            <li style="font-size: 20px;">当系统自动进入桌面时则表示系统已经安装与部署完成，您现在以及可以使用您的电脑了</li>
+          <div class="flex justify-center my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/028.png" class="featured-image h-auto transition-transform duration-500 hover:scale-105" style="max-width: 100%; width: auto; height: auto; margin: 0 auto;">
+              </div>
+            </figure>
+          </div>
           </ol>
         </section>
 
@@ -320,38 +359,45 @@ const articlesData = [
               font-family: inherit;
             ">6. 激活Windows系统</h2>
           <ol class="list-decimal pl-6 space-y-2 mb-6" style="margin-bottom: 2rem; line-height: 1.7;">
-            <li>1.	进入“此电脑”，右键以管理员权限运行“HEU KMS Activator”软件署</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/030.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/031.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">进入“此电脑”，右键以管理员权限运行“HEU KMS Activator”软件署</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/030.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/031.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
 
-            <li>点击“开始”，然后等待进度条加载完毕</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/032.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
-         <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/033.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">点击“开始”，然后等待进度条加载完毕</li>
+          <div class="flex flex-wrap gap-4 my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/032.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+            <figure class="image-container flex-1 min-w-[200px]">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/033.png" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
+              </div>
+            </figure>
+          </div>
 
-            <li>当出现如图所示弹窗，则表示激活成功，点击“确定”即可</li>
-          <figure class="image-container my-8">
-            <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
-              <img src="images/article/1/034.png" alt="Windows 11 Media Creation Tool" class="featured-image w-full h-auto object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </figure>
+            <li style="font-size: 20px;">当出现如图所示弹窗，则表示激活成功，点击“确定”即可</li>
+          <div class="flex justify-center my-8" style="margin-bottom: 2rem;">
+            <figure class="image-container">
+              <div class="image-wrapper overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl">
+                <img src="images/article/1/034.png" class="featured-image h-auto transition-transform duration-500 hover:scale-105" style="max-width: 100%; width: auto; height: auto; margin: 0 auto;">
+              </div>
+            </figure>
+          </div>
+
           <div class="info-box" style="background-color: #f0fdf4; border-left: 4px solid var(--success-color); padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-            <h4 style="color: #166534; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.1rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">🎉恭喜🎉</h4>
+            <h4 style="color: #166534; font-weight: 600; margin-bottom: 0.5rem; font-size: 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">🎉恭喜🎉</h4>
             <p style="color: #166534; line-height: 1.7; margin: 0;">至此，Windows系统重装已全部完成，您现在可以正常使用您的电脑了。</p>
             <p style="color: #166534; line-height: 1.7; margin: 0;">您可以访问本网站的 <a href="${siteLinks.softwareShare}" style="color: #166534; text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#0e7490';" onmouseout="this.style.color='#166534';">好软分享</a> 以及 <a href="${siteLinks.sitesShare}" style="color: #166534; text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='#0e7490';" onmouseout="this.style.color='#166534';">好站分享</a> 页面，获取更多有用的软件和网站推荐。</p>
           </div>

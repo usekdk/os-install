@@ -2,9 +2,9 @@
 const guidesData = [
   {
     id: 1,
-    title: "Windows 11 2023 更新版本全新安装教程",
-    date: "2023-11-15",
-    description: "详细介绍Windows 11最新版本的系统安装步骤，包括UEFI设置、分区方案、驱动安装和系统优化，适合初学者和进阶用户。",
+    title: "Windows 系统全新安装教程",
+    date: "2025-12-3",
+    description: "这份教程为您提供了一份真正适合小白的Windows系统重装指南。全程手把手教学，贴心提醒每一个细节。即使你是电脑新手，也能跟着这份保姆级教程，轻松为电脑换上焕然一新的系统。",
     thumbnail: "images/index/article/1/封面.png",
     category: "Windows",
     readCount: 12543,

@@ -7,7 +7,7 @@ const softwareData = [
     id: 1,
     name: "Google Chrome",
     version: "120.0.6099.199",
-    description: "快速、安全的浏览器，支持扩展插件，提供丰富的功能和良好的兼容性。",
+    description: "快速、安全的浏览器，支持扩展插件，提供丰富功能和良好兼容性。",
     downloadUrl: "software/google-chrome.html",
     icon: "https://picsum.photos/id/50/60/60",
     os: "windows"
